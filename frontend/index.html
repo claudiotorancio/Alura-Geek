@@ -13,6 +13,10 @@
     <title>AluraGeek</title>
     <link rel="stylesheet" href="https://bootswatch.com/5/cosmo/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css" />
+
+    
+
+
 </head>
 
 <body>
@@ -26,10 +30,22 @@
                 <button class="button-busqueda"><img src="https://myimagescnd.s3.us-east-2.amazonaws.com/lupa.png"
                         alt="Icono Lupa"></button>
             </div>
-            <a href="#"><button class="login">Login</button></a>
+            <div class="carrito-link">
+                <a href="#" class="js-toggle-cart " data-modal-url="productoModalCarrito">
+                    <div class="profile-notificacion">
+                        <span class="carrito-cantidad">Usuario: </span>
+                       
+                    </div>
+                    <span class="carrito-monto"></span>
+                </a>
+            </div>
+            <a href="" ><button type="submit" id="login" class="login" data-log>Login</button></a>
+            <a href="" ><button type="submit" id="login" class="login" data-logOut>Login</button></a>
+
             <button class="button-busqueda-login"><img
                     src="https://myimagescnd.s3.us-east-2.amazonaws.com/lupa-negro.png" alt="Icono lupa"></button>
         </div>
+       
     </header>
     <main>
         <section class="contenido_container">
@@ -40,7 +56,7 @@
                     <a href="#consolas"><button class="consolas"> Ver Consolas</button></a>
                 </div>
             </div>
-            <section class="modalVisor">
+            <section class="form">
                 <div class="col-md-8">
                     <form action="/api/createProduct" enctype="multipart/form-data" method="POST" data-form>
                         <p class="parrafo">Agregar un nuevo producto</p>
@@ -67,6 +83,7 @@
                         <button type="submit" class="btn btn-primary btn-lg">Agregar producto</button>
                     </form>
                 </div>
+                
                 <div id="modal" class="modal">
                     <div class="modal-content">
                         <div class="productoModal" data-table></div>
@@ -74,11 +91,21 @@
                     </div>
                 </div>
 
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <div class="productoModal" data-login></div>
+                        <button class="modal-close">cerrar</button>
+                    </div>
+                </div>
+
+            </section>
+
+
             </section>
             <section class="categoria">
                 <div class="texto-categoria">
                     <h2>Posters</h2>
-                    <a href="#">Ver todo<img src="https://myimagescnd.s3.us-east-2.amazonaws.com/Vector.png"></a>
+                   
                 </div>
                 <div class="productos" data-posters>
                 </div>
@@ -86,7 +113,7 @@
             <section class="categoria" id="consolas">
                 <div class="texto-categoria">
                     <h2>Consolas</h2>
-                    <a href="#">Ver todo<img src="https://myimagescnd.s3.us-east-2.amazonaws.com/Vector.png"></a>
+                    
                 </div>
                 <div class="productos" data-consolas>
 
@@ -95,7 +122,7 @@
             <section class="categoria" id="diversos">
                 <div class="texto-categoria">
                     <h2>Diversos</h2>
-                    <a href="#">Ver todo<img src="https://myimagescnd.s3.us-east-2.amazonaws.com/Vector.png"></a>
+                    
                 </div>
                 <div class="productos" data-diversos>
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import MONGODB_URI from "../backend/config.js";
-import Product from "../backend/models/Product.js";
+import MONGODB_URI from "../../config.js";
+import Product from "../../models/Product.js";
 
 
 const detailsProduct = async (req, res) => {
@@ -17,8 +17,6 @@ const detailsProduct = async (req, res) => {
         res.json({ message: 'Product finded', product });
     } catch (error) {
         console.error(error)
-    } finally {
-        mongoose.connection.close()
     }
 }
 

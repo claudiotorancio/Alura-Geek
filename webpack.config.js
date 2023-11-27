@@ -10,11 +10,12 @@ const output = path.join(__dirname, 'backend/public')
 const devMode = process.env.NODE_ENV !== 'production';
 
 export default {
-    entry: './frontend/crear-productos-controllers.js',
+    entry: './frontend/app.js',
     output: {
         path: output,
         filename: 'js/bundle.js'
     },
+   
     mode: 'production',
     module: {
         rules: [

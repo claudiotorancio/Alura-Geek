@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import MONGODB_URI from "../backend/config.js";
-import Product from "../backend/models/Product.js";
+import MONGODB_URI from "../../config.js";
+import Product from "../../models/Product.js";
 import AWS from 'aws-sdk'
 
 const s3 = new AWS.S3({
@@ -54,9 +54,7 @@ const updateProduct = async (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
 
-    } finally {
-        mongoose.connection.close()
-    }
+    } 
 }
 
 export default updateProduct

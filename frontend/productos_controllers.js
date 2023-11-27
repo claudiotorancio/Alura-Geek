@@ -1,7 +1,9 @@
 
 
-import { modal } from "./modal.js";
-import { productoServices } from "./servicios/productos-servicios.js";
+import { modalControllers } from "./modal.js";
+import { productoServices } from "./servicios/product_services.js";
+
+
 
 const nuevoProducto = (name, price, imagePath, id) => {
     const card = document.createElement("div");
@@ -28,7 +30,11 @@ const nuevoProducto = (name, price, imagePath, id) => {
 
     card.querySelector('button').addEventListener('click', (e) => {
         e.preventDefault();
-        modal.modalEliminar(id)  
+        try{
+            modalControllers.modalEliminar(id)  
+        }catch(err){
+            console.log(err)
+        }
     })
 
     card.querySelector('[data-edit]').addEventListener('click', (e) => {
@@ -36,7 +42,7 @@ const nuevoProducto = (name, price, imagePath, id) => {
             productoServices
                 .detalleProducto(id)
                 .then(respuesta => {
-                   modal.modalEdicion(name, price, imagePath,id)
+                   modalControllers.modalEdicion(name, price, imagePath,id)
                    console.log(respuesta)
                 }).catch(() => alert('Ocurrio un error'))
     })
@@ -70,7 +76,9 @@ const editProduct = (name, price, imagePath, id) => {
     productoEdicion.innerHTML = '';
     const card = document.createElement('div');
     const contenido = `
-    <img class="img-card-top mx-auto" style="width:50vw;" src=${imagePath} alt="">
+    <div class="card text-center">
+    <div class="card-header">
+    <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
         <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">Producto a editar</p>
                 <div class="form-group"> 
@@ -87,6 +95,9 @@ const editProduct = (name, price, imagePath, id) => {
                     <button type="submit" class="btn btn-primary btn-lg">Editar producto</button>
                     </div>
         </form>
+    </div>
+    </div>
+
     `
 
     card.innerHTML = contenido;
@@ -135,10 +146,15 @@ const renderProductEdit = async (id) => {
     }
 }
 
+
+    
+
 export const controllers = {
     nuevoProducto,
     render,
     editProduct,
-    renderProductEdit
+    renderProductEdit,
+   
+
 }
 

@@ -196,12 +196,18 @@ align-items: center;
 
 /* Estilos para el modal */
 
-.modalVisor{
+.form{
     display: flex;
     flex-direction: column;
     background-color: var(--fuente-quienesSomos);
     padding: 2rem;
     }
+    .modalVisor{
+        display: flex;
+        flex-direction: column;
+        background-color: var(--fuente-quienesSomos);
+        padding: 2rem;
+        }
 
 .modal {
     display: none;
@@ -389,7 +395,7 @@ width: 9.5rem;
 }
 
 .login {
-width: 6rem;
+width: 4rem;
 }
 .consolas {
     margin-left: 1rem;
@@ -416,6 +422,16 @@ width: 6rem;
 }
 .cabecera_logo{
 width: 9.5rem;
+}
+
+.modalVisor {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--fuente-quienesSomos);
+    padding: 0rem;
+}
+.modal p {
+    font-size: 1.5rem;
 }
 
 .quienesSomos{
@@ -460,12 +476,31 @@ width: 9.5rem;
 
 }
 
+
 .btn {
     
    background-color: var(--fuente-productos-azul);
 }
 
+p.help{
+    font-size: 1.2rem;
+}
 
+.profile-notificacion {
+    font-size:1rem;
+    padding: 1.5rem;
+  
+}
+
+.js-toggle-cart {
+    text-decoration: none;
+    background-color: #f0f0f0;
+   
+}
+
+.button-busqueda-login img {
+    display: none;
+}
 
 }
 
