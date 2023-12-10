@@ -2,76 +2,91 @@
 import { modalControllers } from "../modal.js";
 import { baseURL } from "./product_services.js";
 
-const signin = async (dataSignin) => {
-  try {
-      const response = await fetch(`${baseURL}/api/signin`, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataSignin)
-      });
-      if (!response.ok) {
-          throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
-      }
-      const data = await response.json();
-      const user = data.user.username;
+const signin = async (dataUser) => {
 
-      localStorage.setItem('user', JSON.stringify(user));
-      modalControllers.modalSuccess(user);
+  try {
+    const response = await fetch(`${baseURL}/api/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataUser)
+    });
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+    }
+    //manejo de la respuesta
+    const data = await response.json();
+    const user = data.user.username;
+
+    //Uso de localStorage para guardar usuario
+    localStorage.setItem('user', JSON.stringify(user));
+    modalControllers.modalSuccess(user);
+
   } catch (error) {
-      modalControllers.modalError();
-      console.error(error);
+    modalControllers.modalError();
+    console.error(error);
   }
+
 };
 
 
 const signup = async (dataSignup) => {
   try {
-      const response = await fetch(`${baseURL}/api/signup`, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataSignup)
-      });
+    const response = await fetch(`${baseURL}/api/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataSignup)
+    });
+    //manejo de la respuesta
 
-      if (!response.ok) {
-          throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
-      }
-      const data = await response.json();
-      modalControllers.modalSuccessSignup();
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+    }
+    const data = await response.json();
+
+    // muestra de exito en pantalla
+
+    modalControllers.modalSuccessSignup();
   } catch (error) {
-      modalControllers.modalErrorSignup();
-      console.error(error);
+    modalControllers.modalErrorSignup();
+    console.error(error);
+
+
   }
 };
 
-  
+
 const logout = async () => {
   try {
-      const response = await fetch(`${baseURL}/api/logout`, {
-          method: "DELETE",
-      });
+    const response = await fetch(`${baseURL}/api/logout`, {
+      method: "DELETE",
+    });
 
-      if (!response.ok) {
-          throw new Error(`Error during logout: ${response.status} - ${response.statusText}`);
-      }
+    //manejo de la respuesta
 
-      localStorage.removeItem('user');
-      modalControllers.modalLogout();
+    if (!response.ok) {
+      throw new Error(`Error during logout: ${response.status} - ${response.statusText}`);
+    }
+    //remover usuario de localStorage
+
+    const user = JSON.parse(localStorage.getItem('user'))
+    modalControllers.modalLogout(user);
+    localStorage.removeItem('user');
+
   } catch (error) {
-      console.error('Error during logout:', error);
+    console.error('Error during logout:', error);
   }
 };
 
 
-        
 export const loginServices = {
-    signin,
-    signup,
-    logout
-  }
+  signin,
+  signup,
+  logout,
+}
 
 
 

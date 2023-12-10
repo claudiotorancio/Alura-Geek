@@ -3,8 +3,6 @@
 import { modalControllers } from "./modal.js";
 import { productoServices } from "./servicios/product_services.js";
 
-
-
 const nuevoProducto = (name, price, imagePath, id) => {
     const card = document.createElement("div");
     const contenido = `
@@ -43,17 +41,17 @@ const nuevoProducto = (name, price, imagePath, id) => {
                 .detalleProducto(id)
                 .then(respuesta => {
                    modalControllers.modalEdicion(name, price, imagePath,id)
-                   console.log(respuesta)
                 }).catch(() => alert('Ocurrio un error'))
     })
 
     return card;
 }
 
+//asociar productos con la seccion correspondiente
 const productoPosters = document.querySelector('[data-posters]');
 const productoConsolas = document.querySelector('[data-consolas]');
 const productoDiversos = document.querySelector('[data-diversos]');
-
+//renderizar producto
 const render = async () => {
     try {
         const listaProductos = await productoServices.listaProductos()
@@ -72,6 +70,7 @@ const render = async () => {
     }
 }
 
+//editar producto
 const editProduct = (name, price, imagePath, id) => {
     productoEdicion.innerHTML = '';
     const card = document.createElement('div');
@@ -129,7 +128,7 @@ const editProduct = (name, price, imagePath, id) => {
 }
 
 const productoEdicion = document.querySelector('[data-table]');
-
+//renderizar producto editado
 const renderProductEdit = async (id) => {
     try {
         const listaProductos = await productoServices.listaProductos()
@@ -146,15 +145,10 @@ const renderProductEdit = async (id) => {
     }
 }
 
-
-    
-
 export const controllers = {
     nuevoProducto,
     render,
     editProduct,
     renderProductEdit,
-   
-
 }
 

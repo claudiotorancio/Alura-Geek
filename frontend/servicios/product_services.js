@@ -1,10 +1,11 @@
 
-
+//manejo de dominio en devMode o prodMode
 
 export const baseURL = process.env.NODE_ENV === 'production'
     ? 'https://alura-geek-main-xi.vercel.app'
     : 'http://localhost:3000';
-
+   
+//CRUD de productos
 
 const listaProductos = async () =>
     await fetch(`${baseURL}/api/renderProducts`).then((respuesta) => respuesta.json());

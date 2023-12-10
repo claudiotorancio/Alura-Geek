@@ -1,4 +1,4 @@
-
+//modelo para usuario
 
 import { Schema, model } from "mongoose";
 

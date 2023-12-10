@@ -1,4 +1,4 @@
-
+// estilos adicionales propios
 import './styles/assets/css/style.css'
 import './styles/assets/css/productos.css'
 
@@ -9,27 +9,28 @@ import { controllers } from "./productos_controllers.js";
 import { loginControllers } from './login_controllers.js';
 
 
+// busqueda de cambios
 document.addEventListener('DOMContentLoaded', () => {
-   
 
+    controllers.render();
     const user = JSON.parse(localStorage.getItem('user')) || null;
-    const actualizarUsuario = document.querySelector('.carrito-cantidad');
+    const actualizarUsuario = document.querySelector('.data-user');
     const logoutUsuario = document.querySelector('[data-logOut]')
     const userActive = document.querySelector('[data-log]')
-    if(user){
+    if (user) {
         actualizarUsuario.textContent = `Hola! ${user}`
-        logoutUsuario.textContent= 'logout'
-        userActive.textContent=''
-        userActive.style.display='none'
-        controllers.render();
-    }else{
-        actualizarUsuario.textContent = ''
+        logoutUsuario.textContent = 'Logout'
+        userActive.style.display = 'none'
+
+    } else {
+        actualizarUsuario.style.display = 'none'
         logoutUsuario.style.display = 'none';
-        userActive.textContent='Login'
+        userActive.textContent = 'Login'
     }
 
 });
 
+//extraer info de formulario
 const form = document.querySelector('[data-form]');
 
 form.addEventListener("submit", (e) => {
@@ -46,42 +47,35 @@ form.addEventListener("submit", (e) => {
     productData.append('image', image)
 
     const user = JSON.parse(localStorage.getItem('user')) || null;
-if(user) {
-    productoServices
-    .crearProducto(productData)
-    .then((respuesta) => {
-        window.location.href = "/index.html"
-        alert("El producto fue creado con exito")
-        console.log(respuesta)
-    }).catch((err) => {
-        console.log(err)
-    })
-}else{
-    alert ('debe registrarse para comenzar!')
-    loginControllers.signin()
-}
-  
-       
+    if (user) {
+        productoServices
+            .crearProducto(productData)
+            .then((respuesta) => {
+                window.location.href = "/index.html"
+                alert("El producto fue creado con exito")
+                console.log(respuesta)
+            }).catch((err) => {
+                console.log(err)
+            })
+    } else {
+        alert('debe registrarse para comenzar!')
+        loginControllers.signin()
+    }
 
 });
 
-
+//inicio de sesion desde boron Login
 const login = document.querySelector('[data-log]');
 
 login.addEventListener('click', (e) => {
     e.preventDefault();
     loginControllers.signin();
-
-
 });
 
-
-
+// logout desde boton Logout
 const logOut = document.querySelector('[data-logOut]');
 
 logOut.addEventListener('click', (e) => {
     e.preventDefault();
-   loginServices.logout()
-
-
+    loginServices.logout()
 });

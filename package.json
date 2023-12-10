@@ -5,11 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon backend/index.js --ignore frontend",
-    "postinstall": "npm run build",
-    "build": "cross-env NODE_ENV=production webpack",
-    "server:dev": "cross-env NODE_ENV=development webpack-dev-server"
-  },
+  "dev": "cross-env NODE_ENV=development nodemon backend/index.js --ignore frontend",
+  "postinstall": "npm run build",
+  "build": "npm run build:prod",
+  "build:dev": "cross-env NODE_ENV=development webpack --config webpack.dev.js",
+  "build:prod": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+  "server:dev": "cross-env NODE_ENV=development webpack serve --config webpack.dev.js"
+},
   "author": "claduio",
   "license": "ISC",
   "dependencies": {

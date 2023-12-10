@@ -18,11 +18,11 @@ import MongoDBStore from "connect-mongodb-session";
 import MONGODB_URI from "../backend/config.js";
 
 
-
+//middlewares
 const sessionMiddleware =
     session({
         key: "user_sid",
-        secret: 'This is a secret',
+        secret: process.env.SECRET_KEY,
         resave: false,
         saveUninitialized: false,
         store: new MongoDBStore(session)({
@@ -61,16 +61,22 @@ const upload = () =>
 const uploadSingle = upload(process.env.BUCKET_AWS).single('image');
 const uploadSingleUpdate = upload(process.env.BUCKET_AWS).single('imagePath');
 
+//defino enrutador
+
 const router = Router()
 
+//Login
+
 router.post('/api/signup', signup)
-router.post('/api/signin', sessionMiddleware, passport.authenticate('local.signin', { session: true }), signin)
-router.delete('/api/logout',sessionMiddleware, passport.authenticate('session'),   logout)
+router.post('/api/signin',sessionMiddleware, passport.authenticate('local.signin', { session: true }), signin)
+router.delete('/api/logout',sessionMiddleware, passport.authenticate('session'), logout)
 
 router.get('/success', success)
 
-router.get('/api/renderProducts',  renderProducts)
-router.post('/api/createProduct', uploadSingle, createProduct)
+
+//Products
+router.get('/api/renderProducts', sessionMiddleware, passport.authenticate('session'),  renderProducts)
+router.post('/api/createProduct',  uploadSingle,  sessionMiddleware, passport.authenticate('session'),  createProduct)
 router.delete('/api/deleteProduct/:id', deleteProduct)
 router.get('/api/detailsProduct/:id', detailsProduct)
 router.put('/api/updateProduct/:id', uploadSingleUpdate, updateProduct)

@@ -13,10 +13,6 @@
     <title>AluraGeek</title>
     <link rel="stylesheet" href="https://bootswatch.com/5/cosmo/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css" />
-
-    
-
-
 </head>
 
 <body>
@@ -31,34 +27,34 @@
                         alt="Icono Lupa"></button>
             </div>
             <div class="carrito-link">
-                <a href="#" class="js-toggle-cart " data-modal-url="productoModalCarrito">
+                <a href="#">
                     <div class="profile-notificacion">
-                        <span class="carrito-cantidad">Usuario: </span>
-                       
+                        <span class="data-user">Usuario: </span>
+
                     </div>
                     <span class="carrito-monto"></span>
                 </a>
             </div>
-            <a href="" ><button type="submit" id="login" class="login" data-log>Login</button></a>
-            <a href="" ><button type="submit" id="login" class="login" data-logOut>Login</button></a>
+            <a href=""><button type="submit" id="login" class="login" data-log></button></a>
+            <a href=""><button type="submit" id="login" class="login" data-logOut></button></a>
 
             <button class="button-busqueda-login"><img
                     src="https://myimagescnd.s3.us-east-2.amazonaws.com/lupa-negro.png" alt="Icono lupa"></button>
         </div>
-       
+
     </header>
     <main>
         <section class="contenido_container">
             <div class="banner">
                 <div class="texto">
-                    <h1>Noviembre Promocional</h1>
-                    <p>Productos seleccionados con 33% de descuentos</p>
-                    <a href="#consolas"><button class="consolas"> Ver Consolas</button></a>
+                    <h1>Guarda tus productos de videogames o lo que quieras!!</h1>
+                    <p>save, delete or edit!</p>
+                    <a href="#form"><button class="consolas"> save products </button></a>
                 </div>
             </div>
             <section class="form">
                 <div class="col-md-8">
-                    <form action="/api/createProduct" enctype="multipart/form-data" method="POST" data-form>
+                    <form id="form" action="/api/createProduct" enctype="multipart/form-data" method="POST" data-form>
                         <p class="parrafo">Agregar un nuevo producto</p>
                         <div class="form-group">
                             <input class="form-control  p-2" type="file" name="image" placeholder="URL del producto"
@@ -83,7 +79,7 @@
                         <button type="submit" class="btn btn-primary btn-lg">Agregar producto</button>
                     </form>
                 </div>
-                
+
                 <div id="modal" class="modal">
                     <div class="modal-content">
                         <div class="productoModal" data-table></div>
@@ -101,54 +97,53 @@
             </section>
 
 
-            </section>
-            <section class="categoria">
-                <div class="texto-categoria">
-                    <h2>Posters</h2>
-                   
-                </div>
-                <div class="productos" data-posters>
-                </div>
-            </section>
-            <section class="categoria" id="consolas">
-                <div class="texto-categoria">
-                    <h2>Consolas</h2>
-                    
-                </div>
-                <div class="productos" data-consolas>
+        </section>
+        <section class="categoria">
+            <div class="texto-categoria">
+                <h2>Posters</h2>
 
-                </div>
-            </section>
-            <section class="categoria" id="diversos">
-                <div class="texto-categoria">
-                    <h2>Diversos</h2>
-                    
-                </div>
-                <div class="productos" data-diversos>
+            </div>
+            <div class="productos" data-posters>
+            </div>
+        </section>
+        <section class="categoria" id="consolas">
+            <div class="texto-categoria">
+                <h2>Consolas</h2>
 
+            </div>
+            <div class="productos" data-consolas>
+
+            </div>
+        </section>
+        <section class="categoria" id="diversos">
+            <div class="texto-categoria">
+                <h2>Diversos</h2>
+
+            </div>
+            <div class="productos" data-diversos>
+
+            </div>
+        </section>
+        <section class="quienesSomos">
+            <div class="quienesSomos_container">
+                <img class="quienesSomos_logo" src="https://myimagescnd.s3.us-east-2.amazonaws.com/Logo.png"
+                    alt="AluraGeeK logo">
+                <div class="quienesSomos_parrafos">
+                    <p>Quienes somos</p>
+                    <p>Politica de privacidad</p>
+                    <p>Programa de fidelidad</p>
+                    <p>Nuestras Tiendas</p>
+                    <p>Quiero ser franquiciado</p>
+                    <p>Anuncie aquí</p>
                 </div>
-            </section>
-            <section class="quienesSomos">
-                <div class="quienesSomos_container">
-                    <img class="quienesSomos_logo" src="https://myimagescnd.s3.us-east-2.amazonaws.com/Logo.png"
-                        alt="AluraGeeK logo">
-                    <div class="quienesSomos_parrafos">
-                        <p>Quienes somos</p>
-                        <p>Politica de privacidad</p>
-                        <p>Programa de fidelidad</p>
-                        <p>Nuestras Tiendas</p>
-                        <p>Quiero ser franquiciado</p>
-                        <p>Anuncie aquí</p>
-                    </div>
-                    <div class="hableConNosotros">
-                        <h2 class="formcontato__title">Hable con nosotros</h2>
-                        <input class="nombre" type="text" name="nombre" placeholder="Nombre">
-                        <textarea class="textarea" id="mensaje" name="mensaje"
-                            placeholder="Escribe tu mensaje"></textarea>
-                        <button type="#" class="btn" action="javascript:void(0)">Enviar mensaje</button>
-                    </div>
+                <div class="hableConNosotros">
+                    <h2 class="formcontato__title">Hable con nosotros</h2>
+                    <input class="nombre" type="text" name="nombre" placeholder="Nombre">
+                    <textarea class="textarea" id="mensaje" name="mensaje" placeholder="Escribe tu mensaje"></textarea>
+                    <button type="#" class="btn" action="javascript:void(0)">Enviar mensaje</button>
                 </div>
-            </section>
+            </div>
+        </section>
     </main>
     <footer class="footer">Desarrollado por Claudio Torancio - 2022</footer>
 </body>

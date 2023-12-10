@@ -3,6 +3,7 @@ import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
 import AWS from 'aws-sdk'
 
+//conectar a base de datos s3
 const s3 = new AWS.S3({
     region: process.env.S3_BUCKET_REGION,
     credentials: {
@@ -13,24 +14,26 @@ const s3 = new AWS.S3({
 
 const updateProduct = async (req, res) => {
     try {
+        //parametros de formulario
         const { id } = req.params
         const { name, price, oldImagePath } = req.body
         const imagePath = req.file.location
 
+        //convirtiendo info en objeto
         const updateProduct = {
             name,
             price,
             imagePath,
             oldImagePath
         }
-
+        //conectar a base de datos mediante serverless function
         await mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
 
         const result = await Product.findByIdAndUpdate(id, updateProduct, { new: true })
-
+        //borrar oldImage en s3
         const nombreDeArchivo = oldImagePath.split('/').pop();
         const params = {
             Bucket: process.env.BUCKET_AWS,
@@ -54,7 +57,7 @@ const updateProduct = async (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
 
-    } 
+    }
 }
 
 export default updateProduct

@@ -1,19 +1,20 @@
 
 
 const signin = async (req, res) => {
-  try {
-      if (!req.isAuthenticated()) {
-          return res.status(401).json({ message: 'Usuario no autenticado' });
-      }
-      console.log('Usuario autenticado:', req.user);
-      console.log('Sesión:', req.session);
+    try {
+        //verificar si esta autenticado
+        if (!req.isAuthenticated()) {
+            return res.status(401).json({ message: 'Usuario no autenticado' });
+        }
 
-      return res.json({ user: req.user });
-  } catch (error) {
-      console.error('Error en la función signin:', error);
-      res.status(500).json({ message: 'Error interno del servidor' });
-  }
+        console.log('Usuario autenticado:', req.user);
+        console.log('Sesión:', req.session);
+        //Manejo de la respuesta para mostrar en pantalla los valores
+        return res.json({ user: req.user });
+    } catch (error) {
+        console.error('Error en la función signin:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
 };
-
 
 export default signin;

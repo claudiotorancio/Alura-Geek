@@ -162,10 +162,8 @@ const modalErrorSignup = () => {
 
 }
 
-const modalLogout = () => {
-    baseModal()
-
-
+const modalLogout = (user) => {
+    baseModal();
     const modal = document.getElementById('modal');
     const errorSignup = modal.querySelector('[data-table]');
     errorSignup.innerHTML = `
@@ -174,7 +172,7 @@ const modalLogout = () => {
     <div>
         <div >
             <br>
-            <h4>Velve Pronto!!</h4> 
+            <h4>Velve Pronto ${user}!!</h4> 
             <button class="boton-eliminar btn btn-primary" data-index="">I a inicio</button>
         </div>
     </div>
@@ -194,9 +192,6 @@ const modalLogout = () => {
  
 
 }
-
-
-
 
 export const modalControllers = {
     modalEdicion,

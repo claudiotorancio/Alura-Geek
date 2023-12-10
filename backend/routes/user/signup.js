@@ -2,7 +2,9 @@ import passport from '../../lib/passport.js'
 
 const signup = async (req, res) => {
     try {
+        //cifrar contraseñas con passport
         passport.authenticate('local.signup', function (err, user, info) {
+            //manejo de errores
             if (err) {
                 throw err;
             }

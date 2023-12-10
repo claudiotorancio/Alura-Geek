@@ -1,7 +1,8 @@
-
+//logout.js
 
 const logout = (req, res) => {
    try{
+    //manejo de passport para el logout
    req.logout( (err) => {
         if (err) {
             console.error(err);

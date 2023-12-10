@@ -14,7 +14,7 @@ const signin = async () => {
             <div class="card-body">
                 <form action="/api/signin" method="post" data-signin>
                     <div class="form-group mt-3">
-                        <input type="text" id="username" name="username" placeholder="Username" class="form-control" required>
+                        <input type="text" id="username" name="username" placeholder="Username" class="form-control" required autocomplet>
                     </div>
                     <div class="form-group mt-3">
                         <input type="password" id="password" name="password" placeholder="Password" class="form-control" required>
@@ -110,7 +110,6 @@ const signup = () => {
     });
 
 }
-
 
 export const loginControllers = {
     signin,

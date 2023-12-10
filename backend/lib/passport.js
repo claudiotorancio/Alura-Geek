@@ -5,11 +5,15 @@ import helpers from './helpers.js';
 import MONGODB_URI from '../config.js';
 import Users from '../models/User.js';
 
+//connect to database
+
 await mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
 
+
+// SignIn
 passport.use('local.signin', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
@@ -39,6 +43,8 @@ passport.use('local.signin', new LocalStrategy({
     
 }));
 
+//SignUp
+
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
@@ -61,6 +67,8 @@ passport.use('local.signup', new LocalStrategy({
         return done(err, false, { message: 'Error creating user' });
     }
 }));
+
+//serialUser
 
 passport.serializeUser((user, done) => {
     done(null, user.id);

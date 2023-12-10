@@ -4,6 +4,8 @@ import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
 import AWS from 'aws-sdk'
 
+//conectar con base de datos s3 para eliminar imagen
+
 const s3 = new AWS.S3({
   region: process.env.S3_BUCKET_REGION,
   credentials: {
@@ -14,7 +16,7 @@ const s3 = new AWS.S3({
 
 const deleteProduct = async (req, res) => {
   try {
-
+     //conectar a base de datos mediante serverless function
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
