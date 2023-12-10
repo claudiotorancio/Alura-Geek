@@ -11,11 +11,14 @@ import { loginControllers } from './login_controllers.js';
 
 // busqueda de cambios
 document.addEventListener('DOMContentLoaded', () => {
+
+
     const user = JSON.parse(localStorage.getItem('user')) || null;
     const actualizarUsuario = document.querySelector('.data-user');
     const logoutUsuario = document.querySelector('[data-logOut]')
     const userActive = document.querySelector('[data-log]')
     if (user) {
+        controllers.render();
         actualizarUsuario.textContent = `Hola! ${user}`
         logoutUsuario.textContent = 'Logout'
         userActive.style.display = 'none'
