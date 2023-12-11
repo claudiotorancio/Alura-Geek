@@ -48,9 +48,9 @@ const modalEliminar = (id) => {
         window.location.href = '/index.html';
     });
     eliminarProducto.classList.add("modalVisor");
-    setTimeout(() => {
+    /*setTimeout(() => {
         window.location.href= '/index.html';
-       }, 2000);
+       }, 2000);*/
 }
 
 const modalSuccess = (username) => {

@@ -80,6 +80,27 @@ const editProduct = (name, price, imagePath, id) => {
     <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
         <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">Producto a editar</p>
+                    <div class="form-group">
+                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${name}" required data-nombre >
+                    </div>
+                    <div class="form-group"> 
+                    <input class="form-control mt-3 mb-3 p-2"  placeholder="precio" type="text"value="${price}" required data-precio>
+                    </div>
+                    <div>
+                    <button type="submit" class="btn btn-primary btn-lg">Editar producto</button>
+                    </div>
+        </form>
+    </div>
+    </div>
+
+    `
+    //codigo para actualizar imagen en s3 y mongoDB
+    /*const contenido = `
+    <div class="card text-center">
+    <div class="card-header">
+    <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
+        <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
+            <p class="parrafo">Producto a editar</p>
                 <div class="form-group"> 
                     <input class="form-control p-2"  placeholder="imageUrl" type="file" name="imagePath" value="${imagePath}" required data-image autofocus >
                     <input type="hidden" class="oldImagePath" name="oldImagePath" value="${imagePath}" data-oldPath>
@@ -97,7 +118,7 @@ const editProduct = (name, price, imagePath, id) => {
     </div>
     </div>
 
-    `
+    `*/
 
     card.innerHTML = contenido;
     card.classList.add("modalVisor");
