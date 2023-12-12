@@ -129,14 +129,14 @@ const editProduct = (name, price, imagePath, id) => {
     
         const name = document.querySelector('[data-nombre]').value;
         const price = document.querySelector('[data-precio]').value;
-        const imagePath = document.querySelector('[data-image]').files[0];
-        const oldImagePath = document.querySelector('[data-oldPath]').value;
+        /*const imagePath = document.querySelector('[data-image]').files[0];
+        const oldImagePath = document.querySelector('[data-oldPath]').value;*/
       
         const dataEdit = new FormData()
         dataEdit.append('name', name)
         dataEdit.append('price', price)
-        dataEdit.append('imagePath', imagePath)
-        dataEdit.append('oldImagePath', oldImagePath)
+        /*dataEdit.append('imagePath', imagePath)
+        dataEdit.append('oldImagePath', oldImagePath)*/
 
         productoServices
             .actualizarProducto(dataEdit, id)
