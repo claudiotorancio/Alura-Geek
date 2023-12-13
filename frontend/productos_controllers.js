@@ -140,8 +140,9 @@ const editProduct = (name, price, imagePath, id) => {
 
         productoServices
             .actualizarProducto(dataEdit, id)
-            .then((err) => {
-                window.location.href = '/index.html'
+            .then(() => {
+               modalControllers.modalProductoEditado()
+            }).catch((err) => {
                 console.log(err)
             })
     })

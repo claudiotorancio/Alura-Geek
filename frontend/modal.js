@@ -53,7 +53,7 @@ const modalEliminar = (id) => {
        }, 2000);*/
 }
 
-const modalSuccess = (username) => {
+const modalSuccessSignIn = (username) => {
     baseModal()
     const modal = document.getElementById('modal');
     const success = modal.querySelector('[data-table]');
@@ -79,7 +79,59 @@ const modalSuccess = (username) => {
        }, 3000);
 }
 
-const modalError = () => {
+const modalProductoCreado = () => {
+    baseModal()
+    const modal = document.getElementById('modal');
+    const success = modal.querySelector('[data-table]');
+    success.innerHTML = `
+    <div class="card text-center">
+    <div class="card-header">
+    <div>
+        <div>
+            <br>
+            <h4>producto creado correctamente!</h4> 
+            <button class="boton-eliminar btn btn-primary" data-index="">Volver</button>
+        </div>
+    </div>
+    </div>
+    </div>
+    `
+    const botonEliminar = success.querySelector('.boton-eliminar');
+    botonEliminar.addEventListener('click', () => {
+        window.location.href = '/index.html';
+    });
+    setTimeout(() => {
+        window.location.href= '/index.html';
+       }, 3000);
+}
+
+const modalProductoEditado = () => {
+    baseModal()
+    const modal = document.getElementById('modal');
+    const success = modal.querySelector('[data-table]');
+    success.innerHTML = `
+    <div class="card text-center">
+    <div class="card-header">
+    <div>
+        <div>
+            <br>
+            <h4>producto editado!</h4> 
+            <button class="boton-eliminar btn btn-primary" data-index="">Volver</button>
+        </div>
+    </div>
+    </div>
+    </div>
+    `
+    const botonEliminar = success.querySelector('.boton-eliminar');
+    botonEliminar.addEventListener('click', () => {
+        window.location.href = '/index.html';
+    });
+    setTimeout(() => {
+        window.location.href= '/index.html';
+       }, 3000);
+}
+
+const modalErrorSignIn = () => {
     baseModal()
     const modal = document.getElementById('modal');
     const incorrect = modal.querySelector('[data-table]');
@@ -141,10 +193,10 @@ const modalErrorSignup = () => {
     <div class="card text-center">
     <div class="card-header">
     <div>
-        <div >
+        <div>
             <br>
-            <h4>Error de conexion intentar de nuevo</h4> 
-            <button class="boton-eliminar btn btn-primary" data-index="">SignUp</button>
+            <h4>Nombre de usuario existente</h4> 
+            <button class="boton-eliminar btn btn-primary" data-index="">Volver a intentar</button>
         </div>
     </div>
     </div>
@@ -162,6 +214,35 @@ const modalErrorSignup = () => {
 
 }
 
+const modalErrorRegistro = () => {
+    baseModal()
+    const modal = document.getElementById('modal');
+    const errorSignup = modal.querySelector('[data-table]');
+    errorSignup.innerHTML = `
+    <div class="card text-center">
+    <div class="card-header">
+    <div>
+        <div >
+            <br>
+            <h4>Debe registarse para comenzar!</h4> 
+            <button class="boton-eliminar btn btn-primary" data-index="">SignIn</button>
+        </div>
+    </div>
+    </div>
+    </div>
+    `
+    const botonEliminar = errorSignup.querySelector('.boton-eliminar');
+    botonEliminar.addEventListener('click', () => {
+        
+      loginControllers.signin()
+    });
+
+    setTimeout(() => {
+        loginControllers.signin()
+       }, 2000);
+
+}
+
 const modalLogout = (user) => {
     baseModal();
     const modal = document.getElementById('modal');
@@ -173,7 +254,7 @@ const modalLogout = (user) => {
         <div >
             <br>
             <h4>Velve Pronto ${user}!!</h4> 
-            <button class="boton-eliminar btn btn-primary" data-index="">I a inicio</button>
+            <button class="boton-eliminar btn btn-primary" data-index="">Ok</button>
         </div>
     </div>
     </div>
@@ -193,13 +274,43 @@ const modalLogout = (user) => {
 
 }
 
+const modalErrConexion = () => {
+    baseModal()
+    const modal = document.getElementById('modal');
+    const success = modal.querySelector('[data-table]');
+    success.innerHTML = `
+    <div class="card text-center">
+    <div class="card-header">
+    <div>
+        <div>
+            <br>
+            <h4>Error de conexion</h4> 
+            <button class="boton-eliminar btn btn-primary" data-index="">Volver</button>
+        </div>
+    </div>
+    </div>
+    </div>
+    `
+    const botonEliminar = success.querySelector('.boton-eliminar');
+    botonEliminar.addEventListener('click', () => {
+        window.location.href = '/index.html';
+    });
+    setTimeout(() => {
+        window.location.href= '/index.html';
+       }, 3000);
+}
+
 export const modalControllers = {
     modalEdicion,
     modalEliminar,
     baseModal,
-    modalSuccess,
-    modalError,
+    modalSuccessSignIn,
+    modalErrorSignIn,
     modalSuccessSignup,
     modalErrorSignup,
-    modalLogout
+    modalLogout,
+    modalProductoCreado,
+    modalErrorRegistro,
+    modalProductoEditado,
+    modalErrConexion
 }

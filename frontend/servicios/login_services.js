@@ -21,10 +21,10 @@ const signin = async (dataUser) => {
 
     //Uso de localStorage para guardar usuario
     localStorage.setItem('user', JSON.stringify(user));
-    modalControllers.modalSuccess(user);
+    modalControllers.modalSuccessSignIn(user);
 
   } catch (error) {
-    modalControllers.modalError();
+    modalControllers.modalErrorSignIn();
     console.error(error);
   }
 

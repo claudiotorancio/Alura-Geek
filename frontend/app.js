@@ -7,12 +7,11 @@ import { productoServices } from "./servicios/product_services.js";
 import { loginServices } from './servicios/login_services.js';
 import { controllers } from "./productos_controllers.js";
 import { loginControllers } from './login_controllers.js';
+import { modalControllers } from './modal.js';
 
 
 // busqueda de cambios
 document.addEventListener('DOMContentLoaded', () => {
-
-
     const user = JSON.parse(localStorage.getItem('user')) || null;
     const actualizarUsuario = document.querySelector('.data-user');
     const logoutUsuario = document.querySelector('[data-logOut]')
@@ -51,16 +50,15 @@ form.addEventListener("submit", (e) => {
     if (user) {
         productoServices
             .crearProducto(productData)
-            .then((respuesta) => {
-                window.location.href = "/index.html"
-                alert("El producto fue creado con exito")
-                console.log(respuesta)
+            .then(() => {
+                modalControllers.modalProductoCreado()
+             
             }).catch((err) => {
                 console.log(err)
             })
     } else {
-        alert('debe registrarse para comenzar!')
-        loginControllers.signin()
+  modalControllers.modalErrorRegistro()
+      
     }
 
 });
