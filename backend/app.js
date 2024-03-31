@@ -5,7 +5,6 @@ import morgan from "morgan";
 import cors from 'cors';
 import exphbs from 'express-handlebars'
 import cookieParser from "cookie-parser";
-import passport from "passport";
 import session from "express-session";
 import MongoDBStore from "connect-mongodb-session";
 import MONGODB_URI from "../backend/config.js";
@@ -53,8 +52,7 @@ app.use(session({
   }
 }))
 
-app.use(passport.initialize());
-app.use(passport.session())
+
 
 
 app.use('/', indexRouter)

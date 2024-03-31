@@ -21,6 +21,9 @@ const router = Router()
 
 //middlewares
 
+router.use(passport.initialize());
+router.use(passport.session())
+
 const s3 = new AWS.S3({
     region: process.env.S3_BUCKET_REGION,
     credentials: {
