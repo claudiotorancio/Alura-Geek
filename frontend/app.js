@@ -47,7 +47,7 @@ form.addEventListener("submit", (e) => {
     productData.append('image', image)
 
     const user = JSON.parse(localStorage.getItem('user')) || null;
-    if (user) {
+    if (!user) {
         productoServices
             .crearProducto(productData)
             .then(() => {
@@ -63,7 +63,7 @@ form.addEventListener("submit", (e) => {
 
 });
 
-//inicio de sesion desde boron Login
+//inicio de sesion desde boton Login
 const login = document.querySelector('[data-log]');
 
 login.addEventListener('click', (e) => {
