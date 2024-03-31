@@ -5,6 +5,7 @@ import Product from "../../models/Product.js";
 const renderProducts = async (req, res) => {
 
     try {
+        console.log(req.isAuthenticated())
         //verificar que el usuario este autenticado
         if (!req.isAuthenticated()) {
             return res.status(401).json({ error: 'Usuario no autenticado' });

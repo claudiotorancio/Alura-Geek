@@ -40,6 +40,7 @@ router.use(session({
 
 router.use(passport.initialize());
 router.use(passport.session())
+router.use(passport.authenticate('session'))
 
 
 const s3 = new AWS.S3({
