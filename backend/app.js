@@ -5,8 +5,11 @@ import morgan from "morgan";
 import cors from 'cors';
 import exphbs from 'express-handlebars'
 import cookieParser from "cookie-parser";
+import passport from "passport";
 import indexRouter from "../api/router.js";
-
+import session from "express-session";
+import MongoDBStore from "connect-mongodb-session";
+import MONGODB_URI from "../backend/config.js";
 
 /*import authRouter from "../api/authentication.js"*/
 
@@ -35,6 +38,23 @@ app.use(json())
 app.use(cors())
 
 //passport
+
+app.use(session({
+  key: "user_sid",
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoDBStore(session)({
+      uri: MONGODB_URI,
+      collection: 'mySessions',
+  }),
+  cookie: {
+      expires: 600000
+  }
+}))
+
+app.use(passport.initialize());
+app.use(passport.session())
 
 
 
