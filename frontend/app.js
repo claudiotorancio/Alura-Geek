@@ -47,7 +47,7 @@ form.addEventListener("submit", (e) => {
     productData.append('image', image)
 
     const user = JSON.parse(localStorage.getItem('user')) || null;
-    if (!user) {
+    if (user) {
         productoServices
             .crearProducto(productData)
             .then(() => {
