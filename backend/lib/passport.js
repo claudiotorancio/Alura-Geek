@@ -43,7 +43,6 @@ passport.use('local.signin', new LocalStrategy({
     
 }));
 
-
 //SignUp
 
 passport.use('local.signup', new LocalStrategy({
@@ -72,7 +71,6 @@ passport.use('local.signup', new LocalStrategy({
 //serialUser
 
 passport.serializeUser((user, done) => {
-
     done(null, user.id);
 });
   
@@ -86,6 +84,7 @@ passport.deserializeUser(async (id, done) => {
         done(err, null);
     }
 });
+
 
 
 export default passport
