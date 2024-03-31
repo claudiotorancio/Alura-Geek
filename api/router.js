@@ -13,10 +13,6 @@ import signup from "../backend/routes/user/signup.js";
 import success from "../backend/routes/user/success.js";
 import logout from "../backend/routes/user/logout.js";
 import passport from "../backend/lib/passport.js"
-import session from "express-session";
-import MongoDBStore from "connect-mongodb-session";
-import MONGODB_URI from "../backend/config.js";
-
 
 //defino enrutador
 
@@ -24,23 +20,6 @@ const router = Router()
 
 
 //middlewares
-router.use(session({
-    key: "user_sid",
-    secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoDBStore(session)({
-        uri: MONGODB_URI,
-        collection: 'mySessions',
-    }),
-    cookie: {
-        expires: 600000
-    }
-}))
-
-router.use(passport.initialize());
-router.use(passport.session())
-
 
 const s3 = new AWS.S3({
     region: process.env.S3_BUCKET_REGION,
