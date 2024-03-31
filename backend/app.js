@@ -1,13 +1,11 @@
 import express, { json, urlencoded } from "express";
-
 import { fileURLToPath } from 'url';
 import path from 'path';
 import morgan from "morgan";
 import cors from 'cors';
 import exphbs from 'express-handlebars'
-
+import passport from "passport";
 import cookieParser from "cookie-parser";
-
 import indexRouter from "../api/router.js";
 
 
@@ -34,9 +32,8 @@ app.use(json())
 app.use(cors())
 
 //passport
-
-
-
+app.use(passport.initialize());
+app.use(passport.session())
 
 
 
