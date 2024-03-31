@@ -17,9 +17,10 @@ import session from "express-session";
 import MongoDBStore from "connect-mongodb-session";
 import MONGODB_URI from "../backend/config.js";
 
+const router = Router()
 
 //middlewares
-const sessionMiddleware =
+router.use(
     session({
         key: "user_sid",
         secret: process.env.SECRET_KEY,
@@ -32,7 +33,11 @@ const sessionMiddleware =
         cookie: {
             expires: 600000
         }
-    })
+    }))
+
+    router.use(passport.authenticate('session'))
+    router.use(passport.initialize());
+router.use(passport.session())
 
 const s3 = new AWS.S3({
     region: process.env.S3_BUCKET_REGION,
@@ -63,20 +68,20 @@ const uploadSingleUpdate = upload(process.env.BUCKET_AWS).single('imagePath');
 
 //defino enrutador
 
-const router = Router()
+
 
 //Login
 
 router.post('/api/signup', signup)
-router.post('/api/signin',sessionMiddleware, passport.authenticate('local.signin', { session: true }), signin)
-router.delete('/api/logout',sessionMiddleware, passport.authenticate('session'), logout)
+router.post('/api/signin', passport.authenticate('local.signin', { session: true }), signin)
+router.delete('/api/logout',passport.authenticate('session'), logout)
 
 router.get('/success', success)
 
 
 //Products
-router.get('/api/renderProducts', sessionMiddleware, passport.authenticate('session'),  renderProducts)
-router.post('/api/createProduct',  uploadSingle,  sessionMiddleware, passport.authenticate('session'),  createProduct)
+router.get('/api/renderProducts',  passport.authenticate('session'),  renderProducts)
+router.post('/api/createProduct',  uploadSingle, passport.authenticate('session'),  createProduct)
 router.delete('/api/deleteProduct/:id', deleteProduct)
 router.get('/api/detailsProduct/:id', detailsProduct)
 router.put('/api/updateProduct/:id', uploadSingleUpdate, updateProduct)
