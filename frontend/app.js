@@ -10,10 +10,11 @@ import { loginControllers } from './login_controllers.js';
 import { modalControllers } from './modal.js';
 
 
-var tiemporRecarga = 1000000;
+var tiemporRecarga = 700000;
 
 function recargarPagina() {
     location.reload();
+    sessionStorage.removeItem('user');
 }
 
 setTimeout(recargarPagina, tiemporRecarga)
