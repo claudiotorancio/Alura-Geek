@@ -67,7 +67,7 @@ const upload = () =>
         })
     })
 
-const uploadSingle = upload(process.env.BUCKET_AWS).single('image');
+export const uploadSingle = upload(process.env.BUCKET_AWS).single('image');
 const uploadSingleUpdate = upload(process.env.BUCKET_AWS).single('imagePath');
 
 
@@ -82,7 +82,7 @@ router.get('/success', success)
 
 //Products
 router.get('/api/renderProducts', passport.authenticate('session'),  renderProducts)
-router.post('/api/createProduct', passport.authenticate('session'), uploadSingle, createProduct )
+router.post('/api/createProduct', passport.authenticate('session'), createProduct )
 router.delete('/api/deleteProduct/:id', deleteProduct)
 router.get('/api/detailsProduct/:id', detailsProduct)
 router.put('/api/updateProduct/:id', uploadSingleUpdate, updateProduct)
