@@ -74,7 +74,27 @@ const logout = async () => {
 
     const user = JSON.parse(sessionStorage.getItem('user'))
     modalControllers.modalLogout(user);
+
+    // Función para verificar periódicamente si las cookies de sesión siguen presentes
+function checkSessionExpiration() {
+  if (!areSessionCookiesPresent()) {
+    // Si las cookies de sesión no están presentes, limpiar sessionStorage
     sessionStorage.removeItem('user');
+    // También podrías ejecutar cualquier otra acción necesaria
+  }
+}
+
+// Función para comprobar si hay cookies de sesión presentes
+function areSessionCookiesPresent() {
+  return document.cookie.split(';').some(function(cookie) {
+    return cookie.trim().startsWith('user_sid'); // Suponiendo que tus cookies de sesión se llamen 'session'
+  });
+}
+
+// Establecer un temporizador para verificar periódicamente la expiración de la sesión
+setInterval(checkSessionExpiration, 1000); // Verificar cada segundo (puedes ajustar este valor según tus necesidades)
+
+ 
 
   } catch (error) {
     console.error('Error during logout:', error);
