@@ -72,7 +72,7 @@ const logout = async () => {
     }
     //remover usuario de localStorage
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(sessionStorage.getItem('user'))
     modalControllers.modalLogout(user);
     sessionStorage.removeItem('user');
 
