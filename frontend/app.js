@@ -12,7 +12,7 @@ import { modalControllers } from './modal.js';
 
 // busqueda de cambios
 document.addEventListener('DOMContentLoaded', () => {
-    const user = JSON.parse(localStorage.getItem('user')) || null;
+    const user = JSON.parse(sessionStorage.getItem('user')) || null;
     const actualizarUsuario = document.querySelector('.data-user');
     const logoutUsuario = document.querySelector('[data-logOut]')
     const userActive = document.querySelector('[data-log]')
@@ -46,7 +46,7 @@ form.addEventListener("submit", (e) => {
     productData.append('section', section)
     productData.append('image', image)
 
-    const user = JSON.parse(localStorage.getItem('user')) || null;
+    const user = JSON.parse(sessionStorage.getItem('user')) || null;
     if (user) {
         productoServices
             .crearProducto(productData)
