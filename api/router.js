@@ -13,9 +13,9 @@ import signup from "../backend/routes/user/signup.js";
 import success from "../backend/routes/user/success.js";
 import logout from "../backend/routes/user/logout.js";
 import passport from "../backend/lib/passport.js"
-/*import session from "express-session";
+import session from "express-session";
 import MongoDBStore from "connect-mongodb-session";
-import MONGODB_URI from "../backend/config.js";*/
+import MONGODB_URI from "../backend/config.js";
 
 
 //defino enrutador
@@ -24,7 +24,7 @@ const router = Router()
 
 
 //middlewares
-/*router.use(session({
+router.use(session({
     key: "user_sid",
     secret: process.env.SECRET_KEY,
     resave: false,
@@ -38,7 +38,7 @@ const router = Router()
     }
 }))
 
-*/router.use(passport.initialize());
+router.use(passport.initialize());
 router.use(passport.session())
 router.use(passport.authenticate('session'))
 
