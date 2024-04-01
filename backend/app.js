@@ -7,9 +7,9 @@ import exphbs from 'express-handlebars'
 import cookieParser from "cookie-parser";
 import indexRouter from "../api/router.js";
 import passport from "passport"
-import session from "express-session";
+/*import session from "express-session";
 import MongoDBStore from "connect-mongodb-session";
-import MONGODB_URI from "../backend/config.js";
+import MONGODB_URI from "../backend/config.js";*/
 
 /*import authRouter from "../api/authentication.js"*/
 
@@ -38,7 +38,7 @@ app.use(cors())
 
 //passport
 
-app.use(session({
+/*app.use(session({
     key: "user_sid",
     secret: process.env.SECRET_KEY,
     resave: false,
@@ -53,7 +53,7 @@ app.use(session({
 }))
 
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session())*/
 
 
 

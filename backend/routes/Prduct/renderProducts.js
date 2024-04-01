@@ -11,7 +11,7 @@ const renderProducts = async (req, res) => {
                 console.error('Error al autenticar la sesión del usuario:', error);
                 return res.status(500).json({ error: 'Error al autenticar la sesión del usuario' });
             }
-
+            console.log(req.isAuthenticated())
             // Verificar si el usuario está autenticado
             if (!req.isAuthenticated()) {
                 return res.status(401).json({ error: 'Usuario no autenticado' });
