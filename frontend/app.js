@@ -10,6 +10,14 @@ import { loginControllers } from './login_controllers.js';
 import { modalControllers } from './modal.js';
 
 
+var tiemporRecarga = 1000000;
+
+function recargarPagina() {
+    location.reload();
+}
+
+setTimeout(recargarPagina, tiemporRecarga)
+
 // busqueda de cambios
 document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(sessionStorage.getItem('user')) || null;
