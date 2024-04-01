@@ -82,7 +82,7 @@ router.get('/success', success)
 
 //Products
 router.get('/api/renderProducts', passport.authenticate('session'),  renderProducts)
-router.post(passport.authenticate('session'),'/api/createProduct',  uploadSingle,     createProduct)
+router.post('/api/createProduct', passport.authenticate('session'), createProduct, uploadSingle)
 router.delete('/api/deleteProduct/:id', deleteProduct)
 router.get('/api/detailsProduct/:id', detailsProduct)
 router.put('/api/updateProduct/:id', uploadSingleUpdate, updateProduct)
