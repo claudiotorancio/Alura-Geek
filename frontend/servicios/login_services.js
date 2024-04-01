@@ -20,7 +20,7 @@ const signin = async (dataUser) => {
     const user = data.user.username;
 
     //Uso de localStorage para guardar usuario
-    localStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('user', JSON.stringify(user));
     modalControllers.modalSuccessSignIn(user);
 
   } catch (error) {
@@ -74,7 +74,7 @@ const logout = async () => {
 
     const user = JSON.parse(localStorage.getItem('user'))
     modalControllers.modalLogout(user);
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
 
   } catch (error) {
     console.error('Error during logout:', error);
