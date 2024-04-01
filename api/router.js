@@ -39,7 +39,7 @@ router.use(session({
 
 router.use(passport.initialize());
 router.use(passport.session())
-router.use(passport.authenticate('session'))
+
 
 
 
