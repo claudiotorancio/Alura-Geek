@@ -3,7 +3,7 @@ import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
 
 const renderProducts = async (req, res) => {
-    console.log(req.session)
+
     try {
     
         console.log(req.isAuthenticated())

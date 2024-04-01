@@ -10,34 +10,32 @@ import { loginControllers } from './login_controllers.js';
 import { modalControllers } from './modal.js';
 
 
-var tiemporRecarga = 700000;
-
-function recargarPagina() {
-    location.reload();
-    sessionStorage.removeItem('user');
-}
-
-setTimeout(recargarPagina, tiemporRecarga)
 
 // busqueda de cambios
 document.addEventListener('DOMContentLoaded', () => {
-    const user = JSON.parse(sessionStorage.getItem('user')) || null;
+    const sessionCookieExists = areSessionCookiesPresent();
     const actualizarUsuario = document.querySelector('.data-user');
     const logoutUsuario = document.querySelector('[data-logOut]')
     const userActive = document.querySelector('[data-log]')
-    if (user) {
+    if (sessionCookieExists) {
+        const user = JSON.parse(sessionStorage.getItem('user'));
         controllers.render();
         actualizarUsuario.textContent = `Hola! ${user}`
         logoutUsuario.textContent = 'Logout'
         userActive.style.display = 'none'
-
     } else {
         actualizarUsuario.style.display = 'none'
         logoutUsuario.style.display = 'none';
         userActive.textContent = 'Login'
     }
-
 });
+
+function areSessionCookiesPresent() {
+  return document.cookie.split(';').some(function(cookie) {
+    return cookie.trim().startsWith('user_sid=');
+  });
+}
+
 
 //extraer info de formulario
 const form = document.querySelector('[data-form]');
