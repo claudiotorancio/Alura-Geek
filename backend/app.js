@@ -3,15 +3,10 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import morgan from "morgan";
 import cors from 'cors';
-import exphbs from 'express-handlebars';
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import AWS from 'aws-sdk';
 import multerS3 from 'multer-s3';
-import passport from "passport";
-import session from "express-session";
-import MongoDBStore from "connect-mongodb-session";
-import MONGODB_URI from "../backend/config.js";
 import indexRouter from "../api/router.js";
 
 
@@ -31,21 +26,6 @@ app.use(cors());
 
 // Passport y sesión
 
-app.use(session({
-    key: "user_sid",
-    secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoDBStore(session)({
-      uri: MONGODB_URI,
-      collection: 'mySessions',
-  }),
-    cookie: {
-        expires: 600000
-    }
-}));
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Multer
 const s3 = new AWS.S3({
