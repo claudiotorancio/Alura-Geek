@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
-import { uploadSingle } from "../../app.js"; 
+import { uploadSingle } from "../../../api/router.js";
 
 const createProduct = async (req, res) => {
     try {
