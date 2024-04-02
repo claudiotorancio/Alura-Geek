@@ -2,6 +2,7 @@ import express from "express";
 import { fileURLToPath } from 'url';
 import path from 'path';
 import morgan from "morgan";
+import cors from 'cors'
 import indexRouter from "../api/router.js";
 
 
@@ -16,7 +17,7 @@ const outputPath = path.join(__dirname, 'public')
 
 //middlewares
 app.use(morgan('dev'));
-
+app.use(cors())
 //passport
 
 app.use('/', indexRouter)
