@@ -124,6 +124,29 @@ const nuevoProducto = (name, price, imagePath, id) => {
     return card;
 }
 
+const productoInicio = (name, imagePath) => {
+    const card = document.createElement("div");
+    const contenido = `
+        <div class="container mx-auto mt-4">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div style="width: 15rem;">
+                        <img class="card-img-top" src=${imagePath} alt="">
+                            <div class="card-body">
+                                <h3 class="card-title">${name}</h3>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    card.innerHTML = contenido;
+    card.classList.add("card");
+
+    return card;
+}
+
 //asociar productos con la seccion correspondiente
 const productoPosters = document.querySelector('[data-posters]');
 const productoConsolas = document.querySelector('[data-consolas]');
@@ -153,11 +176,11 @@ const renderInit = async () => {
         listaProductos.forEach(elemento => {
 
             if (elemento.section === 'opcion1') {
-                productoPosters.appendChild(nuevoProducto(elemento.name, elemento.price, elemento.imagePath, elemento._id))
+                productoPosters.appendChild(productoInicio(elemento.name, elemento.imagePath))
             } else if (elemento.section === 'opcion2') {
-                productoConsolas.appendChild(nuevoProducto(elemento.name, elemento.price, elemento.imagePath, elemento._id))
+                productoConsolas.appendChild(productoInicio(elemento.name, elemento.imagePath))
             } else if (elemento.section === 'opcion3') {
-                productoDiversos.appendChild(nuevoProducto(elemento.name, elemento.price, elemento.imagePath, elemento._id))
+                productoDiversos.appendChild(productoInicio(elemento.name,  elemento.imagePath))
             }
         });
     } catch (erro) {
