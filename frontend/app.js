@@ -15,11 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const actualizarUsuario = document.querySelector('.data-user');
     const logoutUsuario = document.querySelector('[data-logOut]')
     const userActive = document.querySelector('[data-log]')
+    const cardActive = document.querySelector('data-card')
     if (user) {
         controllers.render();
         actualizarUsuario.textContent = `Hola! ${user}`
         logoutUsuario.textContent = 'Logout'
         userActive.style.display = 'none'
+        cardActive.style.display = 'none'
 
     } else {
         actualizarUsuario.style.display = 'none'
