@@ -17,7 +17,7 @@ import deleteProduct from "../backend/routes/Prduct/deleteProduct.js";
 import detailsProduct from "../backend/routes/Prduct/detailsProduct.js";
 import updateProduct from "../backend/routes/Prduct/updateProduct.js";
 import path from 'path';
-import productoInicio from "../backend/routes/Prduct/productoInicio.js";
+
 
 const router = Router();
 
@@ -76,7 +76,7 @@ router.post('/api/signup', signup);
 router.post('/api/signin', signin);
 router.delete('/api/logout', logout)
 
-router.get('/api/createProduct', productoInicio)
+
 router.get('/api/renderInicio', renderInicio)
 router.get('/api/renderProducts', renderProducts);
 router.post('/api/createProduct',  createProduct);
