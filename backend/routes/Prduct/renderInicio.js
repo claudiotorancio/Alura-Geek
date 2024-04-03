@@ -17,6 +17,7 @@ const renderInicio = async (req, res) => {
 
         //Devolver productos
         res.json(products);
+        console.log(products)
     } catch (error) {
         console.error('Error al cargar productos:', error);
         res.status(500).json({ error: 'Error al cargar productos' });

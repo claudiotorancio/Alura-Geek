@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
        
     } else {
-        controllers.render();
+        controllers.renderInit();
         actualizarUsuario.style.display = 'none'
         logoutUsuario.style.display = 'none';
         userActive.textContent = 'Login'

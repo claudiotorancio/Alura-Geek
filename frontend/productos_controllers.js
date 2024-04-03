@@ -147,6 +147,24 @@ const render = async () => {
     }
 }
 
+const renderInit = async () => {
+    try {
+        const listaProductos = await productoServices.renderInicio()
+        listaProductos.forEach(elemento => {
+
+            if (elemento.section === 'opcion1') {
+                productoPosters.appendChild(nuevoProducto(elemento.name, elemento.price, elemento.imagePath, elemento._id))
+            } else if (elemento.section === 'opcion2') {
+                productoConsolas.appendChild(nuevoProducto(elemento.name, elemento.price, elemento.imagePath, elemento._id))
+            } else if (elemento.section === 'opcion3') {
+                productoDiversos.appendChild(nuevoProducto(elemento.name, elemento.price, elemento.imagePath, elemento._id))
+            }
+        });
+    } catch (erro) {
+        console.log(erro)
+    }
+}
+
 
 
 //editar producto
@@ -252,6 +270,7 @@ const renderProductEdit = async (id) => {
 export const controllers = {
     nuevoProducto,
     render,
+    renderInit,
     editProduct,
     renderProductEdit,
     formProduct
