@@ -3,6 +3,7 @@
 import { Schema, model } from "mongoose";
 
 const VistaSchema = new Schema ({
+    role: {type: String},
     name: {type: String},
     imagePath: {type: String},
     section:{type: String},
