@@ -197,7 +197,7 @@ const productoEdicion = document.querySelector('[data-table]');
 const editProduct = (name, price, imagePath, id) => {
     productoEdicion.innerHTML = '';
     const card = document.createElement('div');
-    const contenido = `
+    /*const contenido = `
     <div class="card text-center">
     <div class="card-header">
     <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
@@ -216,9 +216,9 @@ const editProduct = (name, price, imagePath, id) => {
     </div>
     </div>
 
-    `
+    `*/
     //codigo para actualizar imagen en s3 y mongoDB
-    /*const contenido = `
+    const contenido = `
     <div class="card text-center">
     <div class="card-header">
     <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
@@ -241,7 +241,7 @@ const editProduct = (name, price, imagePath, id) => {
     </div>
     </div>
 
-    `*/
+    `
 
     card.innerHTML = contenido;
     card.classList.add("modalVisor");
@@ -252,14 +252,14 @@ const editProduct = (name, price, imagePath, id) => {
     
         const name = document.querySelector('[data-nombre]').value;
         const price = document.querySelector('[data-precio]').value;
-        /*const imagePath = document.querySelector('[data-image]').files[0];
-        const oldImagePath = document.querySelector('[data-oldPath]').value;*/
-      
+        const imagePath = document.querySelector('[data-image]').files[0];
+        const oldImagePath = document.querySelector('[data-oldPath]').value;
+
         const dataEdit = new FormData()
         dataEdit.append('name', name)
         dataEdit.append('price', price)
-        /*dataEdit.append('imagePath', imagePath)
-        dataEdit.append('oldImagePath', oldImagePath)*/
+        dataEdit.append('imagePath', imagePath)
+        dataEdit.append('oldImagePath', oldImagePath)
 
         productoServices
             .actualizarProducto(dataEdit, id)

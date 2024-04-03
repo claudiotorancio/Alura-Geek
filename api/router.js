@@ -75,8 +75,6 @@ const uploadSingleUpdate = upload(process.env.BUCKET_AWS).single('imagePath');
 router.post('/api/signup', signup);
 router.post('/api/signin', signin);
 router.delete('/api/logout', logout)
-
-
 router.get('/api/renderInicio', renderInicio)
 router.get('/api/renderProducts', renderProducts);
 router.post('/api/createProduct',  createProduct);

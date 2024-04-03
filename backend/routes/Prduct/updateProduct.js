@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
-/*import AWS from 'aws-sdk'
+import AWS from 'aws-sdk'
 
 //codigo para conectar a base de datos s3 y actualizar la imagen en s3 
 const s3 = new AWS.S3({
@@ -10,28 +10,28 @@ const s3 = new AWS.S3({
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
         accessKeyId: process.env.AWS_ACCESS_KEY_ID
     }
-})*/
+})
 
 const updateProduct = async (req, res) => {
     try {
         //parametros de formulario
         const { id } = req.params
-        const { name, price} = req.body
+        /*const { name, price} = req.body*/
 
-        /*const { name, price, oldImagePath } = req.body
-        const imagePath = req.file.location*/
+        const { name, price, oldImagePath } = req.body
+        const imagePath = req.file.location
 
         //convirtiendo info en objeto.
-        const updateProduct = {
+        /*const updateProduct = {
             name,
             price,
-        }
-        /*const updateProduct = {
+        }*/
+        const updateProduct = {
             name,
             price,
             imagePath,
             oldImagePath
-        }*/
+        }
         //conectar a base de datos mediante serverless function
         await mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true,
@@ -40,7 +40,7 @@ const updateProduct = async (req, res) => {
 
         const result = await Product.findByIdAndUpdate(id, updateProduct, { new: true })
         //borrar oldImage en s3
-       /* const nombreDeArchivo = oldImagePath.split('/').pop();
+       const nombreDeArchivo = oldImagePath.split('/').pop();
         const params = {
             Bucket: process.env.BUCKET_AWS,
             Key: nombreDeArchivo,
@@ -52,7 +52,7 @@ const updateProduct = async (req, res) => {
             } else {
                 console.log('Imagen anterior eliminada con éxito en S3:', data);
             }
-        });*/
+        });
 
         if (!result) {
             res.status(404).json({ message: 'Product not found' });
