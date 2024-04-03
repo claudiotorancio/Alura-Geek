@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Vista from "../../models/Vista.js";
+import Product from "../../models/Product.js";
 import { uploadSingle } from "../../../api/router.js";
 
 const productoInicio = async (req, res) => {
@@ -12,7 +13,20 @@ const productoInicio = async (req, res) => {
 
         // Verificar si el usuario es administrador
         if (!esAdministrador(req.user)) {
-            return res.status(403).json({ error: 'Usuario no autorizado para crear productos' });
+              // Valores del formulario
+              const { name,  section } = req.body;
+              const imagePath = req.file.location;
+              const user_id = req.user._id;
+  
+              const createProductData = {
+                  name,
+                  section,
+                  imagePath,
+                  user_id
+              };
+            //return res.status(403).json({ error: 'Usuario no autorizado para crear productos' });
+        }else {
+            
         }
 
         // Llamar a uploadSingle para manejar la carga de la imagen
