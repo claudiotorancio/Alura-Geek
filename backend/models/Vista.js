@@ -5,6 +5,7 @@ import { Schema, model } from "mongoose";
 const VistaSchema = new Schema ({
     role: {type: String},
     name: {type: String},
+    price: {type: String},
     imagePath: {type: String},
     section:{type: String},
     user_id: { type: Schema.Types.ObjectId, ref: 'Users' },
