@@ -60,4 +60,11 @@ const createProduct = async (req, res) => {
     }
 };
 
+const esAdministrador = (user) => {
+    // Aquí debes implementar la lógica para determinar si el usuario es administrador
+    // Por ejemplo, puedes verificar si el usuario tiene un rol de administrador en sus credenciales.
+    // Retorna true si el usuario es administrador, de lo contrario, false.
+    return user.role === 'admin'; // Ejemplo: aquí se asume que el usuario tiene un campo 'role' que indica su rol.
+};
+
 export default createProduct;
