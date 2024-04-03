@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
-
+import Vista from "../../models/Vista.js";
 
 const renderProducts = async (req, res) => {
     try {
@@ -19,13 +19,26 @@ const renderProducts = async (req, res) => {
             useUnifiedTopology: true,
         });
 
-        // Buscar productos del usuario actual
-        const products = await Product.find({ user_id: user_id });
+        let products;
+
+        // Verificar si el usuario es administrador
+        if (esAdministrador(req.user)) {
+            // Si es administrador, buscar productos utilizando el modelo Vista
+            products = await Vista.find({ user_id: user_id });
+        } else {
+            // Si no es administrador, buscar productos utilizando el modelo Product
+            products = await Product.find({ user_id: user_id });
+        }
+
         res.json(products);
     } catch (error) {
         console.error('Error al cargar productos:', error);
         res.status(500).json({ error: 'Error al cargar productos' });
     }
+};
+
+const esAdministrador = (user) => {
+    return user.role === 'admin'; // Por ejemplo, suponiendo que la propiedad 'role' indique el rol del usuario
 };
 
 export default renderProducts;
