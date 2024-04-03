@@ -147,6 +147,8 @@ const render = async () => {
     }
 }
 
+
+
 //editar producto
 
 const productoEdicion = document.querySelector('[data-table]');

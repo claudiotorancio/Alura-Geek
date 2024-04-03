@@ -7,6 +7,9 @@ export const baseURL = process.env.NODE_ENV === 'production'
    
 //CRUD de productos
 
+const renderInicio = async () =>
+    await fetch(`${baseURL}/api/renderInicio`).then((respuesta) => respuesta.json());
+
 const listaProductos = async () =>
     await fetch(`${baseURL}/api/renderProducts`).then((respuesta) => respuesta.json());
 
@@ -51,7 +54,10 @@ const actualizarProducto = async (product, id) => {
 }
 
 
+
+
 export const productoServices = {
+    renderInicio,
     listaProductos,
     crearProducto,
     eliminarProducto,
