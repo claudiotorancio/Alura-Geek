@@ -7,6 +7,7 @@ const VistaSchema = new Schema ({
     name: {type: String},
     imagePath: {type: String},
     section:{type: String},
+    user_id: { type: Schema.Types.ObjectId, ref: 'Users' },
     created_at: {type: Date, default: Date.now}
 }, {
     versionKey:false
