@@ -30,8 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+const crearproducto = document.querySelector('[data-init]');
+    crearproducto.addEventListener('click', () => {
+        modalControllers.baseModal()
+      controllers.formProduct()
+    });
+
+
 //extraer info de formulario
-const form = document.querySelector('[data-form]');
+/*const form = document.querySelector('[data-form]');
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -61,7 +68,7 @@ form.addEventListener("submit", (e) => {
       
     }
 
-});
+});*/
 
 //inicio de sesion desde boton Login
 const login = document.querySelector('[data-log]');

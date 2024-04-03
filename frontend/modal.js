@@ -18,6 +18,8 @@ const baseModal = () => {
     });
 }
 
+
+
 const modalEdicion = (name, price, imagePath, id) => {
     baseModal()
     controllers.renderProductEdit()
@@ -312,5 +314,6 @@ export const modalControllers = {
     modalProductoCreado,
     modalErrorRegistro,
     modalProductoEditado,
-    modalErrConexion
+    modalErrConexion,
+  
 }
