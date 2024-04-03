@@ -11,11 +11,6 @@ const createProduct = async (req, res) => {
             return res.status(401).json({ error: 'Usuario no autenticado' });
         }
 
-        // Verificar si el usuario es administrador
-        if (!esAdministrador(req.user)) {
-            return res.status(403).json({ error: 'Usuario no autorizado para crear productos' });
-        }
-
         // Llamar a uploadSingle para manejar la carga de la imagen
         uploadSingle(req, res, async (error) => {
             if (error) {
@@ -39,7 +34,7 @@ const createProduct = async (req, res) => {
 
             // Crear un nuevo producto
             let newProduct;
-            if (req.user.role === 'admin') {
+            if (esAdministrador(req.user)) {
                 newProduct = new Vista(createProductData);
             } else {
                 newProduct = new Product(createProductData);
@@ -60,11 +55,9 @@ const createProduct = async (req, res) => {
     }
 };
 
+
 const esAdministrador = (user) => {
-    // Aquí debes implementar la lógica para determinar si el usuario es administrador
-    // Por ejemplo, puedes verificar si el usuario tiene un rol de administrador en sus credenciales.
-    // Retorna true si el usuario es administrador, de lo contrario, false.
-    return user.role === 'admin'; // Ejemplo: aquí se asume que el usuario tiene un campo 'role' que indica su rol.
+    return user.role === 'admin'; 
 };
 
 export default createProduct;
