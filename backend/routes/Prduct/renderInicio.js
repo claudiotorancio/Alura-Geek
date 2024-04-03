@@ -13,7 +13,7 @@ const renderInicio = async (req, res) => {
         });
 
         // consultar productos
-        const products = await Product.find();
+        const products = await Product.find({ user_id: { $exists: false }});
 
         //Devolver productos
         res.json(products);
