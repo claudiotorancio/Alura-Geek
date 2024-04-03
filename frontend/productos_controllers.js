@@ -6,36 +6,39 @@ import { productoServices } from "./servicios/product_services.js";
 const formInit = document.querySelector('[data-table]');
 
 const formProduct = () => {
-
     formInit.innerHTML = '';
     const card = document.createElement('div');
     const contenido = `
-    <div class="col-mx-auto">
-    <form id="form" action="/api/createProduct" enctype="multipart/form-data" method="POST" data-form>
-        <p class="parrafo">Agregar un nuevo producto</p>
-        <div class="form-group">
-            <input class="form-control  p-2" type="file" name="image" placeholder="URL del producto"
-                data-imageUrl required autofocus>
+    <div class="card text-center">
+        <div class="card-header">
+            <p>Agregar producto</p>
         </div>
-        <div class="form-group">
-            <input class="form-control mt-3 p-2" type="text" placeholder="Nombre del producto" required
-                data-name>
-        </div>
-        <div class="form-group">
-            <input class="form-control mt-3 mb-3 p-2" type="text" placeholder="Precio del producto"
-                required data-price>
-        </div>
-        <p for="miMenuDesplegable">Selecciona una Seccion:</p>
-        <div class="form-group">
-            <select class="form-control  mb-3 p-2" id="miMenuDesplegable" name="opcion">
-                <option value="opcion1">Posters</option>
-                <option value="opcion2">Consolas</option>
-                <option value="opcion3">Diversos</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">Agregar producto</button>
-    </form>
-</div>
+            <div class="card-body">
+                <form id="form" action="/api/createProduct" enctype="multipart/form-data" method="POST" data-form>
+                    <div class="form-group">
+                        <input class="form-control  p-2" type="file" name="image" placeholder="URL del producto"
+                            data-imageUrl required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control mt-3 p-2" type="text" placeholder="Nombre del producto" required
+                            data-name>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control mt-3 mb-3 p-2" type="text" placeholder="Precio del producto"
+                            required data-price>
+                    </div>
+                        <p for="miMenuDesplegable">Seccion</p>
+                    <div class="form-group">
+                        <select class="form-control  mb-3 p-2" id="miMenuDesplegable" name="opcion">
+                            <option value="opcion1">Posters</option>
+                            <option value="opcion2">Consolas</option>
+                            <option value="opcion3">Diversos</option>
+                        </select>
+                    </div>
+                        <button type="submit" class="btn btn-primary btn-lg">Agregar</button>
+                </form>
+            </div>
+    </div>
     `
 
     card.innerHTML = contenido;
