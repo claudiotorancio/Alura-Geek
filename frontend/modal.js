@@ -3,34 +3,32 @@ import { controllers } from "./productos_controllers.js";
 import { productoServices } from "./servicios/product_services.js";
 
 const baseModal = () => {
-    const modal = document.getElementById('modal');
-    modal.style.display = 'block';
+  const modal = document.getElementById("modal");
+  modal.style.display = "block";
 
-    const modalClose = document.querySelector('.modal-close');
-    modalClose.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+  const modalClose = document.querySelector(".modal-close");
+  modalClose.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-}
-
-
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+};
 
 const modalEdicion = (name, price, imagePath, id) => {
-    baseModal()
-    controllers.renderProductEdit()
-    controllers.editProduct(name, price, imagePath, id)
-}
+  baseModal();
+  controllers.renderProductEdit();
+  controllers.editProduct(name, price, imagePath, id);
+};
 
 const modalEliminar = (id) => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const eliminarProducto = modal.querySelector('[data-table]');
-    eliminarProducto.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const eliminarProducto = modal.querySelector("[data-table]");
+  eliminarProducto.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -42,24 +40,23 @@ const modalEliminar = (id) => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = eliminarProducto.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-        productoServices
-            .eliminarProducto(id);
-        window.location.href = '/index.html';
-    });
-    eliminarProducto.classList.add("modalVisor");
-    /*setTimeout(() => {
+    `;
+  const botonEliminar = eliminarProducto.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    productoServices.eliminarProducto(id);
+    window.location.href = "/index.html";
+  });
+  eliminarProducto.classList.add("modalVisor");
+  /*setTimeout(() => {
         window.location.href= '/index.html';
        }, 2000);*/
-}
+};
 
 const modalSuccessSignIn = (username) => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const success = modal.querySelector('[data-table]');
-    success.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const success = modal.querySelector("[data-table]");
+  success.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -71,21 +68,21 @@ const modalSuccessSignIn = (username) => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = success.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-        window.location.href = '/index.html';
-    });
-    setTimeout(() => {
-        window.location.href= '/index.html';
-       }, 3000);
-}
+    `;
+  const botonEliminar = success.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    window.location.href = "/index.html";
+  });
+  setTimeout(() => {
+    window.location.href = "/index.html";
+  }, 3000);
+};
 
 const modalProductoCreado = () => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const success = modal.querySelector('[data-table]');
-    success.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const success = modal.querySelector("[data-table]");
+  success.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -97,21 +94,21 @@ const modalProductoCreado = () => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = success.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-        window.location.href = '/index.html';
-    });
-    setTimeout(() => {
-        window.location.href= '/index.html';
-       }, 3000);
-}
+    `;
+  const botonEliminar = success.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    window.location.href = "/index.html";
+  });
+  setTimeout(() => {
+    window.location.href = "/index.html";
+  }, 3000);
+};
 
 const modalProductoEditado = () => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const success = modal.querySelector('[data-table]');
-    success.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const success = modal.querySelector("[data-table]");
+  success.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -123,21 +120,21 @@ const modalProductoEditado = () => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = success.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-        window.location.href = '/index.html';
-    });
-    setTimeout(() => {
-        window.location.href= '/index.html';
-       }, 3000);
-}
+    `;
+  const botonEliminar = success.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    window.location.href = "/index.html";
+  });
+  setTimeout(() => {
+    window.location.href = "/index.html";
+  }, 3000);
+};
 
 const modalErrorSignIn = () => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const incorrect = modal.querySelector('[data-table]');
-    incorrect.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const incorrect = modal.querySelector("[data-table]");
+  incorrect.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -149,22 +146,21 @@ const modalErrorSignIn = () => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = incorrect.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-      
-      loginControllers.signin()
-    });
-    setTimeout(() => {
-        loginControllers.signin()
-       }, 2000);
-}
+    `;
+  const botonEliminar = incorrect.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    loginControllers.signin();
+  });
+  setTimeout(() => {
+    loginControllers.signin();
+  }, 2000);
+};
 
 const modalSuccessSignup = () => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const successSignup = modal.querySelector('[data-table]');
-    successSignup.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const successSignup = modal.querySelector("[data-table]");
+  successSignup.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -176,22 +172,21 @@ const modalSuccessSignup = () => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = successSignup.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-        
-      loginControllers.signin()
-    });
-    setTimeout(() => {
-        loginControllers.signin()
-       }, 3000);
-}
+    `;
+  const botonEliminar = successSignup.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    loginControllers.signin();
+  });
+  setTimeout(() => {
+    loginControllers.signin();
+  }, 3000);
+};
 
 const modalErrorSignup = () => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const errorSignup = modal.querySelector('[data-table]');
-    errorSignup.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const errorSignup = modal.querySelector("[data-table]");
+  errorSignup.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -203,24 +198,22 @@ const modalErrorSignup = () => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = errorSignup.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-        
-      loginControllers.signup()
-    });
+    `;
+  const botonEliminar = errorSignup.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    loginControllers.signup();
+  });
 
-    setTimeout(() => {
-        loginControllers.signup()
-       }, 2000);
-
-}
+  setTimeout(() => {
+    loginControllers.signup();
+  }, 2000);
+};
 
 const modalErrorRegistro = () => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const errorSignup = modal.querySelector('[data-table]');
-    errorSignup.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const errorSignup = modal.querySelector("[data-table]");
+  errorSignup.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -232,24 +225,22 @@ const modalErrorRegistro = () => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = errorSignup.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-        
-      loginControllers.signin()
-    });
+    `;
+  const botonEliminar = errorSignup.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    loginControllers.signin();
+  });
 
-    setTimeout(() => {
-        loginControllers.signin()
-       }, 2000);
-
-}
+  setTimeout(() => {
+    loginControllers.signin();
+  }, 2000);
+};
 
 const modalLogout = (user) => {
-    baseModal();
-    const modal = document.getElementById('modal');
-    const errorSignup = modal.querySelector('[data-table]');
-    errorSignup.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const errorSignup = modal.querySelector("[data-table]");
+  errorSignup.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -261,26 +252,23 @@ const modalLogout = (user) => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = errorSignup.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-    modal.style.display = 'none'
-            window.location.href= '/index.html';
-     
-    });
+    `;
+  const botonEliminar = errorSignup.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    modal.style.display = "none";
+    window.location.href = "/index.html";
+  });
 
-    setTimeout(() => {
-        window.location.href= '/index.html';
-       }, 3000);
- 
-
-}
+  setTimeout(() => {
+    window.location.href = "/index.html";
+  }, 3000);
+};
 
 const modalErrConexion = () => {
-    baseModal()
-    const modal = document.getElementById('modal');
-    const success = modal.querySelector('[data-table]');
-    success.innerHTML = `
+  baseModal();
+  const modal = document.getElementById("modal");
+  const success = modal.querySelector("[data-table]");
+  success.innerHTML = `
     <div class="card text-center">
     <div class="card-header">
     <div>
@@ -292,28 +280,27 @@ const modalErrConexion = () => {
     </div>
     </div>
     </div>
-    `
-    const botonEliminar = success.querySelector('.boton-eliminar');
-    botonEliminar.addEventListener('click', () => {
-        window.location.href = '/index.html';
-    });
-    setTimeout(() => {
-        window.location.href= '/index.html';
-       }, 3000);
-}
+    `;
+  const botonEliminar = success.querySelector(".boton-eliminar");
+  botonEliminar.addEventListener("click", () => {
+    window.location.href = "/index.html";
+  });
+  setTimeout(() => {
+    window.location.href = "/index.html";
+  }, 3000);
+};
 
 export const modalControllers = {
-    modalEdicion,
-    modalEliminar,
-    baseModal,
-    modalSuccessSignIn,
-    modalErrorSignIn,
-    modalSuccessSignup,
-    modalErrorSignup,
-    modalLogout,
-    modalProductoCreado,
-    modalErrorRegistro,
-    modalProductoEditado,
-    modalErrConexion,
-  
-}
+  modalEdicion,
+  modalEliminar,
+  baseModal,
+  modalSuccessSignIn,
+  modalErrorSignIn,
+  modalSuccessSignup,
+  modalErrorSignup,
+  modalLogout,
+  modalProductoCreado,
+  modalErrorRegistro,
+  modalProductoEditado,
+  modalErrConexion,
+};

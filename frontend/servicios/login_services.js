@@ -1,35 +1,32 @@
-
 import { modalControllers } from "../modal.js";
 import { baseURL } from "./product_services.js";
 
 const signin = async (dataUser) => {
-
   try {
     const response = await fetch(`${baseURL}/api/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dataUser)
+      body: JSON.stringify(dataUser),
     });
     if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `Error en la solicitud: ${response.status} - ${response.statusText}`
+      );
     }
     //manejo de la respuesta
     const data = await response.json();
     const user = data.user.username;
 
     //Uso de localStorage para guardar usuario
-    sessionStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem("user", JSON.stringify(user));
     modalControllers.modalSuccessSignIn(user);
-
   } catch (error) {
     modalControllers.modalErrorSignIn();
     console.error(error);
   }
-
 };
-
 
 const signup = async (dataSignup) => {
   try {
@@ -38,12 +35,14 @@ const signup = async (dataSignup) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dataSignup)
+      body: JSON.stringify(dataSignup),
     });
     //manejo de la respuesta
 
     if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `Error en la solicitud: ${response.status} - ${response.statusText}`
+      );
     }
     const data = await response.json();
 
@@ -53,11 +52,8 @@ const signup = async (dataSignup) => {
   } catch (error) {
     modalControllers.modalErrorSignup();
     console.error(error);
-
-
   }
 };
-
 
 const logout = async () => {
   try {
@@ -68,43 +64,25 @@ const logout = async () => {
     //manejo de la respuesta
 
     if (!response.ok) {
-      throw new Error(`Error during logout: ${response.status} - ${response.statusText}`);
+      throw new Error(
+        `Error during logout: ${response.status} - ${response.statusText}`
+      );
     }
     //remover usuario de localStorage
 
-    const user = JSON.parse(sessionStorage.getItem('user'))
+    const user = JSON.parse(sessionStorage.getItem("user"));
     modalControllers.modalLogout(user);
-    sessionStorage.removeItem('user');
-
+    sessionStorage.removeItem("user");
   } catch (error) {
-    console.error('Error during logout:', error);
+    console.error("Error during logout:", error);
   }
 };
-
-
-
 
 export const loginServices = {
   signin,
   signup,
-  logout
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  logout,
+};
 
 /*import httpProxy from 'http-proxy';
 import { modalControllers } from '../modal.js';
@@ -210,4 +188,3 @@ const logout = async () => {
     signup,
     logout
   }*/
-

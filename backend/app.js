@@ -1,10 +1,9 @@
 import express from "express";
-import { fileURLToPath } from 'url';
-import path from 'path';
+import { fileURLToPath } from "url";
+import path from "path";
 import morgan from "morgan";
-import cors from 'cors'
+import cors from "cors";
 import indexRouter from "../api/router.js";
-
 
 const app = express();
 
@@ -12,34 +11,29 @@ const app = express();
 // Ruta hacia carpeta 'public'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const outputPath = path.join(__dirname, 'public')
-
+const outputPath = path.join(__dirname, "public");
 
 //middlewares
-app.use(morgan('dev'));
-app.use(cors())
+app.use(morgan("dev"));
+app.use(cors());
 //passport
 
-app.use('/', indexRouter)
+app.use("/", indexRouter);
 
 //manejo de errores
 indexRouter.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).json({ error: 'Error interno del servidor' });
+  res.status(500).json({ error: "Error interno del servidor" });
 });
 
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).json({ error: 'Error interno del servidor' });
+  res.status(500).json({ error: "Error interno del servidor" });
 });
 
 /*app.use('/', authRouter)*/
 
-
 //Archivos estaticos
-app.use(express.static(outputPath))
+app.use(express.static(outputPath));
 
-
-
-
-export default app
+export default app;
