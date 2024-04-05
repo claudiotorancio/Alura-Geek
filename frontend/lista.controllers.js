@@ -2,6 +2,8 @@
 import { listaServices } from "./servicios/lista_services.js";
 
 const nuevaLista = (username, created_at, id, totalProductos) => {
+
+  const totalProductos = listaServices.totalProductos()
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
@@ -16,7 +18,7 @@ const nuevaLista = (username, created_at, id, totalProductos) => {
                     <tr>
                         <th>Usuario</th>
                         <th>Creación</th>
-                        <th>Cant.prod/th>
+                        <th>Cant.prod</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -67,16 +69,24 @@ const renderLista = async () => {
     const respuesta = await listaServices.listaUsers();
     const lista = respuesta.listado; // Acceder al arreglo de usuarios
 
+    lista.forEach(async (elemento) => {
+      try {
+        // Realizar una llamada para obtener el total de productos para este usuario
+        const totalProductosRespuesta = await listaServices.totalProductos(elemento._id);
+        const totalProductos = totalProductosRespuesta.totalProductos;
 
-    lista.forEach((elemento) => {
-      tabla.appendChild(
-        nuevaLista(
-          elemento.username,
-          elemento.created_at,
-          elemento._id,
-          elemento.totalProductos
-        )
-      );
+        // Agregar la fila a la tabla
+        tabla.appendChild(
+          nuevaLista(
+            elemento.username,
+            elemento.created_at,
+            elemento._id,
+            totalProductos
+          )
+        );
+      } catch (error) {
+        console.error(error);
+      }
     });
   } catch (error) {
     console.log(error);
