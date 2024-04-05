@@ -95,12 +95,18 @@ const nuevoProducto = (name, price, imagePath, id) => {
   card.innerHTML = contenido;
   card.classList.add("card");
 
-  card.querySelector("button").addEventListener("click", (e) => {
+  card.querySelector("button").addEventListener("click", async (e) => {
     e.preventDefault();
     try {
-      modalControllers.modalEliminar(id);
+      const response = await modalControllers.modalEliminar(id);
+      if (response.ok) {
+        card.remove();
+        console.log('El producto se eliminó correctamente.');
+      } else {
+        console.log('Hubo un problema al eliminar el producto.');
+      }
     } catch (err) {
-      console.log(err);
+      console.log('Error al intentar eliminar el producto:', err);
     }
   });
 
