@@ -2,8 +2,6 @@
 import { listaServices } from "./servicios/lista_services.js";
 
 const nuevaLista = (username, created_at, id, totalProductos) => {
-
-  const totalProductos = listaServices.totalProductos()
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
