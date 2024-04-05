@@ -87,26 +87,4 @@ export const listaControllers = {
 };
 
 
-const card = document.createElement("div");
-card.classList.add("mx-auto", "mt-4");
 
-const contenido = `
-  <div class="row">
-      <div class="col-md-12">
-          <table class="table">
-              <thead>
-                  <tr>
-                      <th>Usuario</th>
-                      <th>Creación</th>
-                      <th>Cant.prod/th>
-                      <th>Acciones</th>
-                  </tr>
-              </thead>
-          </table>
-      </div>
-  </div>
-`;
-
-card.innerHTML = contenido;
-
-return card;
