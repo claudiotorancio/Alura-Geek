@@ -1,8 +1,8 @@
-
 import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
 import AWS from 'aws-sdk'
+import Vista from "../../models/Vista.js";
 
 //conectar con base de datos s3 para eliminar imagen
 
@@ -15,16 +15,27 @@ const s3 = new AWS.S3({
 });
 
 const deleteProduct = async (req, res) => {
+  let eliminarProduct; // Declaración de la variable eliminarProduct
+
   try {
-     //conectar a base de datos mediante serverless function
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: 'Usuario no autenticado' });
+    }
+
+    //conectar a base de datos mediante serverless function
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
 
-    const productId = req.params.id
+    const productId = req.params.id;
 
-    const eliminarProduct = await Product.findByIdAndDelete(productId);
+    // Determinar qué modelo de producto utilizar según el rol del usuario
+    if (esAdministrador(req.user)) {
+      eliminarProduct = await Vista.findByIdAndDelete(productId);
+    } else {
+      eliminarProduct = await Product.findByIdAndDelete(productId);
+    }
 
     const nombreDeArchivo = eliminarProduct.imagePath.split('/').pop();
 
@@ -40,11 +51,18 @@ const deleteProduct = async (req, res) => {
         console.log('Imagen eliminada con éxito en S3:', data);
       }
     });
+
     res.json({ message: 'Product deleted' });
 
   } catch (error) {
-    console.error(error)
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 }
 
-export default deleteProduct
+const esAdministrador = (user) => {
+  // Implementa aquí la lógica para determinar si el usuario es administrador
+  return user.role === "admin";
+};
+
+export default deleteProduct;

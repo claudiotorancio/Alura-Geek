@@ -14,6 +14,11 @@ const s3 = new AWS.S3({
 
 const updateProduct = async (req, res) => {
   try {
+
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: 'Usuario no autenticado' });
+    }
+
     // Parametros del formulario
     const { id } = req.params;
     const { name, price, oldImagePath } = req.body;
