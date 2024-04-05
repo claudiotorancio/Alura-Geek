@@ -6,19 +6,23 @@ import { loginServices } from "./servicios/login_services.js";
 import { controllers } from "./productos_controllers.js";
 import { loginControllers } from "./login_controllers.js";
 import { modalControllers } from "./modal.js";
+import { listaControllers } from "./lista.controllers.js";
 
 // busqueda de cambios
 document.addEventListener("DOMContentLoaded", () => {
+ 
   const user = JSON.parse(sessionStorage.getItem("user")) || null;
   const actualizarUsuario = document.querySelector(".data-user");
   const logoutUsuario = document.querySelector("[data-logOut]");
   const userActive = document.querySelector("[data-log]");
   if (user) {
+    listaControllers.renderLista()
     controllers.render();
     actualizarUsuario.textContent = `Hola! ${user}`;
     logoutUsuario.textContent = "Logout";
     userActive.style.display = "none";
   } else {
+  
     controllers.renderInit();
     actualizarUsuario.style.display = "none";
     logoutUsuario.style.display = "none";

@@ -16,6 +16,8 @@ import createProduct from "../backend/routes/Prduct/createProduct.js";
 import deleteProduct from "../backend/routes/Prduct/deleteProduct.js";
 import detailsProduct from "../backend/routes/Prduct/detailsProduct.js";
 import updateProduct from "../backend/routes/Prduct/updateProduct.js";
+import listaAdmin from "../backend/routes/lista/lista.Admin.js";
+import deleteUser from "../backend/routes/lista/deleteUser.js";
 import path from "path";
 
 const router = Router();
@@ -76,6 +78,8 @@ const uploadSingleUpdate = upload(process.env.BUCKET_AWS).single("imagePath");
 router.post("/api/signup", signup);
 router.post("/api/signin", signin);
 router.delete("/api/logout", logout);
+router.get('/api/renderLista', listaAdmin)
+router.delete('/api/deleteUser/:id', deleteUser)
 router.get("/api/renderInicio", renderInicio);
 router.get("/api/renderProducts", renderProducts);
 router.post("/api/createProduct", createProduct);
