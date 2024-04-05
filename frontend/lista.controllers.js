@@ -58,9 +58,6 @@ const nuevaLista = (username, created_at, id, totalProductos) => {
 };
 
 
-
-
-
 const tabla = document.querySelector("[data-lista]");
 
 const renderLista = async () => {
@@ -68,29 +65,25 @@ const renderLista = async () => {
     const respuesta = await listaServices.listaUsers();
     const lista = respuesta.listado; // Acceder al arreglo de usuarios
 
-    lista.forEach(async (elemento) => {
-      try {
-        // Realizar una llamada para obtener el total de productos para este usuario
-        const totalProductos = await listaServices.totalProductos();
-        
+    for (const usuario of lista) {
+      // Obtener la cantidad de productos para este usuario
+      const totalProductos = await listaServices.totalProductos(usuario._id);
 
-        // Agregar la fila a la tabla
-        tabla.appendChild(
-          nuevaLista(
-            elemento.username,
-            elemento.created_at,
-            elemento._id,
-            totalProductos
-          )
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    });
+      // Llamar a nuevaLista con la cantidad de productos obtenida
+      tabla.appendChild(
+        nuevaLista(
+          usuario.username,
+          usuario.created_at,
+          usuario._id,
+          totalProductos
+        )
+      );
+    }
   } catch (error) {
     console.log(error);
   }
 };
+
 
 export const listaControllers = {
   renderLista
