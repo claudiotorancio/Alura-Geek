@@ -68,8 +68,7 @@ const renderLista = async () => {
     const lista = respuesta.listado; // Acceder al arreglo de usuarios
 
 const totalProductos = await listaServices.totalProductos()
-const cantidadProductos = totalProductos.cantidad
-console.log(cantidadProductos)
+console.log(totalProductos)
 
     lista.forEach((elemento) => {
       tabla.appendChild(
