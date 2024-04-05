@@ -15,14 +15,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const actualizarUsuario = document.querySelector(".data-user");
   const logoutUsuario = document.querySelector("[data-logOut]");
   const userActive = document.querySelector("[data-log]");
+  const contactUser = document.querySelector("[data-contact]");
   if (user) {
     listaControllers.renderLista()
     controllers.render();
     actualizarUsuario.textContent = `Hola! ${user}`;
     logoutUsuario.textContent = "Logout";
     userActive.style.display = "none";
+    contactUser.style.display = "none";
   } else {
-  
     controllers.renderInit();
     actualizarUsuario.style.display = "none";
     logoutUsuario.style.display = "none";

@@ -290,6 +290,8 @@ const modalErrConexion = () => {
   }, 3000);
 };
 
+
+
 export const modalControllers = {
   modalEdicion,
   modalEliminar,
