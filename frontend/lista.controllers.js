@@ -13,8 +13,8 @@ const nuevaLista = (username, created_at, id) => {
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nombre de usuario</th>
-                        <th>Fecha de creación</th>
+                        <th>Usuario</th>
+                        <th>Creación</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>

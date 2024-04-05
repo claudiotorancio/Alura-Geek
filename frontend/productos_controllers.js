@@ -99,6 +99,7 @@ const nuevoProducto = (name, price, imagePath, id) => {
     e.preventDefault();
     try {
       modalControllers.modalEliminar(id);
+      card.remove();
     } catch (err) {
       console.log(err);
     }
