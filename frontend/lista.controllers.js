@@ -67,22 +67,25 @@ const renderLista = async () => {
     const respuesta = await listaServices.listaUsers();
     const lista = respuesta.listado; // Acceder al arreglo de usuarios
 
-/*const totalProductos = await listaServices.totalProductos()
-console.log(totalProductos)*/
+    for (const usuario of lista) {
+      // Obtener la cantidad de productos para este usuario
+      const totalProductos = await listaServices.totalProductos(usuario._id);
 
-    lista.forEach((elemento) => {
+      // Llamar a nuevaLista con la cantidad de productos obtenida
       tabla.appendChild(
         nuevaLista(
-          elemento.username,
-          elemento.created_at,
-          elemento._id,
+          usuario.username,
+          usuario.created_at,
+          usuario._id,
+          totalProductos
         )
       );
-    });
+    }
   } catch (error) {
     console.log(error);
   }
 };
+
 
 export const listaControllers = {
   renderLista

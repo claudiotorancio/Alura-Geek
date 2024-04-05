@@ -12,8 +12,8 @@ const listaUsers = async () =>
     });
   };
 
-  const totalProductos = async () =>
-  await fetch(`${baseURL}/api/contadorProductos`).then((respuesta) =>
+  const totalProductos = async (id) =>
+  await fetch(`${baseURL}/api/contadorProductos/${id}`).then((respuesta) =>
     respuesta.json()
   );
 
