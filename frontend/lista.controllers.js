@@ -58,32 +58,32 @@ const nuevaLista = (username, created_at, id, totalProductos) => {
 };
 
 
-const tabla = document.querySelector("[data-lista]");
 
+
+
+const tabla = document.querySelector("[data-lista]");
 const renderLista = async () => {
   try {
     const respuesta = await listaServices.listaUsers();
     const lista = respuesta.listado; // Acceder al arreglo de usuarios
 
-    for (const usuario of lista) {
-      // Obtener la cantidad de productos para este usuario
-      const totalProductos = await listaServices.totalProductos(usuario._id);
+const totalProductos = await listaServices.totalProductos()
+const cantidadProductos = totalProductos.cantidad
+console.log(cantidadProductos)
 
-      // Llamar a nuevaLista con la cantidad de productos obtenida
+    lista.forEach((elemento) => {
       tabla.appendChild(
         nuevaLista(
-          usuario.username,
-          usuario.created_at,
-          usuario._id,
-          totalProductos
+          elemento.username,
+          elemento.created_at,
+          elemento._id,
         )
       );
-    }
+    });
   } catch (error) {
     console.log(error);
   }
 };
-
 
 export const listaControllers = {
   renderLista
