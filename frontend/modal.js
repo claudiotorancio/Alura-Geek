@@ -44,8 +44,8 @@ const modalEliminar = (id) => {
   const botonEliminar = eliminarProducto.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     productoServices.eliminarProducto(id);
+    window.location.href = "/index.html";
   });
-  
   eliminarProducto.classList.add("modalVisor");
   /*setTimeout(() => {
         window.location.href= '/index.html';
