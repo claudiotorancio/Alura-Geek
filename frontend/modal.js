@@ -45,6 +45,7 @@ const modalEliminar = (id) => {
   botonEliminar.addEventListener("click", () => {
     productoServices.eliminarProducto(id);
     modal.style.display = "none";
+    card.remove()
   });
   eliminarProducto.classList.add("modalVisor");
   /*setTimeout(() => {
