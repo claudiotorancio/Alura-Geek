@@ -73,7 +73,8 @@ const renderLista = async () => {
         nuevaLista(
           elemento.username,
           elemento.created_at,
-          elemento._id
+          elemento._id,
+          elemento.totalProductos
         )
       );
     });
