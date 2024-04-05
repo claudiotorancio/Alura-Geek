@@ -62,6 +62,7 @@ const nuevaLista = (username, created_at, id, totalProductos) => {
 
 
 const tabla = document.querySelector("[data-lista]");
+
 const renderLista = async () => {
   try {
     const respuesta = await listaServices.listaUsers();
@@ -70,8 +71,8 @@ const renderLista = async () => {
     lista.forEach(async (elemento) => {
       try {
         // Realizar una llamada para obtener el total de productos para este usuario
-        const totalProductosRespuesta = await listaServices.totalProductos(elemento._id);
-        const totalProductos = totalProductosRespuesta.totalProductos;
+        const totalProductos = await listaServices.totalProductos();
+        
 
         // Agregar la fila a la tabla
         tabla.appendChild(
