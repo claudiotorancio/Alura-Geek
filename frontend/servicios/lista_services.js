@@ -12,7 +12,14 @@ const listaUsers = async () =>
     });
   };
 
+  const totalProductos = async () =>
+  await fetch(`${baseURL}/api/contadorProductos`).then((respuesta) =>
+    respuesta.json()
+  );
+
+
 export const listaServices = {
   listaUsers,
-  eliminarUser
+  eliminarUser,
+  totalProductos
 };

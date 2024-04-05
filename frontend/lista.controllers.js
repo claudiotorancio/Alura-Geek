@@ -1,7 +1,7 @@
-import { modalControllers } from "./modal.js";
+
 import { listaServices } from "./servicios/lista_services.js";
 
-const nuevaLista = (username, created_at, id, cantidad) => {
+const nuevaLista = (username, created_at, id, totalProductos) => {
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
@@ -24,7 +24,7 @@ const nuevaLista = (username, created_at, id, cantidad) => {
                     <tr>
                         <td>${username}</td>
                         <td>${fechaFormateada}</td>
-                        <td>${cantidad}</td>
+                        <td>${totalProductos}</td>
                         <td><button type="button" class="btn btn-danger" data-userid="${id}" >Eliminar</button></td>
                     </tr>
                 </tbody>
