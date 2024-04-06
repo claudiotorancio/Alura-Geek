@@ -1,7 +1,7 @@
 
 import { listaServices } from "./servicios/lista_services.js";
 
-const nuevaLista = (username, created_at, id, totalProductos) => {
+const nuevaLista = (username, created_at, id, totalProductos, role) => {
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
@@ -45,9 +45,14 @@ const nuevaLista = (username, created_at, id, totalProductos) => {
 
     if (confirmacion) {
         try {
+          if(role === 'admin'){
+            confirm('no se puede eliminar usuario admin')
+          }else{
             await listaServices.eliminarUser(userId);
             // Eliminar la fila de la tabla después de eliminar el usuario
             card.remove();
+          }
+           
         } catch (error) {
             console.error(error);
         }
