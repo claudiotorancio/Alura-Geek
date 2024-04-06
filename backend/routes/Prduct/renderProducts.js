@@ -22,7 +22,7 @@ const renderProducts = async (req, res) => {
         let products;
 
         // Verificar si el usuario es administrador
-        if (esAdministrador(req.user)) {
+        if (req.user.role === 'admin') {
             // Si es administrador, buscar productos utilizando el modelo Vista
             products = await Vista.find({ user_id: user_id });
         } else {
@@ -37,8 +37,5 @@ const renderProducts = async (req, res) => {
     }
 };
 
-const esAdministrador = (user) => {
-    return user.role === 'admin'; // Por ejemplo, suponiendo que la propiedad 'role' indique el rol del usuario
-};
 
 export default renderProducts;
