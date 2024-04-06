@@ -1,6 +1,6 @@
 import { listaServices } from "./servicios/lista_services.js";
 
-const nuevaLista = (username, created_at, id, totalProductos) => {
+const nuevaLista = (rol, username, created_at, totalProductos, id) => {
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
@@ -13,14 +13,17 @@ const nuevaLista = (username, created_at, id, totalProductos) => {
             <table class="table">
                 <thead>
                     <tr>
+                    <th>Rol</th>
                         <th>Usuario</th>
                         <th>Creación</th>
                         <th>Cant.prod</th>
+                       
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                    <td>${rol}</td>
                         <td>${username}</td>
                         <td>${fechaFormateada}</td>
                         <td>${totalProductos}</td>
@@ -71,6 +74,7 @@ const renderLista = async () => {
       // Llamar a nuevaLista con la cantidad de productos obtenida
       tabla.appendChild(
         nuevaLista(
+          usuario.role,
           usuario.username,
           usuario.created_at,
           usuario._id,
