@@ -22,7 +22,8 @@ const updateProduct = async (req, res) => {
     // Parametros del formulario
     const { id } = req.params;
     const { name, price, oldImagePath } = req.body;
-    const imagePath = '' ? oldImagePath : req.file.location;
+    const imagePath = req.file.location ? req.file.location : oldImagePath;
+
 
     const updateProduct = {
       name,
