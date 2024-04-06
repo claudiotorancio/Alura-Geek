@@ -1,6 +1,6 @@
 import { listaServices } from "./servicios/lista_services.js";
 
-const nuevaLista = (username, created_at, id, totalProductos, role) => {
+const nuevaLista = (username, created_at, id, totalProductos) => {
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
@@ -16,7 +16,6 @@ const nuevaLista = (username, created_at, id, totalProductos, role) => {
                         <th>Usuario</th>
                         <th>Creación</th>
                         <th>Cant.prod</th>
-                        <th>Rol</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -25,7 +24,6 @@ const nuevaLista = (username, created_at, id, totalProductos, role) => {
                         <td>${username}</td>
                         <td>${fechaFormateada}</td>
                         <td>${totalProductos}</td>
-                        <td>${role}</td>
                         <td><button type="button" class="btn btn-danger" data-userid="${id}" >Eliminar</button></td>
                     </tr>
                 </tbody>
@@ -75,7 +73,6 @@ const renderLista = async () => {
         nuevaLista(
           usuario.username,
           usuario.created_at,
-          usuario.role,
           usuario._id,
           totalProductos
         )
