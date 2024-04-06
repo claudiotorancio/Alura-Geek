@@ -69,7 +69,7 @@ const renderLista = async () => {
 
     for (const usuario of lista) {
       // Obtener la cantidad de productos para este usuario
-      const productosCantidad = await listaServices.totalProductos(usuario._id);
+      const productosCantidad = await listaServices.totalProductos();
       const totalProductos = productosCantidad.cantidad;
       // Llamar a nuevaLista con la cantidad de productos obtenida
       tabla.appendChild(
