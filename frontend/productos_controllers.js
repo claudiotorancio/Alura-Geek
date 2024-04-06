@@ -212,7 +212,6 @@ const renderInit = async () => {
 const productoEdicion = document.querySelector("[data-table]");
 
 const editProduct = (name, price, imagePath, id) => {
-  conso
   productoEdicion.innerHTML = "";
   const card = document.createElement("div");
   /*const contenido = `
