@@ -39,25 +39,20 @@ const nuevaLista = (username, created_at, id, totalProductos, role) => {
   card.querySelector("button").addEventListener("click", async (event) => {
     event.preventDefault();
     const userId = event.target.dataset.userid;
-  
+
     // Mostrar una alerta para confirmar la eliminación
     const confirmacion = confirm("¿Estás seguro de que quieres eliminar esta tarjeta?");
-  
+
     if (confirmacion) {
-      try {
-        if (req.user.role === 'admin') {
-          confirm('No se puede eliminar un usuario administrador');
-        } else {
-          await listaServices.eliminarUser(userId);
-          // Eliminar la fila de la tabla después de eliminar el usuario
-          card.remove();
+        try {
+            await listaServices.eliminarUser(userId);
+            // Eliminar la fila de la tabla después de eliminar el usuario
+            card.remove();
+        } catch (error) {
+            console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
     }
-  });
-  
+});
 
   return card;
 };
