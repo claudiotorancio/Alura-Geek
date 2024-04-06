@@ -211,7 +211,8 @@ const renderInit = async () => {
 
 const productoEdicion = document.querySelector("[data-table]");
 
-const editProduct = (name, price, imagePath, id) => {
+const editProduct = (name, price, imagePath, oldImagePath, id) => {
+  console.log(oldImagePath)
   productoEdicion.innerHTML = "";
   const card = document.createElement("div");
   /*const contenido = `
@@ -242,7 +243,7 @@ const editProduct = (name, price, imagePath, id) => {
         <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">Producto a editar</p>
                 <div class="form-group"> 
-                    <input class="form-control p-2"  placeholder="imageUrl" type="file" name="imagePath" value="${imagePath}" required data-image autofocus >
+                    <input class="form-control p-2"  placeholder="imageUrl" type="file" name="imagePath"  data-image autofocus >
                     <input type="hidden" class="oldImagePath" name="oldImagePath" value="${imagePath}" data-oldPath>
                 </div>
                     <div class="form-group">

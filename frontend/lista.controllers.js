@@ -1,7 +1,6 @@
-
 import { listaServices } from "./servicios/lista_services.js";
 
-const nuevaLista = (username, created_at, role, totalProductos,  id) => {
+const nuevaLista = (username, created_at, role, totalProductos, id) => {
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
@@ -46,15 +45,20 @@ const nuevaLista = (username, created_at, role, totalProductos,  id) => {
     const confirmacion = confirm("¿Estás seguro de que quieres eliminar esta tarjeta?");
 
     if (confirmacion) {
-        try {
-            await listaServices.eliminarUser(userId);
-            // Eliminar la fila de la tabla después de eliminar el usuario
-            card.remove();
-        } catch (error) {
-            console.error(error);
+      try {
+        // Verificar si el usuario autenticado es administrador
+        if (role !== 'admin') {
+          await listaServices.eliminarUser(userId);
+          // Eliminar la fila de la tabla después de eliminar el usuario
+          card.remove();
+        } else {
+          alert('No se puede eliminar un usuario administrador');
         }
+      } catch (error) {
+        console.error(error);
+      }
     }
-});
+  });
 
   return card;
 };
@@ -69,17 +73,15 @@ const renderLista = async () => {
     for (const usuario of lista) {
       // Obtener la cantidad de productos para este usuario
       const productosCantidad = await listaServices.totalProductos(usuario._id);
-const totalProductos =  productosCantidad.cantidad
+      const totalProductos = productosCantidad.cantidad;
       // Llamar a nuevaLista con la cantidad de productos obtenida
       tabla.appendChild(
         nuevaLista(
-        
           usuario.username,
           usuario.created_at,
           usuario.role,
           totalProductos,
           usuario._id
-       
         )
       );
     }
@@ -88,10 +90,6 @@ const totalProductos =  productosCantidad.cantidad
   }
 };
 
-
 export const listaControllers = {
-  renderLista
+  renderLista,
 };
-
-
-
