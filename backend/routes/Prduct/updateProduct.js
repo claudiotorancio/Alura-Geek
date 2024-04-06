@@ -22,7 +22,7 @@ const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { name, price } = req.body;
     let imagePath = req.file ? req.file.location : ''; // Si no hay nueva imagen, mantener la imagen anterior
-    const oldImagePath = req.body.oldImagePath; // Usar la ruta de la imagen anterior
+    const {oldImagePath} = req.body.oldImagePath; // Usar la ruta de la imagen anterior
     
     const updateProduct = {
       name,
