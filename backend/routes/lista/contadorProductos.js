@@ -20,10 +20,10 @@ const contadorProductos = async (req, res) => {
         const productosUsuario = await Product.find({ user_id: userId });
 
         // Contar la cantidad de productos encontrados
-        const totalProductos = productosUsuario.length;
+        const cantidad = productosUsuario.length;
 
         // Enviar la respuesta con el total de productos
-        res.json({ totalProductos });
+        res.json({ cantidad });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal server error" });
