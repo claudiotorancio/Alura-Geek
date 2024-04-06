@@ -1,6 +1,7 @@
+
 import { listaServices } from "./servicios/lista_services.js";
 
-const nuevaLista = (rol, username, created_at, totalProductos, id) => {
+const nuevaLista = (username, created_at, id, totalProductos) => {
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
@@ -13,17 +14,14 @@ const nuevaLista = (rol, username, created_at, totalProductos, id) => {
             <table class="table">
                 <thead>
                     <tr>
-                    <th>Rol</th>
                         <th>Usuario</th>
                         <th>Creación</th>
                         <th>Cant.prod</th>
-                       
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                    <td>${rol}</td>
                         <td>${username}</td>
                         <td>${fechaFormateada}</td>
                         <td>${totalProductos}</td>
@@ -43,23 +41,25 @@ const nuevaLista = (rol, username, created_at, totalProductos, id) => {
     const userId = event.target.dataset.userid;
 
     // Mostrar una alerta para confirmar la eliminación
-    const confirmacion = confirm(
-      "¿Estás seguro de que quieres eliminar esta tarjeta?"
-    );
+    const confirmacion = confirm("¿Estás seguro de que quieres eliminar esta tarjeta?");
 
     if (confirmacion) {
-      try {
-        await listaServices.eliminarUser(userId);
-        // Eliminar la fila de la tabla después de eliminar el usuario
-        card.remove();
-      } catch (error) {
-        console.error(error);
-      }
+        try {
+            await listaServices.eliminarUser(userId);
+            // Eliminar la fila de la tabla después de eliminar el usuario
+            card.remove();
+        } catch (error) {
+            console.error(error);
+        }
     }
-  });
+});
 
   return card;
 };
+
+
+
+
 
 const tabla = document.querySelector("[data-lista]");
 const renderLista = async () => {
@@ -69,12 +69,11 @@ const renderLista = async () => {
 
     for (const usuario of lista) {
       // Obtener la cantidad de productos para este usuario
-      const productosCantidad = await listaServices.totalProductos();
-      const totalProductos = productosCantidad.cantidad;
+      const productosCantidad = await listaServices.totalProductos(usuario._id);
+const totalProductos =  productosCantidad.cantidad
       // Llamar a nuevaLista con la cantidad de productos obtenida
       tabla.appendChild(
         nuevaLista(
-          usuario.role,
           usuario.username,
           usuario.created_at,
           usuario._id,
@@ -87,6 +86,10 @@ const renderLista = async () => {
   }
 };
 
+
 export const listaControllers = {
-  renderLista,
+  renderLista
 };
+
+
+
