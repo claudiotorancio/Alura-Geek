@@ -75,9 +75,9 @@ const renderLista = async () => {
         nuevaLista(
           usuario.username,
           usuario.created_at,
-          usuario._id,
+          totalProductos,
           usuario.role,
-          totalProductos
+          usuario._id,
         )
       );
     }
