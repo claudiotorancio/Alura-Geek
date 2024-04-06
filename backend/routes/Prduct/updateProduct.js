@@ -18,26 +18,25 @@ const updateProduct = async (req, res) => {
       return res.status(401).json({ error: 'Usuario no autenticado' });
     }
 
-    // Parámetros del formulario
     const { id } = req.params;
     const { name, price } = req.body;
-    let imagePath = req.file ? req.file.location : ''; // Si no hay nueva imagen, mantener la imagen anterior
-    const {oldImagePath} = req.body.oldImagePath; // Usar la ruta de la imagen anterior
-    
-    const updateProduct = {
-      name,
-      price,
-      imagePath,
-      oldImagePath,
-    };
+    let { imagePath, oldImagePath } = req.body; // Definir oldImagePath
+    if (!imagePath) {
+      imagePath = oldImagePath; // Usar oldImagePath si no hay nueva imagen
+    }
 
-    // Conectar a la base de datos mediante serverless function
+    // Validar campos requeridos
+    if (!name || !price) {
+      return res.status(400).json({ error: 'Faltan campos requeridos' });
+    }
+
+    const updateProduct = { name, price, imagePath, oldImagePath };
+
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
 
-    // Crear un nuevo producto o vista según el rol del usuario
     let result;
     if (esAdministrador(req.user)) {
       result = await Vista.findByIdAndUpdate(id, updateProduct, { new: true });
@@ -45,31 +44,24 @@ const updateProduct = async (req, res) => {
       result = await Product.findByIdAndUpdate(id, updateProduct, { new: true });
     }
 
-    // Borrar la imagen anterior en S3 si se proporciona una nueva
-    if (req.file && oldImagePath) {
+    // Eliminar imagen anterior en S3
+    if (oldImagePath !== imagePath) {
       const nombreDeArchivo = oldImagePath.split("/").pop();
-      const params = {
-        Bucket: process.env.BUCKET_AWS,
-        Key: nombreDeArchivo,
-      };
+      const params = { Bucket: process.env.BUCKET_AWS, Key: nombreDeArchivo };
 
-      s3.deleteObject(params, (err, data) => {
-        if (err) {
-          console.error("Error al eliminar la imagen anterior en S3:", err);
-        } else {
-          console.log("Imagen anterior eliminada con éxito en S3:", data);
-        }
-      });
+      await s3.deleteObject(params).promise(); // Usar promesa para manejar de forma asíncrona
+
+      console.log("Imagen anterior eliminada con éxito en S3");
     }
 
     if (!result) {
-      res.status(404).json({ message: "Product not found" });
+      res.status(404).json({ message: "Producto no encontrado" });
     } else {
-      res.json({ message: "Product updated", updatedProduct: result });
+      res.json({ message: "Producto actualizado", updatedProduct: result });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Error interno del servidor" });
   }
 };
 
