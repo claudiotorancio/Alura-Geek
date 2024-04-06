@@ -1,7 +1,7 @@
 
 import { listaServices } from "./servicios/lista_services.js";
 
-const nuevaLista = (username, created_at, id, totalProductos, role) => {
+const nuevaLista = (username, created_at, role, totalProductos,  id) => {
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = fechaCreacion.toLocaleString();
 
@@ -17,6 +17,7 @@ const nuevaLista = (username, created_at, id, totalProductos, role) => {
                         <th>Usuario</th>
                         <th>Creación</th>
                         <th>Cant.prod</th>
+                        <th>Rol</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -25,6 +26,7 @@ const nuevaLista = (username, created_at, id, totalProductos, role) => {
                         <td>${username}</td>
                         <td>${fechaFormateada}</td>
                         <td>${totalProductos}</td>
+                        <td>${role}</td>
                         <td><button type="button" class="btn btn-danger" data-userid="${id}" >Eliminar</button></td>
                     </tr>
                 </tbody>
@@ -58,9 +60,6 @@ const nuevaLista = (username, created_at, id, totalProductos, role) => {
 };
 
 
-
-
-
 const tabla = document.querySelector("[data-lista]");
 const renderLista = async () => {
   try {
@@ -74,10 +73,13 @@ const totalProductos =  productosCantidad.cantidad
       // Llamar a nuevaLista con la cantidad de productos obtenida
       tabla.appendChild(
         nuevaLista(
+        
           usuario.username,
           usuario.created_at,
-          usuario._id,
-          totalProductos
+          usuario.role,
+          totalProductos,
+          usuario._id
+       
         )
       );
     }
