@@ -212,66 +212,68 @@ const renderInit = async () => {
 const productoEdicion = document.querySelector("[data-table]");
 
 const editProduct = (name, price, imagePath, id) => {
- 
+  conso
   productoEdicion.innerHTML = "";
   const card = document.createElement("div");
-  
+  /*const contenido = `
+    <div class="card text-center">
+    <div class="card-header">
+    <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
+        <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
+            <p class="parrafo">Producto a editar</p>
+                    <div class="form-group">
+                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${name}" required data-nombre >
+                    </div>
+                    <div class="form-group"> 
+                    <input class="form-control mt-3 mb-3 p-2"  placeholder="precio" type="text"value="${price}" required data-precio>
+                    </div>
+                    <div>
+                    <button type="submit" class="btn btn-primary btn-lg">Editar producto</button>
+                    </div>
+        </form>
+    </div>
+    </div>
+
+    `*/
+  //codigo para actualizar imagen en s3 y mongoDB
   const contenido = `
     <div class="card text-center">
-      <div class="card-header">
-        <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
+    <div class="card-header">
+    <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
         <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
-          <p class="parrafo">Producto a editar</p>
-          <div class="form-group"> 
-            <label for="imagePath">Selecciona una nueva imagen (opcional)</label>
-            <input class="form-control p-2" id="imagePath" placeholder="imageUrl" type="file" name="imagePath" data-image autofocus >
-            <input type="hidden" class="oldImagePath" name="oldImagePath" value="${imagePath}" data-oldPath>
-          </div>
-          <div class="form-group">
-            <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${name}" required data-nombre >
-          </div>
-          <div class="form-group"> 
-            <input class="form-control mt-3 mb-3 p-2"  placeholder="precio" type="text"value="${price}" required data-precio>
-          </div>
-          <div>
-            <button type="submit" class="btn btn-primary btn-lg">Editar producto</button>
-          </div>
+            <p class="parrafo">Producto a editar</p>
+                <div class="form-group"> 
+                <label for="imagePath">Selecciona una nueva imagen (opcional)</label>
+                br
+                <input class="form-control p-2"  id="imagePath" placeholder="imageUrl" type="file" name="imagePath" data-image autofocus>
+                    <input type="hidden" class="oldImagePath" name="oldImagePath" value="${imagePath}" data-oldPath>
+                </div>
+                    <div class="form-group">
+                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${name}" required data-nombre >
+                    </div>
+                    <div class="form-group"> 
+                    <input class="form-control mt-3 mb-3 p-2"  placeholder="precio" type="text"value="${price}" required data-precio>
+                    </div>
+                    <div>
+                    <button type="submit" class="btn btn-primary btn-lg">Editar producto</button>
+                    </div>
         </form>
-      </div>
     </div>
-  `;
+    </div>
+
+    `;
 
   card.innerHTML = contenido;
   card.classList.add("modalVisor");
   productoEdicion.appendChild(card);
 
-  const fileInput = card.querySelector('#imagePath');
-  const imgPreview = card.querySelector('.img-card-top');
-
-  // Agregar un evento de cambio al campo de selección de archivo
-  fileInput.addEventListener('change', () => {
-    // Verificar si se ha seleccionado un archivo
-    if (fileInput.files && fileInput.files[0]) {
-      const reader = new FileReader();
-
-      // Leer el archivo seleccionado como URL de datos
-      reader.onload = function (e) {
-        // Establecer la URL de datos como atributo src de la etiqueta img
-        imgPreview.src = e.target.result;
-      };
-
-      // Leer el archivo como URL de datos
-      reader.readAsDataURL(fileInput.files[0]);
-    }
-  });
-
   card.querySelector("[data-forma]").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const name = card.querySelector("[data-nombre]").value;
-    const price = card.querySelector("[data-precio]").value;
-    const imagePath = card.querySelector("[data-image]").files[0];
-    const oldImagePath = card.querySelector("[data-oldPath]").value;
+    const name = document.querySelector("[data-nombre]").value;
+    const price = document.querySelector("[data-precio]").value;
+    const imagePath = document.querySelector("[data-image]").files[0];
+    const oldImagePath = document.querySelector("[data-oldPath]").value;
 
     const dataEdit = new FormData();
     dataEdit.append("name", name);
