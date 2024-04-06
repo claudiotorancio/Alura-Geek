@@ -243,7 +243,8 @@ const editProduct = (name, price, imagePath, oldImagePath, id) => {
         <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">Producto a editar</p>
                 <div class="form-group"> 
-                    <input class="form-control p-2"  placeholder="imageUrl" type="file" name="imagePath" value="imagePath"  data-image autofocus >
+                <label for="imagePath">Selecciona una nueva imagen (opcional)</label>
+                <input class="form-control p-2"  id="imagePath" placeholder="imageUrl" type="file" name="imagePath" data-image autofocus >
                     <input type="hidden" class="oldImagePath" name="oldImagePath" value="${imagePath}" data-oldPath>
                 </div>
                     <div class="form-group">
