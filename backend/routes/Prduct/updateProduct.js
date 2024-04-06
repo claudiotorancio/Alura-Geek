@@ -15,32 +15,38 @@ const s3 = new AWS.S3({
 const updateProduct = async (req, res) => {
   try {
 
- if (!req.isAuthenticated()) {
+    if (!req.isAuthenticated()) {
       return res.status(401).json({ error: 'Usuario no autenticado' });
     }
-
     // Parametros del formulario
     const { id } = req.params;
     const { name, price, oldImagePath } = req.body;
-    const imagePath = req.file === null  ? oldImagePath : req.file.location
 
+    // Verificar si se proporciona una nueva imagen en el formulario de edición
+    let imagePath = oldImagePath;
+    if (req.file) {
+      imagePath = req.file.location;
+    }
 
+    // Construir el objeto de actualización del producto
     const updateProduct = {
       name,
       price,
-      imagePath,
-      oldImagePath,
     };
 
-    // Conectar a la base de datos mediante serverless function
+    // Agregar la imagen al objeto de actualización solo si se proporciona una nueva imagen
+    if (req.file) {
+      updateProduct.imagePath = req.file.location;
+    }
+
+    // Conectar a la base de datos
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
 
-    // Crear un nuevo producto o vista según el rol del usuario
     let result;
-    if (esAdministrador(req.user)) {
+    if (req.user.role === 'admin') {
       result = await Vista.findByIdAndUpdate(id, updateProduct, { new: true });
     } else {
       result = await Product.findByIdAndUpdate(id, updateProduct, {
@@ -48,21 +54,24 @@ const updateProduct = async (req, res) => {
       });
     }
 
-    // Borrar oldImage en S3
-    const nombreDeArchivo = oldImagePath.split("/").pop();
-    const params = {
-      Bucket: process.env.BUCKET_AWS,
-      Key: nombreDeArchivo,
-    };
+    // Borrar oldImage en S3 solo si se proporciona una nueva imagen
+    if (req.file) {
+      const nombreDeArchivo = oldImagePath.split("/").pop();
+      const params = {
+        Bucket: process.env.BUCKET_AWS,
+        Key: nombreDeArchivo,
+      };
 
-    s3.deleteObject(params, (err, data) => {
-      if (err) {
-        console.error("Error al eliminar la imagen en S3:", err);
-      } else {
-        console.log("Imagen anterior eliminada con éxito en S3:", data);
-      }
-    });
+      s3.deleteObject(params, (err, data) => {
+        if (err) {
+          console.error("Error al eliminar la imagen en S3:", err);
+        } else {
+          console.log("Imagen anterior eliminada con éxito en S3:", data);
+        }
+      });
+    }
 
+    // Manejar el resultado de la actualización
     if (!result) {
       res.status(404).json({ message: "Product not found" });
     } else {

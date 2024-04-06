@@ -38,4 +38,5 @@ const renderProducts = async (req, res) => {
 };
 
 
+
 export default renderProducts;
