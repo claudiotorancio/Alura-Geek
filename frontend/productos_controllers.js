@@ -239,7 +239,7 @@ const editProduct = (name, price, imagePath, description, id) => {
 }
 
 // Mostrar productos en el inicio
-const productoInicio = (name, description, imagePath) => {
+const productoInicio = (name, imagePath, description) => {
   const card = document.createElement("div");
   const contenido = `
         <div class="container mx-auto mt-4">
@@ -282,7 +282,6 @@ const renderInit = async () => {
             elemento.name,
             elemento.imagePath,
             elemento.price,
-            elemento.description
            
           )
         );
@@ -292,7 +291,6 @@ const renderInit = async () => {
             elemento.name,
             elemento.imagePath,
             elemento.price,
-            elemento.description
            
           )
         );
@@ -302,7 +300,6 @@ const renderInit = async () => {
             elemento.name,
             elemento.imagePath,
             elemento.price,
-            elemento.description
            
           )
         );
