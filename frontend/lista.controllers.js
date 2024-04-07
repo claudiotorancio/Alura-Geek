@@ -69,6 +69,7 @@ const renderLista = async () => {
       <div>
       <div class="row">
         <div class="col-md-12">
+        <h2 class="card-header">USUARIOS REGISTRADOS</H2>
         <table class="table">
       <thead>
       <tr>

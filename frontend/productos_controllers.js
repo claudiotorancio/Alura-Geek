@@ -191,7 +191,7 @@ const editProduct = (name, price, imagePath, description, id) => {
   const modal = document.getElementById("modal");
   const productoEdicion = modal.querySelector("[data-table]");
   productoEdicion.innerHTML =  `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
         <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
