@@ -194,7 +194,16 @@ align-items: center;
     flex-wrap: wrap;
 }
 
-/* Estilos para el modal */
+.card-lista {
+
+    margin: 2rem;
+  
+  }
+
+.table-container {
+    max-height: 10rem; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Hace que la barra de desplazamiento vertical aparezca cuando el contenido excede la altura máxima */
+}
 
 .form{
     display: flex;
@@ -428,7 +437,7 @@ width: 9.5rem;
     display: flex;
     flex-direction: column;
     background-color: var(--fuente-quienesSomos);
-    padding: 0rem;
+    padding: 0.5rem;
 }
 .modal p {
     font-size: 1.5rem;

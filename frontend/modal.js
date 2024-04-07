@@ -1,5 +1,4 @@
 import { loginControllers } from "./login_controllers.js";
-import { controllers } from "./productos_controllers.js";
 import { productoServices } from "./servicios/product_services.js";
 
 const baseModal = () => {
@@ -23,7 +22,7 @@ const modalEliminar = (id) => {
   const modal = document.getElementById("modal");
   const eliminarProducto = modal.querySelector("[data-table]");
   eliminarProducto.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div>
@@ -35,6 +34,7 @@ const modalEliminar = (id) => {
     </div>
     </div>
     `;
+    eliminarProducto.classList.add("modalVisor");
   const botonEliminar = eliminarProducto.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     productoServices.eliminarProducto(id);
@@ -51,7 +51,7 @@ const modalSuccessSignIn = (username) => {
   const modal = document.getElementById("modal");
   const success = modal.querySelector("[data-table]");
   success.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div>
@@ -63,6 +63,8 @@ const modalSuccessSignIn = (username) => {
     </div>
     </div>
     `;
+    success.classList.add("modalVisor");
+
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     window.location.href = "/index.html";
@@ -77,7 +79,7 @@ const modalProductoCreado = () => {
   const modal = document.getElementById("modal");
   const success = modal.querySelector("[data-table]");
   success.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div>
@@ -89,6 +91,9 @@ const modalProductoCreado = () => {
     </div>
     </div>
     `;
+
+    success.classList.add("modalVisor");
+
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     window.location.href = "/index.html";
@@ -103,7 +108,7 @@ const modalProductoEditado = () => {
   const modal = document.getElementById("modal");
   const success = modal.querySelector("[data-table]");
   success.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div>
@@ -115,6 +120,9 @@ const modalProductoEditado = () => {
     </div>
     </div>
     `;
+
+    success.classList.add("modalVisor");
+
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     window.location.href = "/index.html";
@@ -129,7 +137,7 @@ const modalErrorSignIn = () => {
   const modal = document.getElementById("modal");
   const incorrect = modal.querySelector("[data-table]");
   incorrect.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div >
@@ -141,6 +149,9 @@ const modalErrorSignIn = () => {
     </div>
     </div>
     `;
+
+    incorrect.classList.add("modalVisor");
+
   const botonEliminar = incorrect.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     loginControllers.signin();
@@ -155,7 +166,7 @@ const modalSuccessSignup = () => {
   const modal = document.getElementById("modal");
   const successSignup = modal.querySelector("[data-table]");
   successSignup.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div >
@@ -167,6 +178,9 @@ const modalSuccessSignup = () => {
     </div>
     </div>
     `;
+
+    successSignup.classList.add("modalVisor");
+
   const botonEliminar = successSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     loginControllers.signin();
@@ -181,7 +195,7 @@ const modalErrorSignup = () => {
   const modal = document.getElementById("modal");
   const errorSignup = modal.querySelector("[data-table]");
   errorSignup.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div>
@@ -193,6 +207,9 @@ const modalErrorSignup = () => {
     </div>
     </div>
     `;
+
+    errorSignup.classList.add("modalVisor");
+
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     loginControllers.signup();
@@ -208,7 +225,7 @@ const modalErrorRegistro = () => {
   const modal = document.getElementById("modal");
   const errorSignup = modal.querySelector("[data-table]");
   errorSignup.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div >
@@ -220,6 +237,9 @@ const modalErrorRegistro = () => {
     </div>
     </div>
     `;
+
+    errorSignup.classList.add("modalVisor");
+
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     loginControllers.signin();
@@ -235,7 +255,7 @@ const modalLogout = (user) => {
   const modal = document.getElementById("modal");
   const errorSignup = modal.querySelector("[data-table]");
   errorSignup.innerHTML = `
-    <div class="card text-center">
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div >
@@ -247,6 +267,9 @@ const modalLogout = (user) => {
     </div>
     </div>
     `;
+
+    errorSignup.classList.add("modalVisor");
+
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     modal.style.display = "none";
@@ -261,9 +284,9 @@ const modalLogout = (user) => {
 const modalErrConexion = () => {
   baseModal();
   const modal = document.getElementById("modal");
-  const success = modal.querySelector("[data-table]");
-  success.innerHTML = `
-    <div class="card text-center">
+  const incorrect = modal.querySelector("[data-table]");
+ incorrect.innerHTML = `
+    <div class="text-center">
     <div class="card-header">
     <div>
         <div>
@@ -275,6 +298,9 @@ const modalErrConexion = () => {
     </div>
     </div>
     `;
+
+    incorrect.classList.add("modalVisor");
+
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     window.location.href = "/index.html";

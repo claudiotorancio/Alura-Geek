@@ -8,7 +8,7 @@ const formProduct = () => {
   formInit.innerHTML = "";
   const card = document.createElement("div");
   const contenido = `
-    <div class="card text-center">
+    <div class="text-center">
         <div class="card-header">
             <p>Agregar producto</p>
         </div>
@@ -89,6 +89,8 @@ const nuevoProducto = (name, price, imagePath, description,  id) => {
                     <div style="width: 15rem;">
                         <img class="card-img-top" src=${imagePath} alt="">
                             <div class="card-body">
+                            <a href="#">ver producto </a>
+                               
                                 <h3 class="card-title">${name}</h3>
                                 <p class="card-text">${"$" + price}</p>
                                 <a href="#form" class="btn btn-primary" id="${id}" data-edit >Editar</a>
@@ -102,6 +104,15 @@ const nuevoProducto = (name, price, imagePath, description,  id) => {
 
   card.innerHTML = contenido;
   card.classList.add("card");
+
+  card.querySelector("a").addEventListener("click", (e) => {
+    e.preventDefault();
+    try {
+      mostrarProducto( imagePath, name, description );
+    } catch (err) {
+      console.log(err);
+    }
+  });
 
   card.querySelector("button").addEventListener("click", (e) => {
     e.preventDefault();
@@ -282,8 +293,6 @@ const renderInit = async () => {
             elemento.description,
             elemento.name,
             elemento.imagePath,
-           
-           
           )
         );
       } else if (elemento.section === "opcion2") {
@@ -292,8 +301,6 @@ const renderInit = async () => {
             elemento.description,
             elemento.name,
             elemento.imagePath,
-            
-           
           )
         );
       } else if (elemento.section === "opcion3") {
@@ -302,7 +309,6 @@ const renderInit = async () => {
             elemento.description,
             elemento.name,
             elemento.imagePath,
-           
            
           )
         );
@@ -328,7 +334,7 @@ const mostrarProducto = (imagePath, name, description) => {
                     <div class="card-body">
                       <h3 class="card-title">${name}</h3>
                       <br>
-                      <h5 class="card-subtitle" style="max-width: 100%; overflow-wrap: break-word;">${description}</h5>
+                      <h7 class="card-text" style="overflow: auto;">${description}</h7>
                     </div>
                 </div
             </div>

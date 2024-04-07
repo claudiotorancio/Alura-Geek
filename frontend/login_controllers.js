@@ -7,7 +7,7 @@ const signin = async () => {
     const modal = document.getElementById('modal');
     const loginInicio = modal.querySelector('[data-table]');
     loginInicio.innerHTML = `
-        <div class="card text-center">
+        <div class=" text-center">
             <div class="card-header">
                 <h3>SignIn</h3>
             </div>
