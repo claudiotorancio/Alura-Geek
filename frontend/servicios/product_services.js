@@ -36,7 +36,6 @@ const eliminarProducto = async (id) => {
 };
 
 const detalleProducto = async (id) => {
-  console.log(id)
   await fetch(`${baseURL}/api/detailsProduct/${id}`).then((respuesta) =>
     respuesta.json()
   );

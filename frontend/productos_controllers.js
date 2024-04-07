@@ -239,7 +239,7 @@ const editProduct = (name, price, imagePath, description, id) => {
 }
 
 // Mostrar productos en el inicio
-const productoInicio = (name, imagePath, description) => {
+const productoInicio = (name, imagePath) => {
   const card = document.createElement("div");
   const contenido = `
         <div class="container mx-auto mt-4">
@@ -263,7 +263,7 @@ const productoInicio = (name, imagePath, description) => {
   card.querySelector("a").addEventListener("click", (e) => {
     e.preventDefault();
     try {
-      modalControllers.modalMostrarProducto(imagePath, description, name);
+      modalControllers.modalMostrarProducto(imagePath, name);
     } catch (err) {
       console.log(err);
     }
