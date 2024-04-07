@@ -207,7 +207,7 @@ const editProduct = (name, price, imagePath, description, id) => {
 
     `;
    
-    modal.classList.add("card");
+   productoEdicion.classList.add("modalVisor");
 
 
   modal.querySelector("[data-forma]").addEventListener("submit", (e) => {
@@ -235,7 +235,7 @@ const editProduct = (name, price, imagePath, description, id) => {
         console.log(err);
       });
   });
-  return modal;
+  
 }
 
 // Mostrar productos en el inicio
@@ -336,9 +336,8 @@ const mostrarProducto = (imagePath, name, description) => {
     `;
 
 
-  modal.classList.add("card");
+  mostrarProducto.classList.add("modalVisor");
 
-  return card;
 };
 
 
