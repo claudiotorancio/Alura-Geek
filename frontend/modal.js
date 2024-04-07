@@ -290,6 +290,33 @@ const modalErrConexion = () => {
   }, 3000);
 };
 
+const modalMostrarProducto = (imagePath, name, description) => {
+  baseModal()
+  const modal = document.getElementById("modal");
+  const mostrarProducto = modal.querySelector("[data-table]");
+  mostrarProducto.innerHTML = `
+        <div class="contenido_container">
+            <div class="row">
+                <div class="col-md-6 mx-auto ">                
+                      <img class="card-img-top" src=${imagePath} alt="">         
+                </div>
+                <div class="col-md-6 mx-auto ">
+                    <div class="card-body">
+                      <h3 class="card-title">${name}</h3>
+                      <br>
+                      <h5 class="card-subtitle" style="max-width: 100%; overflow-wrap: break-word;">${description}</h5>
+                    </div>
+                </div
+            </div>
+        </div>
+    `;
+
+  card.innerHTML = contenido;
+  card.classList.add("card");
+
+  return card;
+};
+
 
 
 export const modalControllers = {
@@ -305,4 +332,5 @@ export const modalControllers = {
   modalErrorRegistro,
   modalProductoEditado,
   modalErrConexion,
+  modalMostrarProducto
 };

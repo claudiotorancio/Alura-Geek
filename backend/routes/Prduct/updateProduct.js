@@ -20,7 +20,7 @@ const updateProduct = async (req, res) => {
     }
     // Parametros del formulario
     const { id } = req.params;
-    const { name, price, oldImagePath } = req.body;
+    const { name, price, description, oldImagePath } = req.body;
 
     // Verificar si se proporciona una nueva imagen en el formulario de edición
     let imagePath = oldImagePath;
@@ -32,6 +32,7 @@ const updateProduct = async (req, res) => {
     const updateProduct = {
       name,
       price,
+      description
     };
 
     // Agregar la imagen al objeto de actualización solo si se proporciona una nueva imagen

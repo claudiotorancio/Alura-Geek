@@ -1,6 +1,7 @@
 import { modalControllers } from "./modal.js";
 import { productoServices } from "./servicios/product_services.js";
 
+// Mostrar formulario desde boton save products
 const formInit = document.querySelector("[data-table]");
 
 const formProduct = () => {
@@ -14,8 +15,8 @@ const formProduct = () => {
             <div class="card-body">
                 <form id="form" action="/api/createProduct" enctype="multipart/form-data" method="POST" data-form>
                     <div class="form-group">
-                        <input class="form-control  p-2" type="file" name="image" placeholder="URL del producto"
-                            data-imageUrl required autofocus>
+                        <input class="form-control p-2"  type="file" name="image" 
+                            data-imageUrl  required autofocus>
                     </div>
                     <div class="form-group">
                         <input class="form-control mt-3 p-2" type="text" placeholder="Nombre del producto" required
@@ -24,6 +25,10 @@ const formProduct = () => {
                     <div class="form-group">
                         <input class="form-control mt-3 mb-3 p-2" type="text" placeholder="Precio del producto"
                             required data-price>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control mt-3 mb-3 p-2" type="text" placeholder="Descripcion"
+                            required data-description>
                     </div>
                         <p for="miMenuDesplegable">Seccion</p>
                     <div class="form-group">
@@ -46,12 +51,14 @@ const formProduct = () => {
     e.preventDefault();
     const name = document.querySelector("[data-name]").value;
     const price = document.querySelector("[data-price]").value;
+    const description = document.querySelector("[data-description]").value;
     const section = document.getElementById("miMenuDesplegable").value;
     const image = document.querySelector("[data-imageUrl]").files[0];
 
     const productData = new FormData();
     productData.append("name", name);
     productData.append("price", price);
+    productData.append("description", description);
     productData.append("section", section);
     productData.append("image", image);
 
@@ -117,29 +124,6 @@ const nuevoProducto = (name, price, imagePath, id) => {
   return card;
 };
 
-const productoInicio = (name, imagePath) => {
-  const card = document.createElement("div");
-  const contenido = `
-        <div class="container mx-auto mt-4">
-            <div class="row">
-                <div class="col-md-4 ">
-                    <div style="width: 15rem;">
-                        <img class="card-img-top" src=${imagePath} alt="">
-                            <div class="card-body">
-                                <h3 class="card-title">${name}</h3>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-  card.innerHTML = contenido;
-  card.classList.add("card");
-
-  return card;
-};
-
 //asociar productos con la seccion correspondiente
 const productoPosters = document.querySelector("[data-posters]");
 const productoConsolas = document.querySelector("[data-consolas]");
@@ -183,22 +167,70 @@ const render = async () => {
   }
 };
 
-//render productos pagina ppal
+// Mostrar productos en el inicio
+const productoInicio = (name, imagePath, price, description) => {
+  const card = document.createElement("div");
+  const contenido = `
+        <div class="container mx-auto mt-4">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div style="width: 15rem;">
+                        <img class="card-img-top" src=${imagePath} alt="">
+                            <div class="card-body">
+                                <h3 class="card-title">${name}</h3>
+                                <a href="#">ver producto </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+  card.innerHTML = contenido;
+  card.classList.add("card");
+
+  card.querySelector("a").addEventListener("click", (e) => {
+    e.preventDefault();
+    try {
+      modalControllers.modalMostrarProducto(imagePath, name, description);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  return card;
+};
+
 const renderInit = async () => {
   try {
     const listaProductos = await productoServices.renderInicio();
     listaProductos.forEach((elemento) => {
       if (elemento.section === "opcion1") {
         productoPosters.appendChild(
-          productoInicio(elemento.name, elemento.imagePath)
+          productoInicio(
+            elemento.name,
+            elemento.imagePath,
+            elemento.price,
+            elemento.description
+          )
         );
       } else if (elemento.section === "opcion2") {
         productoConsolas.appendChild(
-          productoInicio(elemento.name, elemento.imagePath)
+          productoInicio(
+            elemento.name,
+            elemento.imagePath,
+            elemento.price,
+            elemento.description
+          )
         );
       } else if (elemento.section === "opcion3") {
         productoDiversos.appendChild(
-          productoInicio(elemento.name, elemento.imagePath)
+          productoInicio(
+            elemento.name,
+            elemento.imagePath,
+            elemento.price,
+            elemento.description
+          )
         );
       }
     });
@@ -211,7 +243,7 @@ const renderInit = async () => {
 
 const productoEdicion = document.querySelector("[data-table]");
 
-const editProduct = (name, price, imagePath, id) => {
+const editProduct = (name, price, imagePath, description, id) => {
   productoEdicion.innerHTML = "";
   const card = document.createElement("div");
   /*const contenido = `
@@ -251,6 +283,9 @@ const editProduct = (name, price, imagePath, id) => {
                     <div class="form-group"> 
                     <input class="form-control mt-3 mb-3 p-2"  placeholder="precio" type="text"value="${price}" required data-precio>
                     </div>
+                    <div class="form-group"> 
+                    <input class="form-control mt-3 mb-3 p-2"  placeholder="Descripcion" type="text"value="${description}" required data-description>
+                    </div>
                     <div>
                     <button type="submit" class="btn btn-primary btn-lg">Editar producto</button>
                     </div>
@@ -269,12 +304,14 @@ const editProduct = (name, price, imagePath, id) => {
 
     const name = document.querySelector("[data-nombre]").value;
     const price = document.querySelector("[data-precio]").value;
+    const description = document.querySelector("[data-description]").value;
     const imagePath = document.querySelector("[data-image]").files[0];
     const oldImagePath = document.querySelector("[data-oldPath]").value;
 
     const dataEdit = new FormData();
     dataEdit.append("name", name);
     dataEdit.append("price", price);
+    dataEdit.append("description", description);
     dataEdit.append("imagePath", imagePath);
     dataEdit.append("oldImagePath", oldImagePath);
 
