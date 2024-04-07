@@ -239,7 +239,7 @@ const editProduct = (name, price, imagePath, description, id) => {
 }
 
 // Mostrar productos en el inicio
-const productoInicio = (name, description, imagePath) => {
+const productoInicio = (description,name,  imagePath) => {
   const card = document.createElement("div");
   const contenido = `
         <div class="container mx-auto mt-4">
@@ -263,7 +263,7 @@ const productoInicio = (name, description, imagePath) => {
   card.querySelector("a").addEventListener("click", (e) => {
     e.preventDefault();
     try {
-      mostrarProducto(imagePath, description, name);
+      mostrarProducto( imagePath, name, description );
     } catch (err) {
       console.log(err);
     }
@@ -279,8 +279,8 @@ const renderInit = async () => {
       if (elemento.section === "opcion1") {
         productoPosters.appendChild(
           productoInicio(
-            elemento.name,
             elemento.description,
+            elemento.name,
             elemento.imagePath,
            
            
@@ -289,8 +289,8 @@ const renderInit = async () => {
       } else if (elemento.section === "opcion2") {
         productoConsolas.appendChild(
           productoInicio(
-            elemento.name,
             elemento.description,
+            elemento.name,
             elemento.imagePath,
             
            
@@ -299,8 +299,8 @@ const renderInit = async () => {
       } else if (elemento.section === "opcion3") {
         productoDiversos.appendChild(
           productoInicio(
-            elemento.name,
             elemento.description,
+            elemento.name,
             elemento.imagePath,
            
            
