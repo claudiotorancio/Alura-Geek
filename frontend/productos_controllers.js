@@ -239,7 +239,7 @@ const editProduct = (name, price, imagePath, description, id) => {
 }
 
 // Mostrar productos en el inicio
-const productoInicio = (name, imagePath) => {
+const productoInicio = (name, description, imagePath) => {
   const card = document.createElement("div");
   const contenido = `
         <div class="container mx-auto mt-4">
@@ -263,7 +263,7 @@ const productoInicio = (name, imagePath) => {
   card.querySelector("a").addEventListener("click", (e) => {
     e.preventDefault();
     try {
-      modalControllers.modalMostrarProducto(imagePath, name);
+      mostrarProducto(imagePath, description, name);
     } catch (err) {
       console.log(err);
     }
@@ -280,8 +280,9 @@ const renderInit = async () => {
         productoPosters.appendChild(
           productoInicio(
             elemento.name,
+            elemento.description,
             elemento.imagePath,
-            elemento.price,
+           
            
           )
         );
@@ -289,8 +290,9 @@ const renderInit = async () => {
         productoConsolas.appendChild(
           productoInicio(
             elemento.name,
+            elemento.description,
             elemento.imagePath,
-            elemento.price,
+            
            
           )
         );
@@ -298,8 +300,9 @@ const renderInit = async () => {
         productoDiversos.appendChild(
           productoInicio(
             elemento.name,
+            elemento.description,
             elemento.imagePath,
-            elemento.price,
+           
            
           )
         );
@@ -311,6 +314,33 @@ const renderInit = async () => {
 };
 
 
+const mostrarProducto = (imagePath, name, description) => {
+  modalControllers.baseModal()
+  const modal = document.getElementById("modal");
+  const mostrarProducto = modal.querySelector("[data-table]");
+  mostrarProducto.innerHTML = `
+        <div class="contenido_container">
+            <div class="row">
+                <div class="col-md-6 mx-auto ">                
+                      <img class="card-img-top" src=${imagePath} alt="">         
+                </div>
+                <div class="col-md-6 mx-auto ">
+                    <div class="card-body">
+                      <h3 class="card-title">${name}</h3>
+                      <br>
+                      <h5 class="card-subtitle" style="max-width: 100%; overflow-wrap: break-word;">${description}</h5>
+                    </div>
+                </div
+            </div>
+        </div>
+    `;
+
+
+  modal.classList.add("card");
+
+  return card;
+};
+
 
 export const controllers = {
   nuevoProducto,
@@ -318,4 +348,5 @@ export const controllers = {
   editProduct,
   renderInit,
   formProduct,
+  mostrarProducto
 };
