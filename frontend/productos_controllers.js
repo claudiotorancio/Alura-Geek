@@ -79,7 +79,8 @@ const formProduct = () => {
   return card;
 };
 
-const nuevoProducto = (name, price, imagePath, id) => {
+const nuevoProducto = (name, price, imagePath, description,  id) => {
+ 
   const card = document.createElement("div");
   const contenido = `
         <div class="container mx-auto mt-4">
@@ -111,15 +112,19 @@ const nuevoProducto = (name, price, imagePath, id) => {
     }
   });
 
-  card.querySelector("[data-edit]").addEventListener("click", (e) => {
+  card.querySelector("[data-edit]").addEventListener("click", async (e) => {
     e.preventDefault();
-    productoServices
-      .detalleProducto(id)
-      .then((respuesta) => {
-        modalControllers.modalEdicion(name, price, imagePath, id);
-      })
-      .catch(() => alert("Ocurrio un error"));
-  });
+    try {
+        await productoServices.detalleProducto(id);
+       editProduct(name, price, imagePath, description, id);
+    } catch (error) {
+        console.error("Error al obtener el detalle del producto:", error);
+        alert("Ocurrió un error al obtener el detalle del producto. Por favor, intenta nuevamente.");
+    }
+});
+
+return card;
+
 
   return card;
 };
@@ -139,6 +144,7 @@ const render = async () => {
             elemento.name,
             elemento.price,
             elemento.imagePath,
+            elemento.description,
             elemento._id
           )
         );
@@ -148,6 +154,7 @@ const render = async () => {
             elemento.name,
             elemento.price,
             elemento.imagePath,
+            elemento.description,
             elemento._id
           )
         );
@@ -157,6 +164,7 @@ const render = async () => {
             elemento.name,
             elemento.price,
             elemento.imagePath,
+            elemento.description,
             elemento._id
           )
         );
@@ -166,108 +174,12 @@ const render = async () => {
     console.log(erro);
   }
 };
-
-// Mostrar productos en el inicio
-const productoInicio = (name, imagePath, price, description) => {
-  const card = document.createElement("div");
-  const contenido = `
-        <div class="container mx-auto mt-4">
-            <div class="row">
-                <div class="col-md-6 ">
-                    <div style="width: 15rem;">
-                        <img class="card-img-top" src=${imagePath} alt="">
-                            <div class="card-body">
-                                <h3 class="card-title">${name}</h3>
-                                <a href="#">ver producto </a>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-  card.innerHTML = contenido;
-  card.classList.add("card");
-
-  card.querySelector("a").addEventListener("click", (e) => {
-    e.preventDefault();
-    try {
-      modalControllers.modalMostrarProducto(imagePath, name, description);
-    } catch (err) {
-      console.log(err);
-    }
-  });
-
-  return card;
-};
-
-const renderInit = async () => {
-  try {
-    const listaProductos = await productoServices.renderInicio();
-    listaProductos.forEach((elemento) => {
-      if (elemento.section === "opcion1") {
-        productoPosters.appendChild(
-          productoInicio(
-            elemento.name,
-            elemento.imagePath,
-            elemento.price,
-            elemento.description
-          )
-        );
-      } else if (elemento.section === "opcion2") {
-        productoConsolas.appendChild(
-          productoInicio(
-            elemento.name,
-            elemento.imagePath,
-            elemento.price,
-            elemento.description
-          )
-        );
-      } else if (elemento.section === "opcion3") {
-        productoDiversos.appendChild(
-          productoInicio(
-            elemento.name,
-            elemento.imagePath,
-            elemento.price,
-            elemento.description
-          )
-        );
-      }
-    });
-  } catch (erro) {
-    console.log(erro);
-  }
-};
-
-//editar producto
-
-const productoEdicion = document.querySelector("[data-table]");
 
 const editProduct = (name, price, imagePath, description, id) => {
-  productoEdicion.innerHTML = "";
-  const card = document.createElement("div");
-  /*const contenido = `
-    <div class="card text-center">
-    <div class="card-header">
-    <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
-        <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
-            <p class="parrafo">Producto a editar</p>
-                    <div class="form-group">
-                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${name}" required data-nombre >
-                    </div>
-                    <div class="form-group"> 
-                    <input class="form-control mt-3 mb-3 p-2"  placeholder="precio" type="text"value="${price}" required data-precio>
-                    </div>
-                    <div>
-                    <button type="submit" class="btn btn-primary btn-lg">Editar producto</button>
-                    </div>
-        </form>
-    </div>
-    </div>
-
-    `*/
-  //codigo para actualizar imagen en s3 y mongoDB
-  const contenido = `
+  modalControllers.baseModal();
+  const modal = document.getElementById("modal");
+  const productoEdicion = modal.querySelector("[data-table]");
+  productoEdicion.innerHTML =  `
     <div class="card text-center">
     <div class="card-header">
     <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
@@ -294,12 +206,11 @@ const editProduct = (name, price, imagePath, description, id) => {
     </div>
 
     `;
+   
+    modal.classList.add("card");
 
-  card.innerHTML = contenido;
-  card.classList.add("modalVisor");
-  productoEdicion.appendChild(card);
 
-  card.querySelector("[data-forma]").addEventListener("submit", (e) => {
+  modal.querySelector("[data-forma]").addEventListener("submit", (e) => {
     e.preventDefault();
 
     const name = document.querySelector("[data-nombre]").value;
@@ -309,38 +220,87 @@ const editProduct = (name, price, imagePath, description, id) => {
     const oldImagePath = document.querySelector("[data-oldPath]").value;
 
     const dataEdit = new FormData();
+    dataEdit.append("imagePath", imagePath);
     dataEdit.append("name", name);
     dataEdit.append("price", price);
     dataEdit.append("description", description);
-    dataEdit.append("imagePath", imagePath);
     dataEdit.append("oldImagePath", oldImagePath);
 
     productoServices
       .actualizarProducto(dataEdit, id)
       .then(() => {
-        modalControllers.modalProductoEditado();
+       modalControllers.modalProductoEditado();
       })
       .catch((err) => {
         console.log(err);
       });
   });
+  return modal;
+}
+
+// Mostrar productos en el inicio
+const productoInicio = (name, imagePath) => {
+  const card = document.createElement("div");
+  const contenido = `
+        <div class="container mx-auto mt-4">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div style="width: 15rem;">
+                        <img class="card-img-top" src=${imagePath} alt="">
+                            <div class="card-body">
+                                <h3 class="card-title">${name}</h3>
+                                <a href="#">ver producto </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+  card.innerHTML = contenido;
+  card.classList.add("card");
+
+  card.querySelector("a").addEventListener("click", (e) => {
+    e.preventDefault();
+    try {
+      modalControllers.modalMostrarProducto(imagePath, name);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
   return card;
 };
 
-//renderizar producto editado
-const renderProductEdit = async (id) => {
+const renderInit = async () => {
   try {
-    const listaProductos = await productoServices.listaProductos();
-
+    const listaProductos = await productoServices.renderInicio();
     listaProductos.forEach((elemento) => {
-      if (elemento._id === id) {
-        productoEdicion.appendChild(
-          editProduct(
+      if (elemento.section === "opcion1") {
+        productoPosters.appendChild(
+          productoInicio(
             elemento.name,
-            elemento.price,
             elemento.imagePath,
-            elemento.description,
-            elemento._id
+            elemento.price,
+           
+          )
+        );
+      } else if (elemento.section === "opcion2") {
+        productoConsolas.appendChild(
+          productoInicio(
+            elemento.name,
+            elemento.imagePath,
+            elemento.price,
+           
+          )
+        );
+      } else if (elemento.section === "opcion3") {
+        productoDiversos.appendChild(
+          productoInicio(
+            elemento.name,
+            elemento.imagePath,
+            elemento.price,
+           
           )
         );
       }
@@ -350,11 +310,12 @@ const renderProductEdit = async (id) => {
   }
 };
 
+
+
 export const controllers = {
   nuevoProducto,
   render,
-  renderInit,
   editProduct,
-  renderProductEdit,
+  renderInit,
   formProduct,
 };

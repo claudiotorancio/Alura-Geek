@@ -9,7 +9,7 @@ const renderProducts = async (req, res) => {
         if (!req.isAuthenticated()) {
             return res.status(401).json({ error: 'Usuario no autenticado' });
         }
-
+      
         // Relacionar id de usuario con producto para visualizar solo sus productos
         const user_id = req.user._id;
 
@@ -25,9 +25,9 @@ const renderProducts = async (req, res) => {
         if (req.user.role === 'admin') {
             // Si es administrador, buscar productos utilizando el modelo Vista
             products = await Vista.find({ user_id: user_id });
-        } else {
+       } else {
             // Si no es administrador, buscar productos utilizando el modelo Product
-            products = await Product.find({ user_id: user_id });
+           products = await Product.find({ user_id: user_id });
         }
 
         res.json(products);

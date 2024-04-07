@@ -18,12 +18,6 @@ const baseModal = () => {
   });
 };
 
-const modalEdicion = (name, price, imagePath, id) => {
-  baseModal();
-  controllers.renderProductEdit();
-  controllers.editProduct(name, price, imagePath, id);
-};
-
 const modalEliminar = (id) => {
   baseModal();
   const modal = document.getElementById("modal");
@@ -320,7 +314,7 @@ const modalMostrarProducto = (imagePath, name, description) => {
 
 
 export const modalControllers = {
-  modalEdicion,
+ 
   modalEliminar,
   baseModal,
   modalSuccessSignIn,

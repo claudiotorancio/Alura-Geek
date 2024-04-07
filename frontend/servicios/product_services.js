@@ -36,12 +36,14 @@ const eliminarProducto = async (id) => {
 };
 
 const detalleProducto = async (id) => {
+  console.log(id)
   await fetch(`${baseURL}/api/detailsProduct/${id}`).then((respuesta) =>
     respuesta.json()
   );
 };
 
 const actualizarProducto = async (product, id) => {
+  console.log(product, id)
   await fetch(`${baseURL}/api/updateProduct/${id}`, {
     method: "PUT",
 
