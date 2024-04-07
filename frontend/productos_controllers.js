@@ -239,7 +239,7 @@ const editProduct = (name, price, imagePath, description, id) => {
 }
 
 // Mostrar productos en el inicio
-const productoInicio = (name, imagePath) => {
+const productoInicio = (name, description, imagePath) => {
   const card = document.createElement("div");
   const contenido = `
         <div class="container mx-auto mt-4">
@@ -263,7 +263,7 @@ const productoInicio = (name, imagePath) => {
   card.querySelector("a").addEventListener("click", (e) => {
     e.preventDefault();
     try {
-      modalControllers.modalMostrarProducto(imagePath, name);
+      modalControllers.modalMostrarProducto(imagePath, description, name);
     } catch (err) {
       console.log(err);
     }
@@ -282,6 +282,7 @@ const renderInit = async () => {
             elemento.name,
             elemento.imagePath,
             elemento.price,
+            elemento.description
            
           )
         );
@@ -291,6 +292,7 @@ const renderInit = async () => {
             elemento.name,
             elemento.imagePath,
             elemento.price,
+            elemento.description
            
           )
         );
@@ -300,6 +302,7 @@ const renderInit = async () => {
             elemento.name,
             elemento.imagePath,
             elemento.price,
+            elemento.description
            
           )
         );

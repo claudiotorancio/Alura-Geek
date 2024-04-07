@@ -305,8 +305,8 @@ const modalMostrarProducto = (imagePath, name, description) => {
         </div>
     `;
 
-  card.innerHTML = contenido;
-  card.classList.add("card");
+
+  modal.classList.add("card");
 
   return card;
 };
