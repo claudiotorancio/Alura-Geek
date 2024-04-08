@@ -84,25 +84,23 @@ const nuevoProducto = (name, price, imagePath, description,  id) => {
  
   const card = document.createElement("div");
   const contenido = `
-        <div class="container mx-auto mt-4">
-            <div class="row">
-                <div class="col-md-4 ">
-                    <div style="width: 15rem;">
-                    <div class="card-img-top-container">
-                        <img class="card-img-top" src=${imagePath} alt="">
-                        </div>
-                            <div class="card-body">
-                            <a href="#">ver producto </a>
-                               
-                                <h3 class="card-title">${name}</h3>
-                                <p class="card-text">${"$" + price}</p>
-                                <a href="#form" class="btn btn-primary" id="${id}" data-edit >Editar</a>
-                                <button  class="btn btn-danger" type="button" id="${id}" >eliminar</button>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container mx-auto mt-4">
+  
+    
+      <div class="img-card">
+        <img class="card-img-top" src=${imagePath} alt="">
+      </div>
+     
+      <div class="card-body">
+        <a href="#">ver producto </a>
+        <h3 class="card-title">${name}</h3>
+        <p class="card-text">${"$" + price}</p>
+        <a href="#form" class="btn btn-primary" id="${id}" data-edit >Editar</a>
+        <button  class="btn btn-danger" type="button" id="${id}" >eliminar</button>
+      </div>
+
+</div>
+
     `;
 
   card.innerHTML = contenido;

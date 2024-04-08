@@ -46,6 +46,7 @@ display: flex;
 }
 
 .card {
+    justify-content: center;
     margin: 2rem;
     transition: all 0.25s cubic-bezier(0.645, 0.045,0.355,1);
     background-color: #fff;
@@ -63,10 +64,13 @@ display: flex;
   
   }
 
-.card-body {
-   align-items: center;
+  .img-card{
+    width: 15rem;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 
 
 
@@ -78,6 +82,10 @@ display: flex;
     
     .productos {
         display: block;
+        }
+
+        .img-card{
+          display: inline;
         }
 }
 
