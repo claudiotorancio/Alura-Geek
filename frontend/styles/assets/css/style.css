@@ -188,11 +188,6 @@ align-items: center;
 
 }
 
-.productos {
-    display: flex;
-    justify-content: space-around ;
-    flex-wrap: wrap;
-}
 
 .card-lista {
 

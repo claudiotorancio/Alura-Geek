@@ -38,9 +38,9 @@ const modalEliminar = (id) => {
   const botonEliminar = eliminarProducto.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     productoServices.eliminarProducto(id);
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   });
-  eliminarProducto.classList.add("modalVisor");
+
   /*setTimeout(() => {
         window.location.href= '/index.html';
        }, 2000);*/
@@ -67,10 +67,10 @@ const modalSuccessSignIn = (username) => {
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   });
   setTimeout(() => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   }, 3000);
 };
 
@@ -96,10 +96,10 @@ const modalProductoCreado = () => {
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   });
   setTimeout(() => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   }, 3000);
 };
 
@@ -125,10 +125,10 @@ const modalProductoEditado = () => {
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   });
   setTimeout(() => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   }, 3000);
 };
 
@@ -273,11 +273,11 @@ const modalLogout = (user) => {
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     modal.style.display = "none";
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   });
 
   setTimeout(() => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   }, 3000);
 };
 
@@ -303,10 +303,10 @@ const modalErrConexion = () => {
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   });
   setTimeout(() => {
-    window.location.href = "/index.html";
+    window.location.replace("/index.html");
   }, 3000);
 };
 

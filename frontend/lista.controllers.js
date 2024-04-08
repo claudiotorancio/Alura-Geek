@@ -62,6 +62,7 @@ const renderLista = async () => {
   try {
     const respuesta = await listaServices.listaUsers();
     const lista = respuesta.listado; // Acceder al arreglo de usuarios
+    const cantidad = respuesta.usersCantidad;
 
     lista.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
@@ -69,11 +70,11 @@ const renderLista = async () => {
       <div>
       <div class="row">
         <div class="col-md-12">
-        <h2 class="card-header">USUARIOS REGISTRADOS</H2>
+        <h2 class="card-header">Usuarios registrados</H2>
         <table class="table">
       <thead>
       <tr>
-        <th style="width: 25%;">User</th>
+        <th style="width: 25%;">Users (${cantidad})</th>
         <th style="width: 25%;">Create</th>
         <th style="width: 25%;">prod</th>
         <th style="width: 25%;">Rol</th>

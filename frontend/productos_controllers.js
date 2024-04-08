@@ -1,3 +1,4 @@
+
 import { modalControllers } from "./modal.js";
 import { productoServices } from "./servicios/product_services.js";
 
@@ -87,7 +88,9 @@ const nuevoProducto = (name, price, imagePath, description,  id) => {
             <div class="row">
                 <div class="col-md-4 ">
                     <div style="width: 15rem;">
+                    <div class="card-img-top-container">
                         <img class="card-img-top" src=${imagePath} alt="">
+                        </div>
                             <div class="card-body">
                             <a href="#">ver producto </a>
                                
@@ -114,14 +117,16 @@ const nuevoProducto = (name, price, imagePath, description,  id) => {
     }
   });
 
-  card.querySelector("button").addEventListener("click", (e) => {
+  card.querySelector("button").addEventListener("click", async (e) => {
     e.preventDefault();
     try {
-      modalControllers.modalEliminar(id);
-    } catch (err) {
+      // Llamas a modalEliminar y esperas su completación
+     await modalControllers.modalEliminar(id);
+
+      } catch (err) {
       console.log(err);
     }
-  });
+});
 
   card.querySelector("[data-edit]").addEventListener("click", async (e) => {
     e.preventDefault();
