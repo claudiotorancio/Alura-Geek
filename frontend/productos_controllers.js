@@ -28,8 +28,8 @@ const formProduct = () => {
                             required data-price>
                     </div>
                     <div class="form-group">
-                        <input class="form-control mt-3 mb-3 p-2" type="text" placeholder="Descripcion"
-                            required data-description>
+                        <textarea class="form-control mt-3 mb-3 p-2" type="text" placeholder="Descripcion"
+                            required data-description></textarea>
                     </div>
                         <p for="miMenuDesplegable">Seccion</p>
                     <div class="form-group">
@@ -212,7 +212,7 @@ const editProduct = (name, price, imagePath, description, id) => {
                     <input class="form-control mt-3 mb-3 p-2"  placeholder="precio" type="text"value="${price}" required data-precio>
                     </div>
                     <div class="form-group"> 
-                    <input class="form-control mt-3 mb-3 p-2"  placeholder="Descripcion" type="text"value="${description}" required data-description>
+                    <textarea class="form-control mt-3 mb-3 p-2"  placeholder="Descripcion" type="text"value="${description}" required data-description></textarea>
                     </div>
                     <div>
                     <button type="submit" class="btn btn-primary btn-lg">Editar producto</button>
