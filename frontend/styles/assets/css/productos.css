@@ -79,11 +79,18 @@ display: flex;
 
 
 @media (min-width:320px) and (max-width:768px) {
+
+    .card {
+        transition: none; 
+    }
     
     .productos {
         display: block;
         }
-
+        div.card:hover {
+            transform: none;
+            box-shadow:none;
+        }
        
 }
 
