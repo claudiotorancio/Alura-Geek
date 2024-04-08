@@ -42,7 +42,6 @@ const detalleProducto = async (id) => {
 };
 
 const actualizarProducto = async (product, id) => {
-  console.log(product, id)
   await fetch(`${baseURL}/api/updateProduct/${id}`, {
     method: "PUT",
 
