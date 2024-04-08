@@ -1,4 +1,3 @@
-
 import { modalControllers } from "./modal.js";
 import { productoServices } from "./servicios/product_services.js";
 
@@ -80,8 +79,7 @@ const formProduct = () => {
   return card;
 };
 
-const nuevoProducto = (name, price, imagePath, description,  id) => {
- 
+const nuevoProducto = (name, price, imagePath, description, id) => {
   const card = document.createElement("div");
   const contenido = `
   <div class="container mx-auto mt-4">
@@ -109,7 +107,7 @@ const nuevoProducto = (name, price, imagePath, description,  id) => {
   card.querySelector("a").addEventListener("click", (e) => {
     e.preventDefault();
     try {
-      mostrarProducto( imagePath, name, description );
+      mostrarProducto(imagePath, name, description);
     } catch (err) {
       console.log(err);
     }
@@ -119,26 +117,26 @@ const nuevoProducto = (name, price, imagePath, description,  id) => {
     e.preventDefault();
     try {
       // Llamas a modalEliminar y esperas su completación
-     await modalControllers.modalEliminar(id);
-
-      } catch (err) {
+      await modalControllers.modalEliminar(id);
+    } catch (err) {
       console.log(err);
     }
-});
+  });
 
   card.querySelector("[data-edit]").addEventListener("click", async (e) => {
     e.preventDefault();
     try {
-        await productoServices.detalleProducto(id);
-       editProduct(name, price, imagePath, description, id);
+      await productoServices.detalleProducto(id);
+      editProduct(name, price, imagePath, description, id);
     } catch (error) {
-        console.error("Error al obtener el detalle del producto:", error);
-        alert("Ocurrió un error al obtener el detalle del producto. Por favor, intenta nuevamente.");
+      console.error("Error al obtener el detalle del producto:", error);
+      alert(
+        "Ocurrió un error al obtener el detalle del producto. Por favor, intenta nuevamente."
+      );
     }
-});
+  });
 
-return card;
-
+  return card;
 
   return card;
 };
@@ -193,7 +191,7 @@ const editProduct = (name, price, imagePath, description, id) => {
   modalControllers.baseModal();
   const modal = document.getElementById("modal");
   const productoEdicion = modal.querySelector("[data-table]");
-  productoEdicion.innerHTML =  `
+  productoEdicion.innerHTML = `
     <div class="text-center">
     <div class="card-header">
     <img class="img-card-top mx-auto" style="width:45vw;" src=${imagePath} alt="">
@@ -220,9 +218,8 @@ const editProduct = (name, price, imagePath, description, id) => {
     </div>
 
     `;
-   
-   productoEdicion.classList.add("modalVisor");
 
+  productoEdicion.classList.add("modalVisor");
 
   modal.querySelector("[data-forma]").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -243,32 +240,34 @@ const editProduct = (name, price, imagePath, description, id) => {
     productoServices
       .actualizarProducto(dataEdit, id)
       .then(() => {
-       modalControllers.modalProductoEditado();
+        modalControllers.modalProductoEditado();
       })
       .catch((err) => {
         console.log(err);
       });
   });
-  
-}
+};
 
 // Mostrar productos en el inicio
-const productoInicio = (description,name,  imagePath) => {
+const productoInicio = (description, name, imagePath) => {
   const card = document.createElement("div");
   const contenido = `
+
         <div class="container mx-auto mt-4">
-            <div class="row">
-                <div class="col-md-6 ">
-                    <div style="width: 15rem;">
-                        <img class="card-img-top" src=${imagePath} alt="">
-                            <div class="card-body">
-                                <h3 class="card-title">${name}</h3>
-                                <a href="#">ver producto </a>
-                            </div>
-                    </div>
-                </div>
-            </div>
+  
+    
+        <div class="img-card">
+          <img class="card-img-top" src=${imagePath} alt="">
         </div>
+       
+        <div class="card-body">
+         
+          <h3 class="card-title">${name}</h3>
+          <a href="#">ver producto </a>
+         
+        </div>
+  
+  </div>
     `;
 
   card.innerHTML = contenido;
@@ -277,7 +276,7 @@ const productoInicio = (description,name,  imagePath) => {
   card.querySelector("a").addEventListener("click", (e) => {
     e.preventDefault();
     try {
-      mostrarProducto( imagePath, name, description );
+      mostrarProducto(imagePath, name, description);
     } catch (err) {
       console.log(err);
     }
@@ -295,7 +294,7 @@ const renderInit = async () => {
           productoInicio(
             elemento.description,
             elemento.name,
-            elemento.imagePath,
+            elemento.imagePath
           )
         );
       } else if (elemento.section === "opcion2") {
@@ -303,7 +302,7 @@ const renderInit = async () => {
           productoInicio(
             elemento.description,
             elemento.name,
-            elemento.imagePath,
+            elemento.imagePath
           )
         );
       } else if (elemento.section === "opcion3") {
@@ -311,8 +310,7 @@ const renderInit = async () => {
           productoInicio(
             elemento.description,
             elemento.name,
-            elemento.imagePath,
-           
+            elemento.imagePath
           )
         );
       }
@@ -322,9 +320,8 @@ const renderInit = async () => {
   }
 };
 
-
 const mostrarProducto = (imagePath, name, description) => {
-  modalControllers.baseModal()
+  modalControllers.baseModal();
   const modal = document.getElementById("modal");
   const mostrarProducto = modal.querySelector("[data-table]");
   mostrarProducto.innerHTML = `
@@ -344,11 +341,8 @@ const mostrarProducto = (imagePath, name, description) => {
         </div>
     `;
 
-
   mostrarProducto.classList.add("modalVisor");
-
 };
-
 
 export const controllers = {
   nuevoProducto,
@@ -356,5 +350,5 @@ export const controllers = {
   editProduct,
   renderInit,
   formProduct,
-  mostrarProducto
+  mostrarProducto,
 };
