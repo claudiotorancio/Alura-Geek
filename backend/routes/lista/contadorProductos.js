@@ -21,7 +21,7 @@ const contadorProductos = async (req, res) => {
         let cantidad
 
         if(req.user.role === 'admin') {
-            cantidad = await Vista.find()
+            cantidad = await Vista.find({ user_id: userId })
         }else {
             cantidad = await Product.countDocuments({ user_id: userId });
         }
