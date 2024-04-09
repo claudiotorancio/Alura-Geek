@@ -1,6 +1,6 @@
 import { listaServices } from "./servicios/lista_services.js";
 
-const nuevaLista = ( username, created_at, role, totalProductos,   id) => {
+const nuevaLista = ( username, created_at, role, totalProductos,  id) => {
   const fechaCreacion = new Date(created_at);
   const fechaFormateada = `${fechaCreacion.getFullYear().toString().slice(-2)}-${fechaCreacion.getMonth() + 1}-${fechaCreacion.getDate()}`;
 
@@ -63,7 +63,9 @@ const renderLista = async () => {
     const respuesta = await listaServices.listaUsers();
     const lista = respuesta.listado; // Acceder al arreglo de usuarios
     const cantidad = respuesta.usersCantidad;
-    
+
+    const mostrarCantidad = await listaServices.totalProductos();
+    const total = mostrarCantidad.cantidad
 
     lista.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
@@ -77,7 +79,7 @@ const renderLista = async () => {
       <tr>
         <th style="width: 25%;">Users (${cantidad})</th>
         <th style="width: 25%;">Create</th>
-        <th style="width: 25%;">prod</th>
+        <th style="width: 25%;">prod (${total})</th>
         <th style="width: 25%;">Rol</th>
         <th style="width: 25%;">Accion</th>
       </tr>
@@ -94,8 +96,6 @@ const renderLista = async () => {
         const productosCantidad = await listaServices.totalProductos(usuario._id);
        
         const totalProductos = productosCantidad.cantidad;
-      
-      console.log(totalProductos)
       // Llamar a nuevaLista con la cantidad de productos obtenida
       tabla.appendChild(
         nuevaLista(

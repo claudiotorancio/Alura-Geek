@@ -10,16 +10,14 @@ import { listaControllers } from "./lista.controllers.js";
 
 // busqueda de cambios
 document.addEventListener("DOMContentLoaded", () => {
-  listaControllers.renderLista()
-    controllers.render();
-  
+  listaControllers.renderLista();
+  controllers.render();
   const user = JSON.parse(sessionStorage.getItem("user")) || null;
   const actualizarUsuario = document.querySelector(".data-user");
   const logoutUsuario = document.querySelector("[data-logOut]");
   const userActive = document.querySelector("[data-log]");
   const contactUser = document.querySelector("[data-contact]");
   if (user) {
-  
     actualizarUsuario.textContent = `Hola! ${user}`;
     logoutUsuario.textContent = "Logout";
     userActive.style.display = "none";
