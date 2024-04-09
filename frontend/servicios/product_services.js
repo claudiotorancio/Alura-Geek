@@ -12,10 +12,20 @@ const renderInicio = async () =>
     respuesta.json()
   );
 
-const listaProductos = async () =>
-  await fetch(`${baseURL}/api/renderProducts`).then((respuesta) =>
-    respuesta.json()
-  );
+  const listaProductos = async () => {
+    try {
+      const respuesta = await fetch(`${baseURL}/api/renderProducts`);
+      const data = await respuesta.json();
+      // Acceder a los productos y al total desde el objeto de respuesta
+      const products = data.products;
+      const total = data.total;
+      // Retornar los productos si es necesario
+      return {products, total};
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
 const crearProducto = async (product) => {
   await fetch(`${baseURL}/api/createProduct`, {

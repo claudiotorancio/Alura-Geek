@@ -26,11 +26,14 @@ const renderProducts = async (req, res) => {
             // Si es administrador, buscar productos utilizando el modelo Vista
             products = await Vista.find({ user_id: user_id });
        } else {
-    //         // Si no es administrador, buscar productos utilizando el modelo Product
+        // Si no es administrador, buscar productos utilizando el modelo Product
            products = await Product.find({ user_id: user_id });
         }
 
-        res.json(products);
+        const totalProduct = await Product.countDocuments();
+        const totalVista = await Vista.countDocuments()
+
+        res.json({products, total: totalProduct + totalVista});
     } catch (error) {
         console.error('Error al cargar productos:', error);
         res.status(500).json({ error: 'Error al cargar productos' });

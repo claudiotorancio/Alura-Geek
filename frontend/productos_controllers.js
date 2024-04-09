@@ -147,7 +147,9 @@ const productoDiversos = document.querySelector("[data-diversos]");
 const render = async () => {
   try {
     const listaProductos = await productoServices.listaProductos();
-    listaProductos.forEach((elemento) => {
+    const {products} = listaProductos
+    console.log(products)
+   products.forEach((elemento) => {
       if (elemento.section === "opcion1") {
         productoPosters.appendChild(
           nuevoProducto(

@@ -1,4 +1,5 @@
 import { listaServices } from "./servicios/lista_services.js";
+import { productoServices } from "./servicios/product_services.js";
 
 const nuevaLista = ( username, created_at, role, totalProductos,  id) => {
   const fechaCreacion = new Date(created_at);
@@ -64,9 +65,9 @@ const renderLista = async () => {
     const lista = respuesta.listado; // Acceder al arreglo de usuarios
     const cantidad = respuesta.usersCantidad;
 
-    const mostrarCantidad = await listaServices.totalProductos();
-    const total = mostrarCantidad.cantidad
-
+    const mostrarCantidad = await productoServices.listaProductos();
+    const {total} = mostrarCantidad
+    
     lista.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
       const tituloTabla = `
