@@ -15,17 +15,16 @@ const contadorProductos = async (req, res) => {
         });
 
         const userId = req.params.id;
-console.log(userId)
+ 
         // Buscar productos asociados al usuario específico
 
         let cantidad
 
-        if(req.user.role === 'admin') {
+   
             cantidad = await Vista.countDocuments({ user_id: userId })
-        }else if(req.user.role === 'user') {
+      
             cantidad = await Product.countDocuments({ user_id: userId });
-        }
-        console.log(cantidad)
+      
         res.json({ cantidad});
     } catch (error) {
         console.error(error);
