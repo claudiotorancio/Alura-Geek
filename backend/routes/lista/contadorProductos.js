@@ -22,7 +22,7 @@ console.log(userId)
 
         if(req.user.role === 'admin') {
             cantidad = await Vista.countDocuments({ user_id: userId })
-        }else {
+        }else if(req.user.role === 'user') {
             cantidad = await Product.countDocuments({ user_id: userId });
         }
         console.log(cantidad)
