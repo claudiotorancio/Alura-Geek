@@ -73,6 +73,12 @@ display: flex;
     overflow: hidden;
 }
 
+.img-card img{
+    width: 100%; /* Ajusta la imagen al 100% del contenedor */
+    height: 100%; /* Ajusta la imagen al 100% del contenedor */
+    object-fit: cover;
+}
+
 
 
 @media (min-width:320px) and (max-width:768px) {
