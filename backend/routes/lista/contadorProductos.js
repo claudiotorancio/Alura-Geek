@@ -18,14 +18,10 @@ const contadorProductos = async (req, res) => {
  
         // Buscar productos asociados al usuario específico
 
-        let cantidad
-
-   
-            cantidad = await Vista.countDocuments({ user_id: userId })
+        const cantidadVistas = await Vista.countDocuments({ user_id: userId });
+        const cantidadProductos = await Product.countDocuments({ user_id: userId });
       
-            cantidad = await Product.countDocuments({ user_id: userId });
-      
-        res.json({ cantidad});
+        res.json({ cantidad: cantidadVistas + cantidadProductos});
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal server error" });
