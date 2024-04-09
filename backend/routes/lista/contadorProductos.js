@@ -14,7 +14,7 @@ const contadorProductos = async (req, res) => {
             useUnifiedTopology: true,
         });
 
-        const userId = req.user._id;
+        const userId = req.params.id;
 
         // Buscar productos asociados al usuario específico
 
