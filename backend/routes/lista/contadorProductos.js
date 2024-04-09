@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
-
+import Vista from '../../models/Vista.js'
 const contadorProductos = async (req, res) => {
     try {
 
@@ -14,16 +14,19 @@ const contadorProductos = async (req, res) => {
             useUnifiedTopology: true,
         });
 
-        const userId = req.params.id;
+        const userId = req.user._id;
 
         // Buscar productos asociados al usuario específico
-        const productosUsuario = await Product.find({ user_id: userId });
 
-        // Contar la cantidad de productos encontrados
-        const cantidad = productosUsuario.length;
+        let cantidad
 
-        // Enviar la respuesta con el total de productos
-        res.json({ cantidad });
+        if(req.user.role === 'admin') {
+            cantidad = await Vista.countDocuments({ user_id: userId })
+        }else {
+            cantidad = await Product.countDocuments({ user_id: userId });
+        }
+        
+        res.json({ cantidad});
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal server error" });

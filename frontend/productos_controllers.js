@@ -137,8 +137,6 @@ const nuevoProducto = (name, price, imagePath, description, id) => {
   });
 
   return card;
-
-  return card;
 };
 
 //asociar productos con la seccion correspondiente
