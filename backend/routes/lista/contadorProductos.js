@@ -14,14 +14,14 @@ const contadorProductos = async (req, res) => {
             useUnifiedTopology: true,
         });
 
-        const userId = req.user._id;
+        const userId = req.params.id;
 
         // Buscar productos asociados al usuario específico
 
         let cantidad
 
         if(req.user.role === 'admin') {
-            cantidad = await Vista.countDocuments({ user_id: userId })
+            cantidad = await Vista.find()
         }else {
             cantidad = await Product.countDocuments({ user_id: userId });
         }
