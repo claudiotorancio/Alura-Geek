@@ -1,79 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="http://fonts.googleapis.com" />
-    <link rel="preconnect" href="http://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="shortcut icon"
-      type="imagex/png"
-      href="https://myimagescnd.s3.us-east-2.amazonaws.com/Logo.png"
-      width="16"
-      height="16"
-    />
-    <title>AluraGeek</title>
-    <link
-      rel="stylesheet"
-      href="https://bootswatch.com/5/cosmo/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://bootswatch.com/5/flatly/bootstrap.min.css"
-    />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="http://fonts.googleapis.com" />
+  <link rel="preconnect" href="http://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" type="imagex/png" href="https://myimagescnd.s3.us-east-2.amazonaws.com/Logo.png" width="16" height="16" />
+  <title>AluraGeek</title>
+  <link rel="stylesheet" href="https://bootswatch.com/5/cosmo/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css" />
+</head>
 
-  <body>
-    <header class="header">
-      <div class="cabecera_container">
-        <img
-          class="cabecera_logo"
-          src="https://myimagescnd.s3.us-east-2.amazonaws.com/Logo.png"
-          alt="AluraGeeK logo"
-        />
-        <div class="busqueda">
-          <form action=""></form>
-          <input
-            type="search"
-            class="busqueda_campo"
-            placeholder="¿que deseas buscar?"
-            name="search"
-          />
+<body>
+  <header class="header">
+    <div class="cabecera_container">
+      <img class="cabecera_logo" src="https://myimagescnd.s3.us-east-2.amazonaws.com/Logo.png" alt="AluraGeeK logo" />
+      <div class="busqueda">
+        <form action="">
+          <input type="search" class="busqueda_campo" placeholder="¿Qué deseas buscar?" name="search" />
           <button class="button-busqueda">
-            <img
-              src="https://myimagescnd.s3.us-east-2.amazonaws.com/lupa.png"
-              alt="Icono Lupa"
-            />
+            <img src="https://myimagescnd.s3.us-east-2.amazonaws.com/lupa.png" alt="Icono Lupa" />
           </button>
-        </div>
-        <div class="carrito-link">
-          <a href="#">
-            <div class="profile-notificacion">
-              <span class="data-user">Usuario: </span>
-            </div>
-            <span class="carrito-monto"></span>
-          </a>
-        </div>
-        <a href=""
-          ><button type="submit" id="login" class="login" data-log></button
-        ></a>
-        <a href=""
-          ><button type="submit" id="login" class="login" data-logOut></button
-        ></a>
-
-        <button class="button-busqueda-login">
-          <img
-            src="https://myimagescnd.s3.us-east-2.amazonaws.com/lupa-negro.png"
-            alt="Icono lupa"
-          />
-        </button>
+        </form>
       </div>
-    </header>
+      <div class="carrito-link">
+        <a href="#">
+          <div class="profile-notificacion">
+            <span class="data-user">Usuario: </span>
+          </div>
+          <span class="carrito-monto"></span>
+        </a>
+      </div>
+      <a href=""><button type="submit" id="login" class="login" data-log></button></a>
+      <a href=""><button type="submit" id="login" class="login" data-logOut></button></a>
+      <button class="button-busqueda-login">
+        <img src="https://myimagescnd.s3.us-east-2.amazonaws.com/lupa-negro.png" alt="Icono lupa" />
+      </button>
+    </div>
+  </header>
+  <!-- Aquí iría el contenido de tu página, como el menú que quieres agregar -->
+  <!-- Botón para abrir el menú -->
+<div id="menuBtn">&#9776;</div>
+
+<!-- Modal del menú -->
+<div id="modalMenu" class="modalMenu">
+  <div class="modal-contentMenu">
+    <div  data-menu></div>
+
+  </div>
+</div>
+
+</body>
+</html>
+
     <main>
       <section class="contenido_container">
         <div class="banner">
@@ -91,6 +72,7 @@
           style="margin-top: 0"
           data-lista
         ></div>
+
 
         <div id="modal" class="modal">
           <div class="modal-content">

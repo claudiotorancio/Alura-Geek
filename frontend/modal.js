@@ -11,6 +11,7 @@ const baseModal = () => {
   });
 
   modal.addEventListener("click", (e) => {
+   
     if (e.target === modal) {
       modal.style.display = "none";
     }
@@ -34,7 +35,7 @@ const modalEliminar = (id) => {
     </div>
     </div>
     `;
-    eliminarProducto.classList.add("modalVisor");
+  eliminarProducto.classList.add("modalVisor");
   const botonEliminar = eliminarProducto.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     productoServices.eliminarProducto(id);
@@ -63,7 +64,7 @@ const modalSuccessSignIn = (username) => {
     </div>
     </div>
     `;
-    success.classList.add("modalVisor");
+  success.classList.add("modalVisor");
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -92,7 +93,7 @@ const modalProductoCreado = () => {
     </div>
     `;
 
-    success.classList.add("modalVisor");
+  success.classList.add("modalVisor");
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -121,7 +122,7 @@ const modalProductoEditado = () => {
     </div>
     `;
 
-    success.classList.add("modalVisor");
+  success.classList.add("modalVisor");
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -150,7 +151,7 @@ const modalErrorSignIn = () => {
     </div>
     `;
 
-    incorrect.classList.add("modalVisor");
+  incorrect.classList.add("modalVisor");
 
   const botonEliminar = incorrect.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -179,7 +180,7 @@ const modalSuccessSignup = () => {
     </div>
     `;
 
-    successSignup.classList.add("modalVisor");
+  successSignup.classList.add("modalVisor");
 
   const botonEliminar = successSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -208,7 +209,7 @@ const modalErrorSignup = () => {
     </div>
     `;
 
-    errorSignup.classList.add("modalVisor");
+  errorSignup.classList.add("modalVisor");
 
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -238,7 +239,7 @@ const modalErrorRegistro = () => {
     </div>
     `;
 
-    errorSignup.classList.add("modalVisor");
+  errorSignup.classList.add("modalVisor");
 
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -268,7 +269,7 @@ const modalLogout = (user) => {
     </div>
     `;
 
-    errorSignup.classList.add("modalVisor");
+  errorSignup.classList.add("modalVisor");
 
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -285,7 +286,7 @@ const modalErrConexion = () => {
   baseModal();
   const modal = document.getElementById("modal");
   const incorrect = modal.querySelector("[data-table]");
- incorrect.innerHTML = `
+  incorrect.innerHTML = `
     <div class="text-center">
     <div class="card-header">
     <div>
@@ -299,7 +300,7 @@ const modalErrConexion = () => {
     </div>
     `;
 
-    incorrect.classList.add("modalVisor");
+  incorrect.classList.add("modalVisor");
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -310,10 +311,58 @@ const modalErrConexion = () => {
   }, 3000);
 };
 
+const baseModalMenu = () => {
+  // Obtener el modal y mostrarlo
+  const modalMenu = document.getElementById("modalMenu");
+  modalMenu.style.display = "block";
 
+  // Agregar un evento de clic al modal para cerrarlo si se hace clic fuera de él
+  modalMenu.addEventListener("click", (e) => {
+    if (e.target === modalMenu) {
+      modalMenu.style.display = "none";
+    }
+  });
+
+  // Obtener el botón que abre y cierra el modal
+  const menuBtn = document.getElementById("menuBtn");
+
+  // Agregar un evento de clic al botón para abrir y cerrar el modal
+  menuBtn.addEventListener("click", () => {
+    // Verificar si el modal está abierto o cerrado y ajustar su estado en consecuencia
+    if (modalMenu.style.display === "block") {
+      modalMenu.style.display = "none";
+    } else {
+      modalMenu.style.display = "block";
+    }
+  });
+};
+
+
+const abrirMenu = () => {
+  baseModalMenu();
+  const modalMenu = document.getElementById("modalMenu");
+  const openMenu = modalMenu.querySelector("[data-menu]");
+  openMenu.innerHTML = `
+          <ul>
+                <li><a href="#">Opción 1</a></li>
+                <li><a href="#">Opción 2</a></li>
+                <li><a href="#">Opción 3</a></li>
+                <!-- Agrega más opciones según necesites -->
+          </ul>
+    `;
+  openMenu.classList.add("modalVisorMenu");
+};
+// Obtener el botón de abrir el menú y el modal del menú
+
+const menuBtn = document.getElementById("menuBtn");
+// Agregar evento de clic al botón para abrir el modal del menú
+menuBtn.addEventListener("click", () => {
+  abrirMenu(); // Mostrar el modal
+});
+
+// Agregar evento de clic al área fuera del modal para cerrarlo si se hace clic
 
 export const modalControllers = {
- 
   modalEliminar,
   baseModal,
   modalSuccessSignIn,
@@ -325,5 +374,5 @@ export const modalControllers = {
   modalErrorRegistro,
   modalProductoEditado,
   modalErrConexion,
-
+  abrirMenu
 };
