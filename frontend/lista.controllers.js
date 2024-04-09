@@ -91,7 +91,7 @@ const renderLista = async () => {
 
       for (const usuario of lista) {
         // Obtener la cantidad de productos para este usuario
-        const productosCantidad = await listaServices.totalProductos(usuario.user_id);
+        const productosCantidad = await listaServices.totalProductos(usuario._id);
        
         const totalProductos = productosCantidad.cantidad;
       
