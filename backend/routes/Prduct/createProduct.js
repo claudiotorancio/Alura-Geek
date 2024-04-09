@@ -7,9 +7,9 @@ import Vista from "../../models/Vista.js";
 const createProduct = async (req, res) => {
     try {
         // Verificar si el usuario está autenticado
-        // if (!req.isAuthenticated()) {
-        //     return res.status(401).json({ error: 'Usuario no autenticado' });
-        // }
+        if (!req.isAuthenticated()) {
+            return res.status(401).json({ error: 'Usuario no autenticado' });
+        }
 
         // Llamar a uploadSingle para manejar la carga de la imagen
         uploadSingle(req, res, async (error) => {
@@ -21,7 +21,7 @@ const createProduct = async (req, res) => {
             // Valores del formulario
             const { name, price, description, section } = req.body;
             const imagePath = req.file.location;
-            const user_id = req.params.id;
+            const user_id = req.user._id;
 
             // Crear los datos del producto
             const createProductData = {
@@ -35,11 +35,11 @@ const createProduct = async (req, res) => {
 
             // Crear un nuevo producto
             let newProduct;
-            // if (esAdministrador(req.user)) {
-              newProduct = new Vista(createProductData);
-            // } else {
-            //     newProduct = new Product(createProductData);
-            // }
+            if (esAdministrador(req.user)) {
+                newProduct = new Vista(createProductData);
+            } else {
+                newProduct = new Product(createProductData);
+            }
 
             // Conectar a la base de datos y guardar el producto
             await mongoose.connect(MONGODB_URI, {
