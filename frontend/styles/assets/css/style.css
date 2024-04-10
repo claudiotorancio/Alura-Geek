@@ -520,6 +520,7 @@ margin-top: 1.5rem;
 /* CSS para la versión móvil */
 
     #menuBtn {
+        overflow: hidden;
         display: flex;
         justify-content: center; /* Centrar horizontalmente */
         align-items: center; /* Centrar verticalmente */
@@ -527,13 +528,13 @@ margin-top: 1.5rem;
     }
   
     #menu-mobile {
-        overflow: hidden;
+  
       font-size: 1.8rem;
      
     }
   
     #menu-mobile.active {
-        overflow: hidden;
+      
       height: 100%;
     }
   
@@ -558,7 +559,7 @@ margin-top: 1.5rem;
    overflow: hidden;
       border-radius: 1rem;
       z-index: 1000;
-      height: 65%;
+      height: 65vh;
     }
 
   
