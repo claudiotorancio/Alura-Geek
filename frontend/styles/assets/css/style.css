@@ -502,6 +502,7 @@ width: 9.5rem;
 }
 
 #menuBtn {
+
     position: static;
    z-index: 1;
     display: flex;
@@ -511,8 +512,8 @@ width: 9.5rem;
 
     
     #menu-mobile {
-
-
+        top: 3rem;
+font-size: 1.5rem;
 
     
     }
