@@ -498,6 +498,7 @@ ul li a {
   }
 
   #menu-mobile div.open:nth-child(1) {
+    overflow: hidden;
     font-size: 1rem;
 
     border-radius: 0;
