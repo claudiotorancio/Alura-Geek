@@ -533,6 +533,7 @@ margin-top: 1.5rem;
     }
   
     #menu-mobile.active {
+        overflow: hidden;
       height: 100%;
     }
   
@@ -554,7 +555,7 @@ margin-top: 1.5rem;
     }
   
     #menu-mobile div.open:nth-child(1) {
-   
+   overflow: hidden;
       border-radius: 1rem;
       z-index: 1000;
       height: 65%;
