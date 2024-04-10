@@ -311,6 +311,7 @@ const modalErrConexion = () => {
   }, 3000);
 };
 
+
 const container = document.querySelector('#menu-mobile')
 const menu = document.querySelector('#menu-mobile div:nth-child(1)')
 

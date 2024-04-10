@@ -214,7 +214,7 @@ align-items: center;
 /* position: fixed; 
     left: 0; */
 
-    padding: 1rem; 
+    padding: 0.8rem; 
     cursor: pointer; 
    
     border: none; 
@@ -258,7 +258,7 @@ width: 100%;
     }
     
     #menu-mobile div.open:nth-child(1){
-    transform: translatex(-10%);
+
     border-radius: 1rem;
         z-index: 1000;
         height: 65%;
@@ -393,6 +393,7 @@ width: 6rem;
 }
 
 .cabecera_container {
+   
     width: 90%;
 
 }
@@ -453,7 +454,12 @@ width: 9.5rem;
 
 @media (min-width:320px) and (max-width:768px) {
     
-
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px; /* Ajusta el padding según sea necesario */
+      }
 
 .busqueda {
     margin-right: 10%;
@@ -499,7 +505,9 @@ margin-top: 1.5rem;
 }
 
 .cabecera_container {
+    height: 3vh;
     width: 100%;
+    padding-bottom: 0;
 
 }
 .cabecera_logo{
@@ -509,48 +517,48 @@ margin-left: 3rem;
 margin-top: 1.5rem;
 }
 
-#menuBtn {
+/* CSS para la versión móvil */
 
-    position: static;
-   z-index: 1;
-    display: flex;
-    justify-content:center ;
-}
-
-
-    
-    #menu-mobile {
-        top: 2rem;
-font-size: 1.5rem;
-
-    
-    }
-    
-    #menu-mobile.active {
-
-    }
-    
-    
-    
-    #menu-mobile div:nth-child(1){
-       align-items: center;
-        overflow: hidden;
+    #menuBtn {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        background-color: #fff;
-        width:0%;
-        height: 0px;
-        position: absolute;
-        left: 0px;
-        transition: all 250ms ease-out;
-        }
-        
-        #menu-mobile div.open:nth-child(1){
-        border-radius: 0.5rem;
-           width: 50%;
-        }
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Centrar verticalmente */
+        margin-top: 10px; /* Espacio entre el header y el botón */
+    }
+  
+    #menu-mobile {
+      font-size: 1.8rem;
+     
+    }
+  
+    #menu-mobile.active {
+      height: 100%;
+    }
+  
+    #menu-mobile div:nth-child(1) {
+        display: none; 
+
+      position: absolute;
+      align-items: center;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      background-color: #fff;
+      width: 50vw; /* Ajustar el ancho según sea necesario */
+      height: 0%;
+      left: 0; /* Alinear a la izquierda */
+      transition: all 250ms ease-out;
+    }
+  
+    #menu-mobile div.open:nth-child(1) {
+      border-radius: 1rem;
+      z-index: 1000;
+      height: 65%;
+    }
+
+  
 
 .modalVisor {
     display: flex;
