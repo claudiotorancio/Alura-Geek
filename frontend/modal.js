@@ -311,56 +311,15 @@ const modalErrConexion = () => {
   }, 3000);
 };
 
-const baseModalMenu = () => {
-  // Obtener el modal y mostrarlo
-  const modalMenu = document.getElementById("modalMenu");
-  modalMenu.style.display = "block";
+const container = document.querySelector('#menu-mobile')
+const menu = document.querySelector('#menu-mobile div:nth-child(1)')
 
-  // Agregar un evento de clic al modal para cerrarlo si se hace clic fuera de él
-  modalMenu.addEventListener("click", (e) => {
-    if (e.target === modalMenu) {
-      modalMenu.style.display = "none";
-    }
-  });
-
-  // Obtener el botón que abre y cierra el modal
-  const menuBtn = document.getElementById("menuBtn");
-
-  // Agregar un evento de clic al botón para abrir y cerrar el modal
-  menuBtn.addEventListener("click", () => {
-    // Verificar si el modal está abierto o cerrado y ajustar su estado en consecuencia
-    if (modalMenu.style.display === "block") {
-      modalMenu.style.display = "none";
-    } else {
-      modalMenu.style.display = "block";
-    }
-  });
-};
+container.addEventListener('click', (e) => {
+  container.classList.toggle('active')
+  menu.classList.toggle('open')
+})
 
 
-const abrirMenu = () => {
-  baseModalMenu();
-  const modalMenu = document.getElementById("modalMenu");
-  const openMenu = modalMenu.querySelector("[data-menu]");
-  openMenu.innerHTML = `
-          <ul>
-                <li><a href="#">Opción 1</a></li>
-                <li><a href="#">Opción 2</a></li>
-                <li><a href="#">Opción 3</a></li>
-                <!-- Agrega más opciones según necesites -->
-          </ul>
-    `;
-  openMenu.classList.add("modalVisorMenu");
-};
-// Obtener el botón de abrir el menú y el modal del menú
-
-const menuBtn = document.getElementById("menuBtn");
-// Agregar evento de clic al botón para abrir el modal del menú
-menuBtn.addEventListener("click", () => {
-  abrirMenu(); // Mostrar el modal
-});
-
-// Agregar evento de clic al área fuera del modal para cerrarlo si se hace clic
 
 export const modalControllers = {
   modalEliminar,
@@ -374,5 +333,5 @@ export const modalControllers = {
   modalErrorRegistro,
   modalProductoEditado,
   modalErrConexion,
-  abrirMenu
+
 };
