@@ -257,6 +257,7 @@ width: 100%;
     
     #menu-mobile div.open:nth-child(1){
     transform: translatex(-10%);
+    border-radius: 1rem;
         z-index: 1000;
         height: 65%;
     }
@@ -473,6 +474,7 @@ width: 9.5rem;
 
 .login {
 width: 4rem;
+margin-top: 1.5rem;
 }
 .consolas {
     margin-left: 1rem;
@@ -494,11 +496,14 @@ width: 4rem;
 }
 
 .cabecera_container {
-    width: 90%;
+    width: 100%;
 
 }
 .cabecera_logo{
 width: 9.5rem;
+margin-left: 3rem;
+
+margin-top: 1.5rem;
 }
 
 #menuBtn {
@@ -512,7 +517,7 @@ width: 9.5rem;
 
     
     #menu-mobile {
-        top: 3rem;
+        top: 2rem;
 font-size: 1.5rem;
 
     
@@ -532,7 +537,7 @@ font-size: 1.5rem;
         align-items: center;
         justify-content: space-around;
         background-color: #fff;
-        width: 100vW;
+        width:0%;
         height: 0px;
         position: absolute;
         left: 0px;
@@ -540,7 +545,7 @@ font-size: 1.5rem;
         }
         
         #menu-mobile div.open:nth-child(1){
-        
+        border-radius: 0.5rem;
            width: 50%;
         }
 
@@ -612,8 +617,16 @@ p.help{
 
 .profile-notificacion {
     font-size:1rem;
-    padding: 1.5rem;
+    padding: 0rem;
+    margin-top: 1.5rem;
   
+}
+
+.carrito-link a {
+    list-style-type: none;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
 }
 
 .js-toggle-cart {
