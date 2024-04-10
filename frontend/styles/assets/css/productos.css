@@ -29,17 +29,19 @@
     font-size: 32px;
 }
 
-.texto-categoria img {
-    width: 16px;
-    height: 16px;
-    padding-right: 3.75rem;
-}
-
 .texto-categoria a {
     margin-top: 1rem;
     font-size: 16px;
     color: var(--fuente-productos-azul);
 }
+
+.texto-categoria a img {
+    width: 16px;
+    height: 16px;
+    padding-right: 0rem;
+}
+
+
 
 .productos {
 display: flex;
