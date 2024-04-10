@@ -556,10 +556,11 @@ margin-top: 1.5rem;
     }
   
     #menu-mobile div.open:nth-child(1) {
+
    overflow: hidden;
       border-radius: 1rem;
       z-index: 1000;
-      height: 65vh;
+      height: 70vh;
     }
 
   
@@ -630,10 +631,13 @@ p.help{
     font-size: 1.2rem;
 }
 
+
+
 .profile-notificacion {
     font-size:1rem;
     padding: 0rem;
     margin-top: 1.5rem;
+    margin-left: 0.5rem;
   
 }
 
