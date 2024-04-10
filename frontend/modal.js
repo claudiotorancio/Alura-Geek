@@ -64,7 +64,7 @@ const modalSuccessSignIn = (username) => {
     </div>
     </div>
     `;
-  success.classList.add("modalVisor");
+  success.classList.add("open");
 
   const botonEliminar = success.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
@@ -74,6 +74,7 @@ const modalSuccessSignIn = (username) => {
     window.location.replace("/index.html");
   }, 3000);
 };
+
 
 const modalProductoCreado = () => {
   baseModal();
@@ -316,8 +317,10 @@ const container = document.querySelector('#menu-mobile')
 const menu = document.querySelector('#menu-mobile div:nth-child(1)')
 
 container.addEventListener('click', (e) => {
+
   container.classList.toggle('active')
   menu.classList.toggle('open')
+
 })
 
 
