@@ -503,11 +503,13 @@ ul li a {
 
   #menu-mobile div.open:nth-child(1) {
     overflow: hidden;
+    
     font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    width: 100vw;
     border-radius: 0;
     z-index:0;
     height: 25vh;
