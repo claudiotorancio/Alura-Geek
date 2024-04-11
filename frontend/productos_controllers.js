@@ -174,7 +174,7 @@ console.log(products)
       primerosTresProductos.forEach((producto) => {
         console.log(producto)
         contenedorProductos.appendChild(
-          productoInicio(
+          nuevoProducto(
             producto.name,
             producto.price,
             producto.imagePath,
