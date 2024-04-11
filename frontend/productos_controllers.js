@@ -293,7 +293,7 @@ const productoInicio = (description, name, imagePath) => {
 const renderInit = async () => {
   try {
     const listaProductos = await productoServices.renderInicio();
-    const { products } = listaProductos;
+    const  products  = listaProductos;
 
 
     // Objeto para almacenar los productos por sección
