@@ -145,7 +145,6 @@ const render = async () => {
   try {
     const listaProductos = await productoServices.listaProductos();
     const { products } = listaProductos;
-console.log(products)
 
     // Objeto para almacenar los productos por sección
     const productosPorSeccion = {
@@ -312,7 +311,7 @@ const renderInit = async () => {
       const contenedorProductos = document.querySelector(`[data-${seccion}]`);
 
       primerosTresProductos.forEach((producto) => {
-        console.log(producto)
+       
         contenedorProductos.appendChild(
           productoInicio(
             producto.description,

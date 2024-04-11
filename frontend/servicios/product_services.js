@@ -15,7 +15,6 @@ const renderInicio = async () =>
   const listaProductos = async () => {
     try {
       const respuesta = await fetch(`${baseURL}/api/renderProducts`);
-      console.log(respuesta)
       const data = await respuesta.json();
       // Acceder a los productos y al total desde el objeto de respuesta
       const products = data.products;
