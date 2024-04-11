@@ -454,6 +454,7 @@ ul li a {
   }
 
   .cabecera_container {
+    z-index: 3;
     height: 3vh;
     width: 100%;
     padding-bottom: 0;
@@ -470,9 +471,11 @@ ul li a {
   #menuBtn {
     width: 100vw;
     position: absolute;
+    z-index: 0;
   }
 
   #menu-mobile {
+    z-index: 0;
     font-size: 1.8rem;
   }
 
@@ -502,7 +505,7 @@ ul li a {
     font-size: 1rem;
 
     border-radius: 0;
-    z-index: 1000;
+    z-index:0;
     height: 20vh;
   }
 
