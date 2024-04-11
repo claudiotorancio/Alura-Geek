@@ -36,6 +36,7 @@ const productoInicio = (description, name, imagePath) => {
   
     return card;
   };
+  
 
 const renderInit = async () => {
     try {
@@ -187,64 +188,29 @@ document.getElementById('posters').addEventListener('click', async (e) => {
 
   //todos los productos diversos
 
-  document.getElementById('diversos').addEventListener('click', async (e) => {
-    e.preventDefault(); // Evitar comportamiento predeterminado del enlace
-    
-    try {
-      // Obtener los productos correspondientes a la sección 'posters'
-      const listaProductos = await productoServices.renderInicio();
-     
-      const products = listaProductos.filter(producto => producto.section === 'opcion3');
-  
-      // Limpiar el contenedor de productos antes de renderizar los nuevos
-      const contenedorProductos = document.querySelector('[data-opcion3]');
-      contenedorProductos.innerHTML = ''; // Limpiar contenido existente
-      
-      // Renderizar los productos correspondientes a la sección 'posters'
-      products.forEach((producto) => {
-        contenedorProductos.appendChild(
-          productoInicio(
-            producto.description,
-            producto.name,
-            producto.imagePath,
-            producto.price,         
-            producto._id
-          )
-        );
-      });
-  
-      // Limpiar contenido de las secciones diferentes a 'opcion1'
-      document.querySelectorAll('.productos').forEach(contenedor => {
-        if (contenedor !== contenedorProductos) {
-          contenedor.innerHTML = ''; // Limpiar contenido existente
-        }
-      });
-  
-      document.querySelectorAll('.categoria').forEach(categoria => {
-        if (!categoria.querySelector('[data-opcion3]')) {
-          // Ocultar el texto de la cabecera
-          categoria.querySelector('.texto-categoria').style.display = 'none';
-          
-          // Limpiar contenido del contenedor de productos
-          categoria.querySelector('.productos').innerHTML = '';
-        }
-      });
-    } catch (error) {
-      console.error('Error al obtener los productos:', error);
-      // Manejar el error de manera adecuada
-    }
-  });
-
   document.querySelectorAll('.categoria').forEach(categoria => {
     const categoriaBtn = categoria.querySelector('a');
     categoriaBtn.addEventListener('click', (e) => {
       if (categoriaBtn.textContent === 'Ver todo') {
         categoriaBtn.textContent = 'Volver';
+        // Cambiar la clase del contenedor de productos
+        const contenedorProductos = categoria.querySelector('.productos');
+        contenedorProductos.classList.toggle('allProducts');
+  
+        // Cambiar la clase de las tarjetas
+        const tarjetas = categoria.querySelectorAll('.productos div.allCards:nth-child(1)');
+        tarjetas.forEach(tarjeta => {
+          console.log("Aplicando clase allCard a la tarjeta:", tarjeta);
+          tarjetas.classList.toggle('allCard');
+        });
       } else {
         window.location.href = 'index.html';
       }
     });
+  
+
   });
+  
   
   
   

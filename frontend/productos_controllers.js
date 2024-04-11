@@ -165,7 +165,7 @@ const render = async () => {
       const contenedorProductos = document.querySelector(`[data-${seccion}]`);
     
       primerosTresProductos.forEach((producto) => {
-        console.log(producto)
+      
         contenedorProductos.appendChild(
           nuevoProducto(
             producto.name,
