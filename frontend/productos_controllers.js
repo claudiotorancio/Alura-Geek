@@ -139,10 +139,7 @@ const nuevoProducto = (name, price, imagePath, description, id) => {
   return card;
 };
 
-//asociar productos con la seccion correspondiente
-const productoPosters = document.querySelector("[data-posters]");
-const productoConsolas = document.querySelector("[data-consolas]");
-const productoDiversos = document.querySelector("[data-diversos]");
+
 //renderizar producto
 const render = async () => {
   try {
@@ -162,7 +159,7 @@ console.log(products)
     products.forEach((elemento) => {
       productosPorSeccion[elemento.section].push(elemento);
     });
-    console.log(productosPorSeccion)
+   
 
     // Renderizar los primeros tres productos en cada sección
     for (const [seccion, productos] of Object.entries(productosPorSeccion)) {
@@ -170,7 +167,7 @@ console.log(products)
       const primerosTresProductos = productos.slice(0, 3);
       
       const contenedorProductos = document.querySelector(`[data-${seccion}]`);
-      console.log(contenedorProductos)
+    
       primerosTresProductos.forEach((producto) => {
         console.log(producto)
         contenedorProductos.appendChild(
@@ -295,7 +292,6 @@ const renderInit = async () => {
     const listaProductos = await productoServices.renderInicio();
     const  products  = listaProductos;
 
-
     // Objeto para almacenar los productos por sección
     const productosPorSeccion = {
       opcion1: [],
@@ -303,12 +299,10 @@ const renderInit = async () => {
       opcion3: []
     };
 
-
     // Dividir los productos por sección
     products.forEach((elemento) => {
       productosPorSeccion[elemento.section].push(elemento);
     });
-    console.log(productosPorSeccion)
 
     // Renderizar los primeros tres productos en cada sección
     for (const [seccion, productos] of Object.entries(productosPorSeccion)) {
@@ -316,15 +310,15 @@ const renderInit = async () => {
       const primerosTresProductos = productos.slice(0, 3);
 
       const contenedorProductos = document.querySelector(`[data-${seccion}]`);
-      console.log(contenedorProductos)
+
       primerosTresProductos.forEach((producto) => {
         console.log(producto)
         contenedorProductos.appendChild(
           productoInicio(
-            producto.name,
-            producto.price,
-            producto.imagePath,
             producto.description,
+            producto.name,
+            producto.imagePath,
+            producto.price,         
             producto._id
           )
         );
