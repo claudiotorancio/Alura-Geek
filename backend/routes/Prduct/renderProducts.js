@@ -12,6 +12,7 @@ const renderProducts = async (req, res) => {
       
         //Relacionar id de usuario con producto para visualizar solo sus productos
         const user_id = req.user._id;
+        
 
         // Conectar a la base de datos mediante serverless function
         await mongoose.connect(MONGODB_URI, {

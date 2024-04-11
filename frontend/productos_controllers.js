@@ -147,43 +147,48 @@ const productoDiversos = document.querySelector("[data-diversos]");
 const render = async () => {
   try {
     const listaProductos = await productoServices.listaProductos();
-    const {products} = listaProductos
-    console.log(products)
-   products.forEach((elemento) => {
-      if (elemento.section === "opcion1") {
-        productoPosters.appendChild(
-          nuevoProducto(
-            elemento.name,
-            elemento.price,
-            elemento.imagePath,
-            elemento.description,
-            elemento._id
-          )
-        );
-      } else if (elemento.section === "opcion2") {
-        productoConsolas.appendChild(
-          nuevoProducto(
-            elemento.name,
-            elemento.price,
-            elemento.imagePath,
-            elemento.description,
-            elemento._id
-          )
-        );
-      } else if (elemento.section === "opcion3") {
-        productoDiversos.appendChild(
-          nuevoProducto(
-            elemento.name,
-            elemento.price,
-            elemento.imagePath,
-            elemento.description,
-            elemento._id
-          )
-        );
-      }
+    const { products } = listaProductos;
+console.log(products)
+
+    // Objeto para almacenar los productos por sección
+    const productosPorSeccion = {
+      opcion1: [],
+      opcion2: [],
+      opcion3: []
+    };
+
+
+    // Dividir los productos por sección
+    products.forEach((elemento) => {
+      productosPorSeccion[elemento.section].push(elemento);
     });
-  } catch (erro) {
-    console.log(erro);
+    console.log(productosPorSeccion)
+
+    // Renderizar los primeros tres productos en cada sección
+    for (const [seccion, productos] of Object.entries(productosPorSeccion)) {
+
+      const primerosTresProductos = productos.slice(0, 3);
+      
+      const contenedorProductos = document.querySelector(`[data-${seccion}]`);
+      console.log(contenedorProductos)
+      primerosTresProductos.forEach((producto) => {
+        console.log(producto)
+        contenedorProductos.appendChild(
+          productoInicio(
+            producto.name,
+            producto.price,
+            producto.imagePath,
+            producto.description,
+            producto._id
+          )
+        );
+      });
+    }
+
+    // Renderizar el resto de los productos en otra estructura dinámica
+  
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -287,38 +292,52 @@ const productoInicio = (description, name, imagePath) => {
 
 const renderInit = async () => {
   try {
-    const listaProductos = await productoServices.renderInicio();
-    listaProductos.forEach((elemento) => {
-      if (elemento.section === "opcion1") {
-        productoPosters.appendChild(
-          productoInicio(
-            elemento.description,
-            elemento.name,
-            elemento.imagePath
-          )
-        );
-      } else if (elemento.section === "opcion2") {
-        productoConsolas.appendChild(
-          productoInicio(
-            elemento.description,
-            elemento.name,
-            elemento.imagePath
-          )
-        );
-      } else if (elemento.section === "opcion3") {
-        productoDiversos.appendChild(
-          productoInicio(
-            elemento.description,
-            elemento.name,
-            elemento.imagePath
-          )
-        );
-      }
+    const listaProductos = await productoServices.listaProductos();
+    const { products } = listaProductos;
+console.log(products)
+
+    // Objeto para almacenar los productos por sección
+    const productosPorSeccion = {
+      opcion1: [],
+      opcion2: [],
+      opcion3: []
+    };
+
+
+    // Dividir los productos por sección
+    products.forEach((elemento) => {
+      productosPorSeccion[elemento.section].push(elemento);
     });
-  } catch (erro) {
-    console.log(erro);
+    console.log(productosPorSeccion)
+
+    // Renderizar los primeros tres productos en cada sección
+    for (const [seccion, productos] of Object.entries(productosPorSeccion)) {
+
+      const primerosTresProductos = productos.slice(0, 3);
+
+      const contenedorProductos = document.querySelector(`[data-${seccion}]`);
+      console.log(contenedorProductos)
+      primerosTresProductos.forEach((producto) => {
+        console.log(producto)
+        contenedorProductos.appendChild(
+          productoInicio(
+            producto.name,
+            producto.price,
+            producto.imagePath,
+            producto.description,
+            producto._id
+          )
+        );
+      });
+    }
+
+    // Renderizar el resto de los productos en otra estructura dinámica
+  
+  } catch (error) {
+    console.log(error);
   }
 };
+
 
 const mostrarProducto = (imagePath, name, description) => {
   modalControllers.baseModal();
