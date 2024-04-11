@@ -23,6 +23,7 @@ header {
 }
 
 .cabecera_container {
+    z-index: 3;
   width: 85%;
   height: 8vh;
   display: flex;
@@ -502,11 +503,14 @@ ul li a {
 
   #menu-mobile div.open:nth-child(1) {
     overflow: hidden;
-    font-size: 1rem;
-
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     border-radius: 0;
     z-index:0;
-    height: 20vh;
+    height: 25vh;
   }
 
   .modalVisor {
