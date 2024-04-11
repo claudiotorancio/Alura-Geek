@@ -7,10 +7,10 @@ import { controllers } from "./productos_controllers.js";
 import { loginControllers } from "./login_controllers.js";
 import { modalControllers } from "./modal.js";
 import { listaControllers } from "./lista.controllers.js";
-
+import { productosInicio } from "./controllers_inicio.js";
 // busqueda de cambios
 document.addEventListener("DOMContentLoaded", () => {
-  listaControllers.renderLista();
+  
   controllers.render();
   const user = JSON.parse(sessionStorage.getItem("user")) || null;
   const actualizarUsuario = document.querySelector(".data-user");
@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     userActive.style.display = "none";
     contactUser.style.display = "none";
   } else {
-    controllers.renderInit();
+    listaControllers.renderLista();
+    productosInicio.renderInit();
     actualizarUsuario.style.display = "none";
     logoutUsuario.style.display = "none";
     userActive.textContent = "Login";

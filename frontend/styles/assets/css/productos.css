@@ -25,6 +25,12 @@
     align-items: center;
 }
 
+.texto-categoria div.open:nth-child(1) {
+    z-index: 1000;
+    height: 40vh;
+  
+  }
+
 .texto-categoria h2 {
     font-size: 32px;
 }
