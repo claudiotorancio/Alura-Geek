@@ -236,7 +236,8 @@ header {
 
 #menu-mobile div.open:nth-child(1) {
   z-index: 1000;
-  height: 70vh;
+  height: 40vh;
+
 }
 
 .modalVisor {
