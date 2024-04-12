@@ -140,6 +140,7 @@ const nuevoProducto = (name, price, imagePath, description, id) => {
 };
 
 //renderizar producto
+
 const render = async () => {
   try {
     const listaProductos = await productoServices.listaProductos();

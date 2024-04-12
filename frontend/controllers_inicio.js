@@ -94,13 +94,27 @@ document.querySelectorAll('.categoria').forEach(categoria => {
           if (!mostrarTodos) {
               contenedorProductos.classList.add('allProducts');
 
+              const respuesta = await productoServices.listaProductos();
+              const {usuarioHaIniciadoSesion} = respuesta // Acceder al arreglo de usuarios
+ 
+              let render
+
+              if(!usuarioHaIniciadoSesion){
+                
+                render = productoInicio
+
+              } else {
+             
+                render = controllers.nuevoProducto
+              }
+
               const listaProductos = await productoServices.renderInicio();
               const products = listaProductos.filter(producto => producto.section === opcion);
 
               contenedorProductos.innerHTML = ""; // Limpiar contenido existente
               products.forEach((producto) => {
                   contenedorProductos.appendChild(
-                      productoInicio(
+                      render(
                           producto.description,
                           producto.name,
                           producto.imagePath,

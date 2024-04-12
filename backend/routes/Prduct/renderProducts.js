@@ -20,8 +20,13 @@ const renderProducts = async (req, res) => {
             useUnifiedTopology: true,
         });
 
-        let products;
+         //Verificar si el usuario esta autenticado
 
+       const usuarioHaIniciadoSesion = req.isAuthenticated() 
+       console.log(usuarioHaIniciadoSesion)
+
+
+        let products;
         //Verificar si el usuario es administrador
         if (req.user.role === 'admin') {
             // Si es administrador, buscar productos utilizando el modelo Vista
@@ -34,7 +39,7 @@ const renderProducts = async (req, res) => {
         const totalProduct = await Product.countDocuments();
         const totalVista = await Vista.countDocuments()
 
-        res.json({products, total: totalProduct + totalVista});
+        res.json({usuarioHaIniciadoSesion, products, total: totalProduct + totalVista});
     } catch (error) {
         console.error('Error al cargar productos:', error);
         res.status(500).json({ error: 'Error al cargar productos' });

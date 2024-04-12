@@ -19,9 +19,9 @@ const renderInicio = async () =>
       // Acceder a los productos y al total desde el objeto de respuesta
       const products = data.products;
       const total = data.total;
-
+     const usuarioHaIniciadoSesion = data.usuarioHaIniciadoSesion
       // Retornar los productos si es necesario
-      return {products, total};
+      return {products, total, usuarioHaIniciadoSesion};
     } catch (error) {
       console.error(error);
     }
