@@ -79,7 +79,7 @@ const formProduct = () => {
   return card;
 };
 
-const nuevoProducto = (name, price, imagePath, description, id) => {
+const nuevoProducto = (description,name, imagePath, price,  id) => {
   const card = document.createElement("div");
   const contenido = `
   <div class="container mx-auto mt-4">
