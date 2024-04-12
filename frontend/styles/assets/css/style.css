@@ -568,6 +568,9 @@ ul li a {
   }
 
   .btn {
+    padding-bottom: 0.5rem;
+    overflow: hidden;
+    width: auto;
     background-color: var(--fuente-productos-azul);
   }
 
