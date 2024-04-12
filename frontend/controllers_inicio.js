@@ -1,6 +1,7 @@
 import { productoServices } from "./servicios/product_services.js";
 import { controllers } from "./productos_controllers.js";
 
+
 const productoInicio = (description, name, imagePath) => {
     const card = document.createElement("div");
     const contenido = `
@@ -23,7 +24,7 @@ const productoInicio = (description, name, imagePath) => {
       `;
   
     card.innerHTML = contenido;
-    card.classList.add("card");
+    card.classList.add('card');
   
     card.querySelector("a").addEventListener("click", (e) => {
       e.preventDefault();
@@ -33,7 +34,8 @@ const productoInicio = (description, name, imagePath) => {
         console.log(err);
       }
     });
-  
+
+
     return card;
   };
   
@@ -83,137 +85,62 @@ const renderInit = async () => {
     }
   };
 
-   //todos los productos posters
-
-document.getElementById('posters').addEventListener('click', async (e) => {
-    e.preventDefault(); // Evitar comportamiento predeterminado del enlace
-
-  
-    
-    try {
-      // Obtener los productos correspondientes a la sección 'posters'
-      const listaProductos = await productoServices.renderInicio();
-     
-      const products = listaProductos.filter(producto => producto.section === 'opcion1');
-  
-      // Limpiar el contenedor de productos antes de renderizar los nuevos
-      const contenedorProductos = document.querySelector('[data-opcion1]');
-      contenedorProductos.innerHTML = ''; // Limpiar contenido existente
-      
-      // Renderizar los productos correspondientes a la sección 'posters'
-      products.forEach((producto) => {
-        contenedorProductos.appendChild(
-          productoInicio(
-            producto.description,
-            producto.name,
-            producto.imagePath,
-            producto.price,         
-            producto._id
-          )
-        );
-      });
-  
-      // Limpiar contenido de las secciones diferentes a 'opcion1'
-      document.querySelectorAll('.productos').forEach(contenedor => {
-        if (contenedor !== contenedorProductos) {
-          contenedor.innerHTML = ''; // Limpiar contenido existente
-        }
-      });
-  
-      document.querySelectorAll('.categoria').forEach(categoria => {
-        if (!categoria.querySelector('[data-opcion1]')) {
-          // Ocultar el texto de la cabecera
-          categoria.querySelector('.texto-categoria').style.display = 'none';
-          
-          // Limpiar contenido del contenedor de productos
-          categoria.querySelector('.productos').innerHTML = '';
-        }
-      });
-    } catch (error) {
-      console.error('Error al obtener los productos:', error);
-      // Manejar el error de manera adecuada
-    }
-  });
-
-
-  //todos los productos consolas
-
-  document.getElementById('consolas').addEventListener('click', async (e) => {
-    e.preventDefault(); // Evitar comportamiento predeterminado del enlace
-    
-    try {
-      // Obtener los productos correspondientes a la sección 'posters'
-      const listaProductos = await productoServices.renderInicio();
-     
-      const products = listaProductos.filter(producto => producto.section === 'opcion2');
-  
-      // Limpiar el contenedor de productos antes de renderizar los nuevos
-      const contenedorProductos = document.querySelector('[data-opcion2]');
-      contenedorProductos.innerHTML = ''; // Limpiar contenido existente
-      
-      // Renderizar los productos correspondientes a la sección 'posters'
-      products.forEach((producto) => {
-        contenedorProductos.appendChild(
-          productoInicio(
-            producto.description,
-            producto.name,
-            producto.imagePath,
-            producto.price,         
-            producto._id
-          )
-        );
-      });
-  
-      // Limpiar contenido de las secciones diferentes a 'opcion1'
-      document.querySelectorAll('.productos').forEach(contenedor => {
-        if (contenedor !== contenedorProductos) {
-          contenedor.innerHTML = ''; // Limpiar contenido existente
-        }
-      });
-  
-      document.querySelectorAll('.categoria').forEach(categoria => {
-        if (!categoria.querySelector('[data-opcion2]')) {
-          // Ocultar el texto de la cabecera
-          categoria.querySelector('.texto-categoria').style.display = 'none';
-          
-          // Limpiar contenido del contenedor de productos
-          categoria.querySelector('.productos').innerHTML = '';
-        }
-      });
-    } catch (error) {
-      console.error('Error al obtener los productos:', error);
-      // Manejar el error de manera adecuada
-    }
-  });
-
-  //todos los productos diversos
-
   document.querySelectorAll('.categoria').forEach(categoria => {
     const categoriaBtn = categoria.querySelector('a');
-    categoriaBtn.addEventListener('click', (e) => {
-      if (categoriaBtn.textContent === 'Ver todo') {
-        categoriaBtn.textContent = 'Volver';
-        // Cambiar la clase del contenedor de productos
-        const contenedorProductos = categoria.querySelector('.productos');
-        contenedorProductos.classList.toggle('allProducts');
-  
-        // Cambiar la clase de las tarjetas
-        const tarjetas = categoria.querySelectorAll('.productos div.allCards:nth-child(1)');
-        tarjetas.forEach(tarjeta => {
-          console.log("Aplicando clase allCard a la tarjeta:", tarjeta);
-          tarjetas.classList.toggle('allCard');
-        });
-      } else {
-        window.location.href = 'index.html';
-      }
-    });
-  
+    const opcion = categoriaBtn.getAttribute('id');
+    categoriaBtn.addEventListener('click', async (e) => {
+        e.preventDefault(); // Evitar comportamiento predeterminado del enlace
 
-  });
-  
-  
-  
-  
+        try {
+   
+            const contenedorProductos = document.querySelector(`[data-${opcion}]`);
+            contenedorProductos.classList.add('allProducts');
+
+            const tarjetas = contenedorProductos.querySelectorAll('.card');
+            tarjetas.forEach(tarjeta => {
+                tarjeta.classList.add('allCard');
+            });
+
+            const imagen = contenedorProductos.querySelectorAll('.img-card');
+            imagen.forEach(tarjeta => {
+                tarjeta.classList.add('img-allCard');
+            });
+
+            // Obtener el enlace dentro de la categoría actual
+            const categoriaBtn = categoria.querySelector('a');
+
+            // Verificar si el texto del enlace es 'Ver todo'
+            if (categoriaBtn.textContent === 'Ver todo') {
+                // Cambiar el texto del enlace a 'Volver'
+                categoriaBtn.textContent = 'Volver';
+
+                // Limpiar contenido de las secciones diferentes a 'opcion1'
+                document.querySelectorAll(".productos").forEach(contenedor => {
+                    if (contenedor !== contenedorProductos) {
+                        contenedor.innerHTML = ""; // Limpiar contenido existente
+                    }
+                });
+
+                document.querySelectorAll('.categoria').forEach(categoria => {
+                        if (!categoria.querySelector(`[data-${opcion}]`)) {
+                          // Ocultar el texto de la cabecera
+                          categoria.querySelector('.texto-categoria').style.display = 'none';
+                          
+                          // Limpiar contenido del contenedor de productos
+                          categoria.querySelector('.productos').innerHTML = '';
+                        }
+                      });
+            } else {
+                // Redirigir a la página de inicio
+                window.location.href = 'index.html';
+            }
+        } catch (error) {
+            console.error("Error al obtener los productos:", error);
+            // Manejar el error de manera adecuada
+        }
+    });
+});
+
 
   export const  productosInicio = {
 renderInit
