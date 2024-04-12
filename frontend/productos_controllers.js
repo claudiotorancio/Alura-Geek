@@ -169,10 +169,10 @@ const render = async () => {
       
         contenedorProductos.appendChild(
           nuevoProducto(
-            producto.name,
-            producto.price,
-            producto.imagePath,
             producto.description,
+            producto.name,
+            producto.imagePath,
+            producto.price,
             producto._id
           )
         );
