@@ -314,6 +314,13 @@ ul li a {
   margin: var(--cardMargin);
 }
 
+.btn {
+  margin-bottom: 0.5rem;
+
+  width: 100%;
+
+}
+
 @media (min-width: 768px) and (max-width: 1200px) {
   .busqueda {
     margin-right: 10%;
@@ -568,10 +575,10 @@ ul li a {
   }
 
   .btn {
-    padding-bottom: 0.5rem;
-    overflow: hidden;
-    width: auto;
-    background-color: var(--fuente-productos-azul);
+    margin-bottom: 0.5rem;
+
+    width: 100%;
+
   }
 
   p.help {
