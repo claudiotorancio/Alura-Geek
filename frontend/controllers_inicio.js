@@ -13,9 +13,9 @@ const productoInicio = (description, name, imagePath) => {
           </div>
          
           <div class="card-body">
-           
+          <a href="#">ver producto </a>
             <h3 class="card-title">${name}</h3>
-            <a href="#">ver producto </a>
+            
            
           </div>
     
@@ -63,6 +63,7 @@ const renderInit = async () => {
       primerosTresProductos.forEach((producto) => {
         contenedorProductos.appendChild(
           productoInicio(
+            
             producto.description,
             producto.name,
             producto.imagePath,
@@ -111,12 +112,11 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         products.forEach((producto) => {
           contenedorProductos.appendChild(
             render(
-              
-              producto.name,
-              producto.price,
-              producto.imagePath,
-              producto.description,
-              producto._id
+                producto.description,
+                producto.name,
+                producto.imagePath,
+                producto.price,
+                producto._id
             )
           );
         });
