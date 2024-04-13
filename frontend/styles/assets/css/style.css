@@ -67,7 +67,7 @@ header {
     }
 
 .div-usuario a {
-max-width: 10vW;
+
   list-style-type: none;
   text-decoration: none;
   color: #333;
@@ -330,9 +330,12 @@ ul li a {
   margin: var(--cardMargin);
 }
 
+
+
+
 .btn {
 
-
+margin-bottom: 0.5rem;
   width: 100%;
 
 }
