@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <header class="header">
+  <header class="header header fixed-top">
     <div class="cabecera_container">
       <img class="cabecera_logo" src="https://myimagescnd.s3.us-east-2.amazonaws.com/Logo.png" alt="AluraGeeK logo" />
       <div class="busqueda">
@@ -25,16 +25,17 @@
           </button>
         </form>
       </div>
-      <div class="carrito-link">
-        <a href="#">
-          <div class="profile-notificacion">
-            <span class="data-user">Usuario: </span>
-          </div>
-          <span class="carrito-monto"></span>
+      <div class="div-usuario bg-light p-2 rounded-circle">
+        <a href="#" class="d-flex align-items-center">
+            <div class="profile-notificacion mr-2">
+                <span class="data-user"></span>
+            </div>
         </a>
-      </div>
-      <a href=""><button type="submit" id="login" class="login" data-log></button></a>
-      <a href=""><button type="submit" id="login" class="login" data-logOut></button></a>
+    </div>
+    
+      
+      <a href=""><button type="submit" id="login" class="btn btn-primary" data-log></button></a>
+      <a href=""><button type="submit" id="login" class="btn btn-secondary" data-logOut></button></a>
       <button class="button-busqueda-login">
         <img src="https://myimagescnd.s3.us-east-2.amazonaws.com/lupa-negro.png" alt="Icono lupa" />
       </button>
@@ -104,7 +105,7 @@
         </div>
         <div  class="productos"  data-opcion1></div>
       </section>
-      <section class="categoria" id="consolas">
+      <section class="categoria" id="diversos">
         <div class="texto-categoria">
           <h2>Consolas</h2>
           <a href="#" id="opcion2">Ver todo<img src="https://myimagescnd.s3.us-east-2.amazonaws.com/Vector.png"></a>

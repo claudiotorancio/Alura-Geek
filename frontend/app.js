@@ -13,18 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
   listaControllers.renderLista();
   controllers.render();
   const user = JSON.parse(sessionStorage.getItem("user")) || null;
+  const divUsuario = document.querySelector(".rounded-circle");
   const actualizarUsuario = document.querySelector(".data-user");
   const logoutUsuario = document.querySelector("[data-logOut]");
   const userActive = document.querySelector("[data-log]");
   const contactUser = document.querySelector("[data-contact]");
   if (user) {
-    actualizarUsuario.textContent = `Hola! ${user}`;
+    actualizarUsuario.textContent = `${user}`;
     logoutUsuario.textContent = "Logout";
     userActive.style.display = "none";
     contactUser.style.display = "none";
   } else {
    
     productosInicio.renderInit();
+    divUsuario.style.display = "none";
     actualizarUsuario.style.display = "none";
     logoutUsuario.style.display = "none";
     userActive.textContent = "Login";

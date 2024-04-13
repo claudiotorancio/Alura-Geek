@@ -15,7 +15,11 @@ body {
   box-sizing: border-box;
 }
 
+.fixed-top{
+  position: relative;
+} 
 header {
+  
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -57,6 +61,18 @@ header {
   outline: none;
 }
 
+  
+.div-usuario {
+
+    }
+
+.div-usuario a {
+
+  list-style-type: none;
+  text-decoration: none;
+  color: #333;
+
+}
 .login {
   width: 9rem;
   height: 2.5rem;
@@ -315,7 +331,7 @@ ul li a {
 }
 
 .btn {
-  margin-bottom: 0.5rem;
+
 
   width: 100%;
 
@@ -412,13 +428,35 @@ ul li a {
 }
 
 @media (min-width: 320px) and (max-width: 768px) {
+
+
+  .cabecera_container {
+    z-index: 3;
+    height: 3vh;
+    width: 100%;
+    padding-bottom: 0;
+  }
+  
   .header {
+    
+    background-color: #fff;
     height: 10vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px; /* Ajusta el padding según sea necesario */
+    padding-top: 1rem; /* Ajusta el padding según sea necesario */
+   
   }
+
+
+
+  .contenido_container {
+    margin-top: 10vh;
+  }
+
+.fixed-top {
+  position: fixed;
+}
 
   .busqueda {
     margin-right: 10%;
@@ -439,7 +477,7 @@ ul li a {
   }
 
   .login {
-    width: 4rem;
+width: 4rem;
     margin-top: 1.5rem;
   }
 
@@ -462,12 +500,6 @@ ul li a {
     margin-left: 0.62rem;
   }
 
-  .cabecera_container {
-    z-index: 3;
-    height: 3vh;
-    width: 100%;
-    padding-bottom: 0;
-  }
   .cabecera_logo {
     width: 9.5rem;
     margin-left: 3rem;
@@ -575,7 +607,7 @@ ul li a {
   }
 
   .btn {
-    margin-bottom: 0.5rem;
+    margin-top: 1.2rem;
 
     width: 100%;
 
@@ -586,17 +618,26 @@ ul li a {
   }
 
   .profile-notificacion {
-    font-size: 1rem;
-    padding: 0rem;
-    margin-top: 1.5rem;
-    margin-left: 0.5rem;
+ 
+    width: 100%; /* Asegura que el texto ocupe todo el ancho del contenedor */
+    font-size: 14px; 
+    margin: 0.3rem;
+  }
+  .data-user {
+    font-weight: bold; /* Ajusta el peso de la fuente según sea necesario */
+  }
+  
+  .div-usuario {
+margin-top: 1rem;
   }
 
-  .carrito-link a {
+  .div-usuario a {
+    overflow: hidden;
     list-style-type: none;
     text-decoration: none;
     color: #333;
     text-align: center;
+    width: 4rem;
   }
 
   .js-toggle-cart {
