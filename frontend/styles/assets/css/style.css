@@ -67,7 +67,7 @@ header {
     }
 
 .div-usuario a {
-
+max-width: 10vW;
   list-style-type: none;
   text-decoration: none;
   color: #333;
@@ -330,12 +330,9 @@ ul li a {
   margin: var(--cardMargin);
 }
 
-
-
-
 .btn {
 
-margin-bottom: 0.5rem;
+
   width: 100%;
 
 }
@@ -435,16 +432,9 @@ margin-bottom: 0.5rem;
 
   .cabecera_container {
     z-index: 3;
-    height: 100%;
+    height: 3vh;
     width: 100%;
     padding-bottom: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
-    padding: 0;
-    margin: 0;
-
   }
   
   .header {
@@ -514,7 +504,7 @@ width: 4rem;
     width: 9.5rem;
     margin-left: 3rem;
 
-    margin-top: 0rem;
+    margin-top: 1.5rem;
   }
 
   /* CSS para la versión móvil */
@@ -617,6 +607,7 @@ width: 4rem;
   }
 
   .btn {
+    margin-top: 1.2rem;
 
     width: 100%;
 
@@ -637,7 +628,7 @@ width: 4rem;
   }
   
   .div-usuario {
-margin-top: 0rem;
+margin-top: 1rem;
   }
 
   .div-usuario a {

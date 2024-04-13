@@ -93,8 +93,8 @@ const nuevoProducto = (description,name, imagePath, price,  id) => {
         <a href="#">ver producto </a>
         <h3 class="card-title">${name}</h3>
         <p class="card-text">${"$" + price}</p>
-        <a href="#form" class="btn btn-primary" style="margin-bottom:0.5rem" id="${id}" data-edit >Editar</a>
-        <button  class="btn btn-danger" style="margin-bottom:0.5rem" type="button" id="${id}" >eliminar</button>
+        <a href="#form" class="btn btn-primary" id="${id}" data-edit >Editar</a>
+        <button  class="btn btn-danger" type="button" id="${id}" >eliminar</button>
       </div>
 
 </div>
