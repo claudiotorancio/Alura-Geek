@@ -106,7 +106,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         } else if(usuarioHaIniciadoSesion && usuarioAdmin) {
           console.log('inicie sesion y soy admin')
           const listado = productoServices.listaProductos();
-         ({ listaProductos} = listado.products)
+         listaProductos = listado.products
       console.log(listado)
           render = controllers.nuevoProducto;
         }
