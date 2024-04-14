@@ -59,7 +59,7 @@ const renderInit = async () => {
       const contenedorProductos = document.querySelector(`[data-${seccion}]`);
       contenedorProductos.innerHTML = ""; // Limpiar contenido existente
 
-      const primerosTresProductos = productos.slice(0, 3);
+      const primerosTresProductos = productos
       primerosTresProductos.forEach((producto) => {
         contenedorProductos.appendChild(
           productoInicio(
@@ -91,35 +91,6 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
       // Si aÃºn no se han mostrado todos los productos
       if (!mostrarTodos) {
         contenedorProductos.classList.add("allProducts");
-
-        const respuesta = await productoServices.listaProductos();
-        const { usuarioHaIniciadoSesion } = respuesta; // Acceder al arreglo de usuarios
-
-        let render;
-
-        if (!usuarioHaIniciadoSesion) {
-          render = productoInicio;
-        } else {
-          render = controllers.nuevoProducto;
-        }
-
-        const listaProductos = await productoServices.renderInicio();
-        const products = listaProductos.filter(
-          (producto) => producto.section === opcion
-        );
-
-        contenedorProductos.innerHTML = ""; // Limpiar contenido existente
-        products.forEach((producto) => {
-          contenedorProductos.appendChild(
-            render(
-                producto.description,
-                producto.name,
-                producto.imagePath,
-                producto.price,
-                producto._id
-            )
-          );
-        });
 
         const tarjetas = contenedorProductos.querySelectorAll(".card");
         tarjetas.forEach((tarjeta) => {
