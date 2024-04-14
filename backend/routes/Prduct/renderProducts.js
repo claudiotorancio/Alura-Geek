@@ -23,7 +23,7 @@ const renderProducts = async (req, res) => {
 
        const usuarioHaIniciadoSesion = req.isAuthenticated() 
        const usuarioAdmin = req.user.role === 'admin' 
-      
+      console.log(usuarioAdmin)
 
 
 

@@ -93,8 +93,8 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         contenedorProductos.classList.add("allProducts");
 
         const respuesta = await productoServices.listaProductos();
-        const { usuarioHaIniciadoSesion } = respuesta; // Acceder al arreglo de usuarios
-        const {userAdmin} = respuesta
+        const { usuarioHaIniciadoSesion, usuarioAdmin } = respuesta; // Acceder al arreglo de usuarios
+      
 
         let listaProductos
         let render; 
@@ -102,10 +102,10 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         if (!usuarioHaIniciadoSesion) {
           listaProductos = await productoServices.renderInicio();
           render = productoInicio;
-        } else if(userAdmin) {
+        } else if(usuarioHaIniciadoSesion && usuarioAdmin) {
           listaProductos = productoServices.listaProductos();
           render = controllers.nuevoProducto;
-        }
+        
 
        
         const products = listaProductos.filter(
@@ -124,7 +124,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
             )
           );
         });
-
+      }
         const tarjetas = contenedorProductos.querySelectorAll(".card");
         tarjetas.forEach((tarjeta) => {
           tarjeta.classList.add("allCard");
