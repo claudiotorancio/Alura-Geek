@@ -94,16 +94,20 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
 
         const respuesta = await productoServices.listaProductos();
         const { usuarioHaIniciadoSesion } = respuesta; // Acceder al arreglo de usuarios
+        const {userAdmin} = respuesta
 
-        let render;
+        let listaProductos
+        let render; 
 
         if (!usuarioHaIniciadoSesion) {
+          listaProductos = await productoServices.renderInicio();
           render = productoInicio;
-        } else {
+        } else if(userAdmin) {
+          listaProductos = productoServices.listaProductos();
           render = controllers.nuevoProducto;
         }
 
-        const listaProductos = await productoServices.renderInicio();
+       
         const products = listaProductos.filter(
           (producto) => producto.section === opcion
         );

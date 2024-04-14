@@ -54,7 +54,8 @@ display: flex;
 }
 
 .card {
-    justify-content: center;
+ 
+    justify-content: flex-start;
     margin: 2rem;
     transition: all 0.25s cubic-bezier(0.645, 0.045,0.355,1);
     background-color: #fff;
@@ -64,7 +65,7 @@ display: flex;
 .allProducts {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .allCard {
@@ -93,12 +94,13 @@ display: flex;
   }
 
   .img-card{
+    overflow: hidden;
     width: 15rem;
     height: 14rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+ 
 }
 
 .img-card img{

@@ -20,8 +20,9 @@ const renderInicio = async () =>
       const products = data.products;
       const total = data.total;
      const usuarioHaIniciadoSesion = data.usuarioHaIniciadoSesion
+     const userAdmin = data.userAdmin
       // Retornar los productos si es necesario
-      return {products, total, usuarioHaIniciadoSesion};
+      return {products, total, usuarioHaIniciadoSesion, userAdmin};
     } catch (error) {
       console.error(error);
     }

@@ -449,10 +449,10 @@ margin-bottom: 0.5rem;
   }
 
 
+.banner {
+  margin-top: 6rem;
+}
 
-  .contenido_container {
-    margin-top: 10vh;
-  }
 
 .fixed-top {
   position: fixed;

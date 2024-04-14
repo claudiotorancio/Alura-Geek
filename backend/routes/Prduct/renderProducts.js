@@ -13,7 +13,6 @@ const renderProducts = async (req, res) => {
         //Relacionar id de usuario con producto para visualizar solo sus productos
         const user_id = req.user._id;
         
-
         // Conectar a la base de datos mediante serverless function
         await mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true,
@@ -23,7 +22,9 @@ const renderProducts = async (req, res) => {
          //Verificar si el usuario esta autenticado
 
        const usuarioHaIniciadoSesion = req.isAuthenticated() 
-       console.log(usuarioHaIniciadoSesion)
+       const usuarioAdmin = req.user.role === 'admin' 
+      
+
 
 
         let products;
@@ -39,7 +40,7 @@ const renderProducts = async (req, res) => {
         const totalProduct = await Product.countDocuments();
         const totalVista = await Vista.countDocuments()
 
-        res.json({usuarioHaIniciadoSesion, products, total: totalProduct + totalVista});
+        res.json({usuarioAdmin,usuarioHaIniciadoSesion, products, total: totalProduct + totalVista});
     } catch (error) {
         console.error('Error al cargar productos:', error);
         res.status(500).json({ error: 'Error al cargar productos' });
