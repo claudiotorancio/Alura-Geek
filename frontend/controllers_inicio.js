@@ -78,6 +78,8 @@ const renderInit = async () => {
   }
 };
 
+
+
 document.querySelectorAll(".categoria").forEach((categoria) => {
   const categoriaBtn = categoria.querySelector("a");
   const opcion = categoriaBtn.getAttribute("id");
@@ -93,7 +95,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         contenedorProductos.classList.add("allProducts");
 
         const respuesta = await productoServices.listaProductos();
-        const { usuarioHaIniciadoSesion, usuarioAdmin } = respuesta; // Acceder al arreglo de usuarios
+        const { usuarioHaIniciadoSesion, usuarioAdmin, products } = respuesta;
       
 
         let listaProductos
@@ -103,21 +105,21 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
           console.log('no inicie session')
           listaProductos = await productoServices.renderInicio();
           render = productoInicio;
-        } else if(usuarioHaIniciadoSesion && usuarioAdmin) {
+        } else if (usuarioHaIniciadoSesion && usuarioAdmin) {
           console.log('inicie sesion y soy admin')
-         
-       ( {listaProductos} = respuesta.products)
-      console.log(listaProductos)
+          listaProductos = products;
+          console.log(listaProductos)
           render = controllers.nuevoProducto;
         }
+        
 
        
-        const products = listaProductos.filter(
+        const allProducts = listaProductos.filter(
           (producto) => producto.section === opcion
         );
 
         contenedorProductos.innerHTML = ""; // Limpiar contenido existente
-        products.forEach((producto) => {
+        allProducts.forEach((producto) => {
           contenedorProductos.appendChild(
             render(
                 producto.description,
@@ -138,12 +140,11 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         imagen.forEach((tarjeta) => {
           tarjeta.classList.add("img-allCard");
         });
-
+    
         mostrarTodos = true; // Cambiar el estado a mostrar todos
 
          // Desplazar la página hacia arriba
          window.scrollTo({ top: 0, behavior: "smooth" });
-
         // Cambiar el texto del enlace a 'Volver'
         categoriaBtn.textContent = "Volver";
 
@@ -161,10 +162,12 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
             categoria.querySelector(".productos").innerHTML = "";
           }
         });
+      
       } else {
         // Si ya se han mostrado todos los productos, redirigir a la página de inicio
         window.location.href = "index.html";
       }
+   
     } catch (error) {
       console.error("Error al obtener los productos:", error);
       // Manejar el error de manera adecuada
