@@ -42,19 +42,19 @@ const renderInit = async () => {
     const listaProductos = await productoServices.renderInicio();
     const products = listaProductos;
 
-    // Objeto para almacenar los productos por sección
+    // Objeto para almacenar los productos por secciÃ³n
     const productosPorSeccion = {
       opcion1: [],
       opcion2: [],
       opcion3: [],
     };
 
-    // Dividir los productos por sección
+    // Dividir los productos por secciÃ³n
     products.forEach((elemento) => {
       productosPorSeccion[elemento.section].push(elemento);
     });
 
-    // Renderizar solo los primeros tres productos en cada sección por defecto
+    // Renderizar solo los primeros tres productos en cada secciÃ³n por defecto
     for (const [seccion, productos] of Object.entries(productosPorSeccion)) {
       const contenedorProductos = document.querySelector(`[data-${seccion}]`);
       contenedorProductos.innerHTML = ""; // Limpiar contenido existente
@@ -78,48 +78,38 @@ const renderInit = async () => {
   }
 };
 
-
-
 document.querySelectorAll(".categoria").forEach((categoria) => {
   const categoriaBtn = categoria.querySelector("a");
   const opcion = categoriaBtn.getAttribute("id");
   const contenedorProductos = document.querySelector(`[data-${opcion}]`);
-  let mostrarTodos = false; // Variable para mantener el estado de visualización
+  let mostrarTodos = false; // Variable para mantener el estado de visualizaciÃ³n
 
   categoriaBtn.addEventListener("click", async (e) => {
     e.preventDefault(); // Evitar comportamiento predeterminado del enlace
 
     try {
-      // Si aún no se han mostrado todos los productos
+      // Si aÃºn no se han mostrado todos los productos
       if (!mostrarTodos) {
         contenedorProductos.classList.add("allProducts");
 
         const respuesta = await productoServices.listaProductos();
-        const { usuarioHaIniciadoSesion, usuarioAdmin, products } = respuesta;
-      
+        const { usuarioHaIniciadoSesion } = respuesta; // Acceder al arreglo de usuarios
 
-        let listaProductos
-        let render; 
+        let render;
 
         if (!usuarioHaIniciadoSesion) {
-          console.log('no inicie session')
-          listaProductos = await productoServices.renderInicio();
           render = productoInicio;
-        } else if (usuarioHaIniciadoSesion && usuarioAdmin) {
-          console.log('inicie sesion y soy admin')
-          listaProductos = products;
-          console.log(listaProductos)
+        } else {
           render = controllers.nuevoProducto;
         }
-        
 
-       
-        const allProducts = listaProductos.filter(
+        const listaProductos = await productoServices.renderInicio();
+        const products = listaProductos.filter(
           (producto) => producto.section === opcion
         );
 
         contenedorProductos.innerHTML = ""; // Limpiar contenido existente
-        allProducts.forEach((producto) => {
+        products.forEach((producto) => {
           contenedorProductos.appendChild(
             render(
                 producto.description,
@@ -130,7 +120,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
             )
           );
         });
-      
+
         const tarjetas = contenedorProductos.querySelectorAll(".card");
         tarjetas.forEach((tarjeta) => {
           tarjeta.classList.add("allCard");
@@ -140,11 +130,12 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         imagen.forEach((tarjeta) => {
           tarjeta.classList.add("img-allCard");
         });
-    
+
         mostrarTodos = true; // Cambiar el estado a mostrar todos
 
-         // Desplazar la página hacia arriba
+         // Desplazar la pÃ¡gina hacia arriba
          window.scrollTo({ top: 0, behavior: "smooth" });
+
         // Cambiar el texto del enlace a 'Volver'
         categoriaBtn.textContent = "Volver";
 
@@ -155,19 +146,17 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
           }
         });
 
-        // Ocultar las demás categorías
+        // Ocultar las demÃ¡s categorÃ­as
         document.querySelectorAll(".categoria").forEach((categoria) => {
           if (!categoria.querySelector(`[data-${opcion}]`)) {
             categoria.querySelector(".texto-categoria").style.display = "none";
             categoria.querySelector(".productos").innerHTML = "";
           }
         });
-      
       } else {
-        // Si ya se han mostrado todos los productos, redirigir a la página de inicio
+        // Si ya se han mostrado todos los productos, redirigir a la pÃ¡gina de inicio
         window.location.href = "index.html";
       }
-   
     } catch (error) {
       console.error("Error al obtener los productos:", error);
       // Manejar el error de manera adecuada
