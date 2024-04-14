@@ -86,14 +86,22 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
 
   categoriaBtn.addEventListener("click", async (e) => {
     e.preventDefault(); // Evitar comportamiento predeterminado del enlace
-    const respuesta = await productoServices.listaProductos();
-    const {usuarioAdmin } = respuesta; // Acceder al arreglo de usuarios
+
     try {
       // Si aÃºn no se han mostrado todos los productos
-      if (!mostrarTodos && usuarioAdmin) {
+      if (!mostrarTodos) {
         contenedorProductos.classList.add("allProducts");
 
-      
+        const respuesta = await productoServices.listaProductos();
+        const { usuarioHaIniciadoSesion, usuarioAdmin} = respuesta; // Acceder al arreglo de usuarios
+
+        let render;
+
+        if (!usuarioAdmin ) {
+          render = productoInicio;
+        } else {
+          render = controllers.nuevoProducto;
+        }
 
         const listaProductos = await productoServices.renderInicio();
         const products = listaProductos.filter(
@@ -103,7 +111,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         contenedorProductos.innerHTML = ""; // Limpiar contenido existente
         products.forEach((producto) => {
           contenedorProductos.appendChild(
-            productoInicio(
+            render(
                 producto.description,
                 producto.name,
                 producto.imagePath,
@@ -146,9 +154,8 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
           }
         });
       } else {
-        controllers.render()
         // Si ya se han mostrado todos los productos, redirigir a la pÃ¡gina de inicio
-       // window.location.href = "index.html";
+        window.location.href = "index.html";
       }
     } catch (error) {
       console.error("Error al obtener los productos:", error);
