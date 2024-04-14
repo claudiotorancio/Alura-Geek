@@ -116,6 +116,10 @@ display: flex;
     .card {
         transition: none; 
     }
+
+    .card-title {
+        font-size: large;
+    }
     
     .productos {
         display: block;
