@@ -148,7 +148,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
       } else {
         controllers.render()
         // Si ya se han mostrado todos los productos, redirigir a la pÃ¡gina de inicio
-        window.location.href = "index.html";
+       // window.location.href = "index.html";
       }
     } catch (error) {
       console.error("Error al obtener los productos:", error);
