@@ -102,7 +102,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         if (!usuarioHaIniciadoSesion) {
           listaProductos = await productoServices.renderInicio();
           render = productoInicio;
-        } else if(usuarioHaIniciadoSesion && usuarioAdmin) {
+        } else if(usuarioHaIniciadoSesion || usuarioAdmin) {
           listaProductos = productoServices.listaProductos();
           render = controllers.nuevoProducto;
         
