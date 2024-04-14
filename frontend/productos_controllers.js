@@ -161,7 +161,7 @@ const render = async () => {
     // Renderizar los primeros tres productos en cada sección
     for (const [seccion, productos] of Object.entries(productosPorSeccion)) {
 
-      const primerosTresProductos = productos.slice(0, 3);
+      const primerosTresProductos = productos
       
       const contenedorProductos = document.querySelector(`[data-${seccion}]`);
     
