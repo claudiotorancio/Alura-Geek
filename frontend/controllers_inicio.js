@@ -42,19 +42,19 @@ const renderInit = async () => {
     const listaProductos = await productoServices.renderInicio();
     const products = listaProductos;
 
-    // Objeto para almacenar los productos por secciÃ³n
+    // Objeto para almacenar los productos por sección
     const productosPorSeccion = {
       opcion1: [],
       opcion2: [],
       opcion3: [],
     };
 
-    // Dividir los productos por secciÃ³n
+    // Dividir los productos por sección
     products.forEach((elemento) => {
       productosPorSeccion[elemento.section].push(elemento);
     });
 
-    // Renderizar solo los primeros tres productos en cada secciÃ³n por defecto
+    // Renderizar solo los primeros tres productos en cada sección por defecto
     for (const [seccion, productos] of Object.entries(productosPorSeccion)) {
       const contenedorProductos = document.querySelector(`[data-${seccion}]`);
       contenedorProductos.innerHTML = ""; // Limpiar contenido existente
@@ -93,11 +93,11 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         contenedorProductos.classList.add("allProducts");
 
         const respuesta = await productoServices.listaProductos();
-        const { usuarioHaIniciadoSesion, usuarioAdmin} = respuesta; // Acceder al arreglo de usuarios
+        const { usuarioHaIniciadoSesion } = respuesta; // Acceder al arreglo de usuarios
 
         let render;
 
-        if (!usuarioAdmin ) {
+        if (!usuarioHaIniciadoSesion) {
           render = productoInicio;
         } else {
           render = controllers.nuevoProducto;
@@ -163,6 +163,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
     }
   });
 });
+
 
 export const productosInicio = {
   renderInit,
