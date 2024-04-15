@@ -249,7 +249,7 @@ header {
 
 #menu-mobile div.open:nth-child(1) {
   z-index: 1000;
-  height: 40vh;
+  height: 60vh;
 
 }
 
@@ -261,6 +261,7 @@ header {
 }
 
 ul {
+  line-height: 5rem;
   list-style-type: none; /* Quita los puntos de la lista */
   padding: 0; /* Quita el espaciado interno */
 }
@@ -542,18 +543,37 @@ width: 4rem;
   }
 
   #menu-mobile div.open:nth-child(1) {
-    overflow: hidden;
-    
-    font-size: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 100vw;
-    border-radius: 0;
-    z-index:0;
-    height: 25vh;
+
+
+height: 15vh;
   }
+
+  ul {
+  line-height: 0;
+    margin-top: 1rem;
+    list-style-type: style type;;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+    
+  }
+  
+  ul li {
+    font-size: 1.2rem;
+    text-align: center;
+  text-decoration: underline; /* Agregar subrayado */
+  text-decoration-line: underline; /* Indicar que queremos subrayar */
+  text-decoration-skip-ink: none; /* Evitar que el subrayado se omita alrededor de las letras */
+  text-underline-offset: 0.2em; /* Espacio entre el texto y el subrayado */
+    text-align: center;
+    width: calc(5% - 20px); /* Ancho del 33.33% menos el espacio entre elementos */
+  }
+  
+  ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
 
   .modalVisor {
     display: flex;

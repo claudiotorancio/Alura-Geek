@@ -105,7 +105,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
         mostrarTodos = true; // Cambiar el estado a mostrar todos
 
          // Desplazar la página hacia arriba
-         window.scrollTo({ top: 0, behavior: "smooth" });
+         window.scrollTo({ top: 330, behavior: "smooth" });
 
         // Cambiar el texto del enlace a 'Volver'
         categoriaBtn.textContent = "Volver";
