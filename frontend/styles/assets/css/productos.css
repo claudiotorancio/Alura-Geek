@@ -95,7 +95,7 @@ display: flex;
 }
 
 .allCard {
-    width: calc(40% - 1px);
+   
     margin: 1rem;
 }
 
