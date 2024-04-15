@@ -64,6 +64,7 @@ display: flex;
 
 .card-title {
     font-size: 2vw;
+    font-weight: 600;
 }
 
 .allProducts {
@@ -123,6 +124,7 @@ display: flex;
 
     .card-title {
         font-size: 4vw;
+
     }
     
     .productos {
