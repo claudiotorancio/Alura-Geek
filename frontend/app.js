@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactUser = document.querySelector("[data-contact]");
   if (user) {
     actualizarUsuario.textContent = `${user}`;
-    logoutUsuario.textContent = "Logout";
+    logoutUsuario.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i>';
     userActive.style.display = "none";
     contactUser.style.display = "none";
   } else {
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     divUsuario.style.display = "none";
     actualizarUsuario.style.display = "none";
     logoutUsuario.style.display = "none";
-    userActive.textContent = "Login";
+    userActive.innerHTML = '<i class="fa-solid fa-user"></i>';
   }
 });
 

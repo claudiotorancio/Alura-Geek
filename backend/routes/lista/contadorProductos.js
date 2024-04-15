@@ -2,12 +2,15 @@ import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Product from "../../models/Product.js";
 import Vista from '../../models/Vista.js'
+
+
 const contadorProductos = async (req, res) => {
     try {
 
-        // if (!req.isAuthenticated()) {
-        //     return res.status(401).json({ error: 'Usuario no autenticado' });
-        //   }
+        if (!req.isAuthenticated()) {
+           return res.status(401).json({ error: 'Usuario no autenticado' });
+          }
+          
         // Conectar a la base de datos
         await mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true,
