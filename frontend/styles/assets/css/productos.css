@@ -128,11 +128,25 @@ display: flex;
             transform: none;
             box-shadow:none;
         }
+
+        .productos div:nth-child(n+4) {
+            display: none;
+        }
+
+        .productos.ver-todos-activado div {
+            display: block;
+        }
         
-.allProducts {
+        /* .productos.allProducts div:nth-child() {
+            display:flex;
+        } */
+
+
+        .allProducts {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: inherit;
 }
 
 .allCard {

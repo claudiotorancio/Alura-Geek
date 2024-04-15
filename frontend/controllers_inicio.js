@@ -82,13 +82,13 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
   const categoriaBtn = categoria.querySelector("a");
   const opcion = categoriaBtn.getAttribute("id");
   const contenedorProductos = document.querySelector(`[data-${opcion}]`);
-  let mostrarTodos = false; // Variable para mantener el estado de visualizaciÃ³n
+  let mostrarTodos = false; // Variable para mantener el estado de visualización
 
   categoriaBtn.addEventListener("click", async (e) => {
     e.preventDefault(); // Evitar comportamiento predeterminado del enlace
 
     try {
-      // Si aÃºn no se han mostrado todos los productos
+      // Si aún no se han mostrado todos los productos
       if (!mostrarTodos) {
         contenedorProductos.classList.add("allProducts");
 
@@ -104,7 +104,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
 
         mostrarTodos = true; // Cambiar el estado a mostrar todos
 
-         // Desplazar la pÃ¡gina hacia arriba
+         // Desplazar la página hacia arriba
          window.scrollTo({ top: 0, behavior: "smooth" });
 
         // Cambiar el texto del enlace a 'Volver'
@@ -117,7 +117,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
           }
         });
 
-        // Ocultar las demÃ¡s categorÃ­as
+        // Ocultar las demás categorías
         document.querySelectorAll(".categoria").forEach((categoria) => {
           if (!categoria.querySelector(`[data-${opcion}]`)) {
             categoria.querySelector(".texto-categoria").style.display = "none";
@@ -125,7 +125,7 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
           }
         });
       } else {
-        // Si ya se han mostrado todos los productos, redirigir a la pÃ¡gina de inicio
+        // Si ya se han mostrado todos los productos, redirigir a la página de inicio
         window.location.href = "index.html";
       }
     } catch (error) {
@@ -134,6 +134,16 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
     }
   });
 });
+
+
+document.querySelectorAll('.ver-todos').forEach(enlace => {
+  enlace.addEventListener('click', function(event) {
+      event.preventDefault();
+      const contenedorProductos = this.parentElement.nextElementSibling;
+      contenedorProductos.classList.toggle('ver-todos-activado');
+  });
+});
+
 
 
 export const productosInicio = {
