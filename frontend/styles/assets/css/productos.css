@@ -53,6 +53,27 @@
 display: flex;
 }
 
+.preloader {
+    width: 50px; /* Ancho del preloader */
+    height: 50px; /* Alto del preloader */
+    border: 4px solid #f3f3f3; /* Color del borde del preloader */
+    border-top: 4px solid #3498db; /* Color del borde superior del preloader */
+    border-radius: 50%; /* Forma circular */
+    animation: spin 1s linear infinite; /* Animación giratoria */
+    display: none; /* Ocultar preloader inicialmente */
+    position: absolute; /* Posición absoluta para superponer */
+    top: 50%; /* Alineación vertical al centro */
+    left: 50%; /* Alineación horizontal al centro */
+    margin-top: -25px; /* Mitad de la altura para centrado vertical */
+    margin-left: -25px; /* Mitad del ancho para centrado horizontal */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+
 .card {
  
     justify-content: flex-start;
