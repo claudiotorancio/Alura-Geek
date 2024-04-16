@@ -9,6 +9,8 @@ export class ListaControllers {
 
   async renderLista() {
     try {
+
+
       const listaServicesInstance = new ListaServices();
       const respuesta = await listaServicesInstance.listaUsers(); // Utiliza await aquí
       const lista = respuesta.listado;

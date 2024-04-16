@@ -9,8 +9,10 @@ import { ListaControllers } from "./lista.controllers.js";
 import { productosInicio } from "./controllers_inicio.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const listaServiceInstance = new ListaControllers(); // Instanciación de ListaControllers
-  listaServiceInstance.renderLista(); // Llamada al método renderLista()
+  const tabla = document.querySelector("[data-lista]");
+  const titulo = document.querySelector("[data-titulo]");
+  const listaControllersInstance = new ListaControllers(tabla, titulo);
+  listaControllersInstance.renderLista(); // Llamada al método renderLista()
 
   controllers.render();
   const user = JSON.parse(sessionStorage.getItem("user")) || null;
