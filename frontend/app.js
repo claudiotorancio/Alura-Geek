@@ -5,11 +5,13 @@ import { loginServices } from "./servicios/login_services.js";
 import { controllers } from "./productos_controllers.js";
 import { loginControllers } from "./login_controllers.js";
 import { modalControllers } from "./modal.js";
-import { listaControllers } from "./lista.controllers.js";
+import { ListaControllers } from "./lista.controllers.js";
 import { productosInicio } from "./controllers_inicio.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  listaControllers.renderLista();
+  const listaServiceInstance = new ListaControllers(); // Instanciación de ListaControllers
+  listaServiceInstance.renderLista(); // Llamada al método renderLista()
+
   controllers.render();
   const user = JSON.parse(sessionStorage.getItem("user")) || null;
   const divUsuario = document.querySelector(".rounded-circle");
@@ -33,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     userActive.innerHTML = '<i class="fa-solid fa-user"></i>';
   }
 });
+
 
 
 //crear producto desde save products

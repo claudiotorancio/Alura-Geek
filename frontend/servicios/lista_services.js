@@ -1,25 +1,27 @@
-
 import { baseURL } from "./product_services.js";
 
-const listaUsers = async () =>
-  await fetch(`${baseURL}/api/renderLista`).then((respuesta) =>
-    respuesta.json()
-  );
+export class ListaServices {
+  constructor() {
+    this.baseURL = baseURL;
+  }
 
-  const eliminarUser = async (id) => {
-    await fetch(`${baseURL}/api/deleteUser/${id}`, {
+  async listaUsers() {
+    const respuesta = await fetch(`${this.baseURL}/api/renderLista`);
+    return respuesta.json();
+  }
+
+  async eliminarUser(id) {
+    await fetch(`${this.baseURL}/api/deleteUser/${id}`, {
       method: "DELETE",
     });
-  };
+  }
 
-  const totalProductos = async (id) =>
-  await fetch(`${baseURL}/api/contadorProductos/${id}`).then((respuesta) =>
-    respuesta.json()
-  );
+  async totalProductos(id) {
+    const respuesta = await fetch(`${this.baseURL}/api/contadorProductos/${id}`);
+    return respuesta.json();
+  }
+}
 
 
-export const listaServices = {
-  listaUsers,
-  eliminarUser,
-  totalProductos
-};
+
+
