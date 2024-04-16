@@ -45,14 +45,15 @@ import { ListaServices } from "./servicios/lista_services.js";
     }
   }
 
- async nuevaLista(usuario) {
+ nuevaLista(usuario) {
     const { username, created_at, role, _id } = usuario;
     const fechaCreacion = new Date(created_at);
     const fechaFormateada = `${fechaCreacion.getFullYear().toString().slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${("0" + fechaCreacion.getDate()).slice(-2)}`;
 
     const card = document.createElement("div");
 
-    const totalProductos = await this.obtenerTotalProductos(usuario._id);
+   
+    const totalProductos =  this.obtenerTotalProductos(usuario._id);
    
 
     const contenido = `
@@ -72,8 +73,7 @@ import { ListaServices } from "./servicios/lista_services.js";
         </div>
       </div>`;
 
-    card.innerHTML = contenido;
-
+      card.innerHTML = contenido;
     card.querySelector("button").addEventListener("click", async (event) => {
       event.preventDefault();
       const userId = event.target.dataset.userid;
