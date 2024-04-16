@@ -49,10 +49,6 @@
 
 
 
-.productos {
-  
-display: ruby;
-}
 
 .preloader {
     width: 50px; /* Ancho del preloader */
@@ -89,10 +85,25 @@ display: ruby;
     font-weight: 600;
 }
 
+.productos {
+  
+    display: ruby;
+    }
+    
+    .productos div:nth-child(n+5) {
+        display: none;
+    }
+    
+    .productos.ver-todos-activado div {
+        display: block;
+    }
+    
+
 .allProducts {
-    display: flex;
+    display: ruby;
     flex-wrap: nowrap;
     justify-content: space-between;
+    
 }
 
 .allCard {
@@ -149,6 +160,7 @@ display: ruby;
 
     }
     
+    
     .productos {
         display: block;
         }
@@ -156,14 +168,14 @@ display: ruby;
             transform: none;
             box-shadow:none;
         }
-
         .productos div:nth-child(n+4) {
             display: none;
         }
-
+        
         .productos.ver-todos-activado div {
             display: block;
         }
+       
         
         /* .productos.allProducts div:nth-child() {
             display:flex;
