@@ -10,14 +10,24 @@ const updateUser = async (req, res) => {
     //   return res.status(401).json({ message: 'No autorizado' });
     // }
 
-    const {id} = req.params;
+    const user_id = req.user._id;
 
     // Obtener los datos del usuario a actualizar desde el req.body
     const {  newUsername, newPassword } = req.body;
 
-console.log(`ID del usuario: ${id}`);
-    console.log(`Nuevo nombre de usuario: ${newUsername}`);
-    console.log(`Nueva contraseña: ${newPassword}`);
+    const currentUser = {
+        newUsername,
+        newPassword,
+        user_id
+    }
+
+
+
+console.log(`ID del usuario: ${user_id}`);
+    console.log(`Nuevo nombre de usuario: ${currentUser.newUsername}`);
+    console.log(`Nueva contraseña: ${currentUser.newPassword}`);
+    console.log(`Nuevo User: ${currentUser}`);
+
 //     const currentUser = {
 //         newUsername,
 //         newPassword
