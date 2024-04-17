@@ -5,23 +5,34 @@ export class ListaServices {
     this.baseURL = baseURL;
   }
 
-  async listaUsers() {
-    const respuesta = await fetch(`${this.baseURL}/api/renderLista`);
-    return respuesta.json();
-  }
+  listaUsers = async () => {
+    try {
+      const respuesta = await fetch(`${this.baseURL}/api/renderLista`);
+      return respuesta.json();
+    } catch (error) {
+      console.error("Error al obtener la lista de usuarios:", error);
+      throw error;
+    }
+  };
 
-  async eliminarUser(id) {
-    await fetch(`${this.baseURL}/api/deleteUser/${id}`, {
-      method: "DELETE",
-    });
-  }
+  eliminarUser = async (id) => {
+    try {
+      await fetch(`${this.baseURL}/api/deleteUser/${id}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
+      throw error;
+    }
+  };
 
-  async totalProductos(id) {
-    const respuesta = await fetch(`${this.baseURL}/api/contadorProductos/${id}`);
-    return respuesta.json();
-  }
+  totalProductos = async (id) => {
+    try {
+      const respuesta = await fetch(`${this.baseURL}/api/contadorProductos/${id}`);
+      return respuesta.json();
+    } catch (error) {
+      console.error("Error al obtener el total de productos:", error);
+      throw error;
+    }
+  };
 }
-
-
-
-
