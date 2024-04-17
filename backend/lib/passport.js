@@ -71,31 +71,6 @@ passport.use('local.signup', new LocalStrategy({
 
 
 
-passport.use('local.update', new LocalStrategy({
-    usernameField: 'newUsername', // Campo para el nuevo nombre de usuario
-    passwordField: 'newPassword', // Campo para la nueva contraseña
-    passReqToCallback: true
-}, async (req, newUsername, newPassword, done) => {
-    try {
-      
-        // Actualizar el nombre de usuario y la contraseña del usuario específico
-        const userToUpdate = await Users.findById(req.body.userId); // Obtener el ID del usuario del cuerpo de la solicitud
-        if (!userToUpdate) {
-            return done(null, false, { message: 'Usuario no encontrado' });
-        }
-
-        // Actualizar los valores del usuario
-        userToUpdate.username = newUsername;
-        userToUpdate.password = await helpers.encryptPassword(newPassword);
-        await userToUpdate.save();
-
-        // Devolver el usuario actualizado
-        return done(null, userToUpdate);
-    } catch (err) {
-        return done(err, false, { message: 'Error al actualizar el usuario' });
-    }
-}));
-
 //serialUser
 
 passport.serializeUser((user, done) => {

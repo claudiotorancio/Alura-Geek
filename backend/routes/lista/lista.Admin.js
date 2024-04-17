@@ -4,7 +4,7 @@ import Users from "../../models/User.js";
 
 const listaAdmin = async (req, res) => {
   try {
-    //Verificar si el usuario está autenticado
+   // Verificar si el usuario está autenticado
     if (!req.isAuthenticated()) {
       return res.status(401).json({ error: 'Usuario no autenticado' });
     }

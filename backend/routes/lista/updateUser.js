@@ -1,28 +1,31 @@
 import passport from '../../lib/passport.js';
+import Users from '../../models/User.js';
 
 const updateUser = async (req, res) => {
   try {
-    // Autenticar la sesión del usuario y ejecutar la estrategia 'local.update'
-    passport.authenticate('local.update', async (error, user) => {
-      if (error) {
-        console.error('Error al autenticar la sesión del usuario:', error);
-        return res.status(500).json({ error: 'Error al autenticar la sesión del usuario' });
-      }
+    //Verificar si el usuario autenticado es un administrador
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: 'No autorizado' });
+    }
 
-    //   Verificar si el usuario está autenticado
-    //   if (!req.isAuthenticated()) {
-    //     return res.status(401).json({ message: 'Usuario no autenticado' });
-    //   }
+    // Obtener los datos del usuario a actualizar desde el req.body
+    const { id, newUsername, newPassword } = req.body;
+console.log(req.body)
+    // Buscar el usuario en la base de datos por su ID
+    const userToUpdate = await Users.findById(id);
 
-    //   // Manejar la respuesta de la estrategia 'local.update'
-    //   if (!user) {
-    //     return res.status(400).json({ message: 'Error al actualizar usuario' });
-    //   }
+    // Verificar si se encontró el usuario
+    if (!userToUpdate) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
 
-    //   // Si la actualización fue exitosa, enviar una respuesta con el usuario actualizado
-      console.log('Usuario actualizado:', user);
-      return res.json({ user });
-    })(req, res); // Pasar req y res al middleware de Passport
+    // Actualizar los datos del usuario
+    userToUpdate.username = newUsername;
+    userToUpdate.password = newPassword; // No es necesario encriptar si se proporciona desde el admin
+    await userToUpdate.save();
+
+    // Devolver el usuario actualizado
+    return res.json({ user: userToUpdate });
   } catch (error) {
     console.error('Error al actualizar usuario:', error);
     res.status(500).json({ message: 'Error interno del servidor' });
@@ -30,3 +33,4 @@ const updateUser = async (req, res) => {
 };
 
 export default updateUser;
+

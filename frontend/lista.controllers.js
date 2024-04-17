@@ -127,7 +127,7 @@ export class ListaControllers {
   }
 
 
-  editarLista (username,  password, id) { 
+  editarLista (newUsername, newPassword, id) { 
     modalControllers.baseModal();
     const modal = document.getElementById("modal");
     const productoEdicion = modal.querySelector("[data-table]");
@@ -137,10 +137,10 @@ export class ListaControllers {
           <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
               <p class="parrafo">usuario a editar</p>
                       <div class="form-group">
-                      <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${username}" required data-username >
+                      <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required data-newUsername >
                       </div>
                       <div class="form-group"> 
-                      <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${password}" required data-password>
+                      <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${newPassword}" required data-newPassword>
                       </div>
                       <div>
                       <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
@@ -156,13 +156,13 @@ export class ListaControllers {
     modal.querySelector("[data-forma]").addEventListener("submit", async (e) => {
       e.preventDefault();
   
-      const username = document.querySelector("[data-username]").value;
-      const password = document.querySelector("[data-password]").value;
+      const newUsername = document.querySelector("[data-newUsername]").value;
+      const newPassword = document.querySelector("[data-newPassword]").value;
   
   
       const dataEdit = {
-        username,
-        password
+        newUsername,
+        newPassword
       };
 
 
