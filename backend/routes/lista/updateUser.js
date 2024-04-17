@@ -3,7 +3,7 @@ import passport from '../../lib/passport.js';
 const updateUser = async (req, res) => {
   try {
     // Autenticar la sesión del usuario y ejecutar la estrategia 'local.update'
-    passport.authenticate('local.update', { session: true }, async (error, user) => {
+    passport.authenticate('local.update',  async (error, user) => {
       if (error) {
         console.error('Error al autenticar la sesión del usuario:', error);
         return res.status(500).json({ error: 'Error al autenticar la sesión del usuario' });
