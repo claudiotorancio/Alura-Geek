@@ -12,19 +12,19 @@ const updateUser = async (req, res) => {
     // }
     
 
-    const id = req.params._id;
-    const userId = req.params.id
+    const id = req.params.id;
+    
 
     // Obtener los datos del usuario a actualizar desde el req.body
     const {  newUsername, newPassword } = req.body;
 
-    const currentUser = ({
+    const currentUser = {
         newUsername,
         newPassword,
     
-    })
+    }
 
-    console.log(`req,body: ${userId}`)
+   
 
 console.log(`req,body: ${req.body}`)
 console.log(`ID del usuario: ${id}`);
