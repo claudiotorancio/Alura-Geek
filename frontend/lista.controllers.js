@@ -127,7 +127,7 @@ export class ListaControllers {
   }
 
 
-   editarLista(newUsername, newPassword, id) {
+   editarLista(username, password, id) {
     // Omitir la definición de newPassword si no se proporciona un valor
     const passwordInput = newPassword ? `<input class="form-control mt-3 mb-3 p-2" placeholder="Password" type="password" required name="password">` : '';
   
@@ -139,12 +139,12 @@ export class ListaControllers {
     <div class="card-header">
         <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">usuario a editar</p>
-                    <div class="form-group">
-                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required name="newUsername" >
-                    </div>
-                    <div class="form-group"> 
-                    <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${newPassword}" required name="newPassword">
-                    </div>
+            <div class="form-group">
+            <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${username}" required data-username >
+            </div>
+            <div class="form-group"> 
+            <input class="form-control mt-3 mb-3 p-2"  placeholder="password" type="text"value="${password}" required data-password>
+            </div>
                     <div>
                     <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
                     </div>
@@ -159,8 +159,8 @@ export class ListaControllers {
     modal.querySelector("[data-forma]").addEventListener("submit", async (e) => {
       e.preventDefault();
   
-      const newUsername = document.getElementsByNamer("newUsername").value;
-    const newPassword = document.getElementsByName("newPassword").value;
+      const newUsername = document.querySelector("[data-username]").value;
+    const newPassword = document.querySelector("data-password").value;
   
    
       const dataUser = new FormData();
