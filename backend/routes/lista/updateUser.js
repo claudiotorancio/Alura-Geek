@@ -26,11 +26,11 @@ const updateUser = async (req, res) => {
 
    
 
-console.log(`req,body: ${req.body}`)
+console.dir(`req,body: ${req.body}`)
 console.log(`ID del usuario: ${id}`);
     console.log(`Nuevo nombre de usuario: ${newUsername}`);
     console.log(`Nueva contraseña: ${newPassword}`);
-    console.log(`Nuevo User: ${currentUser}`);
+    console.dir(`Nuevo User: ${currentUser}`);
 
 //     const currentUser = {
 //         newUsername,
