@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Users from "../../models/User.js";;
+import helpers from "../../lib/helpers.js";
 
 const updateUser = async (req, res) => {
   try {
@@ -29,7 +30,7 @@ console.log(userToUpdate)
 
     // Actualizar los datos del usuario
     userToUpdate.username = newUsername;
-    userToUpdate.password = newPassword; // No es necesario encriptar si se proporciona desde el admin
+    userToUpdate.password = await helpers.encryptPassword(newPassword);; // No es necesario encriptar si se proporciona desde el admin
     await userToUpdate.save();
 
     // Devolver el usuario actualizado
