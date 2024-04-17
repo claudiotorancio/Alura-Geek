@@ -10,7 +10,7 @@ const updateUser = async (req, res) => {
     //   return res.status(401).json({ message: 'No autorizado' });
     // }
 
-    const id = req.params.id;
+    const {id} = req.params;
 
     // Obtener los datos del usuario a actualizar desde el req.body
     const {  newUsername, newPassword } = req.body;

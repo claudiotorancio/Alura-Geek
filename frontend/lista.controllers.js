@@ -135,23 +135,25 @@ export class ListaControllers {
     const modal = document.getElementById("modal");
     const productoEdicion = modal.querySelector("[data-table]");
     productoEdicion.innerHTML = `
-      <div class="text-center">
-        <div class="card-header">
-          <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>
-            <!-- Input para editar el nombre de usuario -->
-            <div class="form-group">
-              <input class="form-control mt-3 p-2" placeholder="Nombre de usuario" type="text" value="${newUsername}" required name="newUsername">
-            </div>
-            <!-- Input oculto para enviar el newPassword al servidor si está definido -->
-            ${passwordInput}
-            <input type="hidden" name="newPassword" value="${newPassword || ''}">
-            <div>
-              <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
-            </div>
-          </form>
-        </div>
+    <div class="text-center">
+      <div class="card-header">
+        <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>
+          <!-- Input para editar el nombre de usuario -->
+          <div class="form-group">
+            <input class="form-control mt-3 p-2" placeholder="Nombre de usuario" type="text" value="${newUsername}" required name="newUsername">
+          </div>
+          <!-- Input oculto para enviar el newPassword al servidor -->
+          <input type="hidden" name="newPassword" value="${newPassword}">
+          <div class="form-group"> 
+            <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" required name="password">
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
+          </div>
+        </form>
       </div>
-    `;
+    </div>
+  `;
   
     productoEdicion.classList.add("modalVisor");
   
