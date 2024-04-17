@@ -8,12 +8,14 @@ const updateUser = async (req, res) => {
       return res.status(401).json({ message: 'No autorizado' });
     }
 
+    const {id} = req.params.id
+console.log(id)
     // Obtener los datos del usuario a actualizar desde el req.body
-    const { id, newUsername, newPassword } = req.body;
+    const {  newUsername, newPassword } = req.body;
 console.log(req.body)
     // Buscar el usuario en la base de datos por su ID
     const userToUpdate = await Users.findById(id);
-
+console.log(userToUpdate)
     // Verificar si se encontró el usuario
     if (!userToUpdate) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
