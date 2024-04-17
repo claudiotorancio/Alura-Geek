@@ -135,7 +135,7 @@ export class ListaControllers {
     productoEdicion.innerHTML = `
     <div class="text-center">
     <div class="card-header">
-        <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
+        <form action="/api/updateUser/" id="form"  method="PUT" data-forma>                
             <p class="parrafo">usuario a editar</p>
                     <div class="form-group">
                     <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required name="newUsername" >
