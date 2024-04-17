@@ -72,32 +72,29 @@ passport.use('local.signup', new LocalStrategy({
 
 
 passport.use('local.update', new LocalStrategy({
-    usernameField: 'newUsername', // Cambiar al campo de nuevo nombre de usuario
-    passwordField: 'newPassword', // Cambiar al campo de nueva contraseña
+    usernameField: 'newUsername', // Campo para el nuevo nombre de usuario
+    passwordField: 'newPassword', // Campo para la nueva contraseña
     passReqToCallback: true
 }, async (req, newUsername, newPassword, done) => {
     try {
-        // Obtener el usuario actualmente autenticado
-        const currentUser = req.user;
-console.log(req.user)
-        // Verificar si el nuevo nombre de usuario ya está en uso
-        const existingUser = await Users.findOne({ username: newUsername });
-        if (existingUser && existingUser._id !== currentUser._id) {
-            return done(null, false, { message: 'Username already taken' });
+      
+        // Actualizar el nombre de usuario y la contraseña del usuario específico
+        const userToUpdate = await Users.findById(req.body.userId); // Obtener el ID del usuario del cuerpo de la solicitud
+        if (!userToUpdate) {
+            return done(null, false, { message: 'Usuario no encontrado' });
         }
 
-        // Actualizar el nombre de usuario y la contraseña
-        currentUser.username = newUsername;
-        currentUser.password = await helpers.encryptPassword(newPassword);
-        await currentUser.save();
+        // Actualizar los valores del usuario
+        userToUpdate.username = newUsername;
+        userToUpdate.password = await helpers.encryptPassword(newPassword);
+        await userToUpdate.save();
 
         // Devolver el usuario actualizado
-        return done(null, currentUser);
+        return done(null, userToUpdate);
     } catch (err) {
-        return done(err, false, { message: 'Error updating user' });
+        return done(err, false, { message: 'Error al actualizar el usuario' });
     }
 }));
-
 
 //serialUser
 
