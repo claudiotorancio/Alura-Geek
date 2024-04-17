@@ -127,7 +127,8 @@ export class ListaControllers {
   }
 
 
-   editarLista(username, password, id) {
+   editarLista(newUsername, newPassword, id) {
+    
     modalControllers.baseModal();
     const modal = document.getElementById("modal");
     const productoEdicion = modal.querySelector("[data-table]");
@@ -136,12 +137,12 @@ export class ListaControllers {
     <div class="card-header">
         <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">usuario a editar</p>
-            <div class="form-group">
-            <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${username}" required data-username >
-            </div>
-            <div class="form-group"> 
-            <input class="form-control mt-3 mb-3 p-2"  placeholder="password" type="text"value="${password}" required data-password>
-            </div>
+                    <div class="form-group">
+                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required name="newUsername" >
+                    </div>
+                    <div class="form-group"> 
+                    <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${newPassword}" required name="newPassword">
+                    </div>
                     <div>
                     <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
                     </div>
@@ -156,17 +157,14 @@ export class ListaControllers {
     modal.querySelector("[data-forma]").addEventListener("submit", async (e) => {
       e.preventDefault();
   
-      const newUsername = document.querySelector("[data-username]").value;
-    const newPassword = document.querySelector("[data-password]").value;
+      const form = e.currentTarget;
+      const formData = new FormData(form);
   
-   
-      const dataUser = new FormData();
-    dataUser.append("newUsername", newUsername);
-    dataUser.append("newPassword", newPassword);
+      // Agregar el ID del usuario al FormData
    
   
       try {
-        await this.listaServicesInstance.updateUser(dataUser, id);
+        await this.listaServicesInstance.updateUser(formData, id);
         modalControllers.modalProductoEditado();
       } catch (error) {
         console.error(error);
