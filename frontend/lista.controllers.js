@@ -128,9 +128,6 @@ export class ListaControllers {
 
 
    editarLista(username, password, id) {
-    // Omitir la definición de newPassword si no se proporciona un valor
-    const passwordInput = newPassword ? `<input class="form-control mt-3 mb-3 p-2" placeholder="Password" type="password" required name="password">` : '';
-  
     modalControllers.baseModal();
     const modal = document.getElementById("modal");
     const productoEdicion = modal.querySelector("[data-table]");
