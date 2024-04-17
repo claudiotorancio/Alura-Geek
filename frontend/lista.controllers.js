@@ -140,10 +140,10 @@ export class ListaControllers {
         <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">usuario a editar</p>
                     <div class="form-group">
-                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required data-newUsername >
+                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required name="newUsername" >
                     </div>
                     <div class="form-group"> 
-                    <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${newPassword}" required data-newPassword>
+                    <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${newPassword}" required name="newPassword">
                     </div>
                     <div>
                     <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>

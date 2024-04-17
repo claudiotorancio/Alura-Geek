@@ -12,7 +12,7 @@ const updateUser = async (req, res) => {
     // }
     
 
-    const id = req.params.id;
+    const id = req.params;
 
     // Obtener los datos del usuario a actualizar desde el req.body
     const {  newUsername, newPassword } = req.body;
@@ -55,6 +55,7 @@ console.log(userToUpdate)
 
 //     // Devolver el usuario actualizado
 //     return res.json({ user: userToUpdate });
+res.status(200).json({ message: 'Usuario actualizado correctamente' });
   } catch (error) {
     console.error('Error al actualizar usuario:', error);
     res.status(500).json({ message: 'Error interno del servidor' });
