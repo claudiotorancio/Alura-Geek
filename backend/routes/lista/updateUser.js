@@ -6,22 +6,22 @@ import helpers from "../../lib/helpers.js";
 const updateUser = async (req, res) => {
   try {
     //Verificar si el usuario autenticado es un administrador
-    if (!req.isAuthenticated()) {
-      return res.status(401).json({ message: 'No autorizado' });
-    }
+    // if (!req.isAuthenticated()) {
+    //   return res.status(401).json({ message: 'No autorizado' });
+    // }
 
-    const userId = req.params.id;
+    const id = req.params.id;
 
     // Obtener los datos del usuario a actualizar desde el req.body
     const {  newUsername, newPassword } = req.body;
-console.log(req.body)
+console.log(req.body, id)
     // Buscar el usuario en la base de datos por su ID
     await mongoose.connect(MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
 
-    const userToUpdate = await Users.findById(userId);
+    const userToUpdate = await Users.findById(id);
 console.log(userToUpdate)
     // Verificar si se encontró el usuario
     if (!userToUpdate) {
