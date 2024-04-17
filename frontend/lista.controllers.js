@@ -160,9 +160,10 @@ export class ListaControllers {
       const password = document.querySelector("[data-role]").value;
   
   
-      const dataEdit = new FormData();
-      dataEdit.append("username", username);
-      dataEdit.append("password", password);
+      const dataEdit = {
+        username,
+        password
+      };
 
 
       await this.listaServicesInstance.updateUser(dataEdit, id)

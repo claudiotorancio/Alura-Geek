@@ -31,7 +31,10 @@ export class ListaServices {
     try {
       await fetch(`${this.baseURL}/api/updateUser/${id}`, {
         method: "PUT",
-        body: user
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataUser),
       });
     } catch (error) {
       console.error("Error al eliminar usuario:", error);
