@@ -9,12 +9,7 @@ import { ListaControllers } from "./lista.controllers.js";
 import { productosInicio } from "./controllers_inicio.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const tabla = document.querySelector("[data-lista]");
-  const titulo = document.querySelector("[data-titulo]");
-  const listaControllersInstance = new ListaControllers(tabla, titulo);
-  listaControllersInstance.renderLista(); // Llamada al método renderLista()
-
-  controllers.render();
+ 
   const user = JSON.parse(sessionStorage.getItem("user")) || null;
   const divUsuario = document.querySelector(".rounded-circle");
   const actualizarUsuario = document.querySelector(".data-user");
@@ -24,6 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Mostrar u ocultar elementos según si hay un usuario autenticado
   if (user) {
+    controllers.render();
+    const tabla = document.querySelector("[data-lista]");
+    const titulo = document.querySelector("[data-titulo]");
+    const listaControllersInstance = new ListaControllers(tabla, titulo);
+    listaControllersInstance.renderLista(); // Llamada al método renderLista()
     actualizarUsuario.textContent = `${user}`;
     logoutUsuario.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i>';
     userActive.style.display = "none";
