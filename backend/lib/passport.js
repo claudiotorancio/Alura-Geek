@@ -44,6 +44,41 @@ passport.use('local.signin', new LocalStrategy({
 }));
 
 
+passport.use('local.update', new LocalStrategy({
+    usernameField: 'newUsername', // Cambiar al campo de nuevo nombre de usuario
+    passwordField: 'newPassword', // Cambiar al campo de nueva contraseña
+    passReqToCallback: true
+}, async (req, newUsername, newPassword, done) => {
+    try {
+        // Verificar si el usuario está autenticado (puedes omitir este paso si no es necesario)
+        // if (!req.isAuthenticated()) {
+        //     return done(null, false, { message: 'Usuario no autenticado' });
+        // }
+
+        // Obtener el usuario desde el req.body
+        const { id } = req.params; // Asegúrate de enviar el userId desde el cliente
+console.log(id)
+        // Buscar el usuario en la base de datos por su ID
+        const currentUser = await Users.findById(id);
+console.log(currentUser)
+        // Verificar si se encontró el usuario
+        if (!currentUser) {
+            return done(null, false, { message: 'Usuario no encontrado' });
+        }
+
+        // Actualizar el nombre de usuario y la contraseña
+        currentUser.username = newUsername;
+        currentUser.password = await helpers.encryptPassword(newPassword);
+        await currentUser.save();
+
+        // Devolver el usuario actualizado
+        return done(null, currentUser);
+    } catch (err) {
+        return done(err, false, { message: 'Error al actualizar usuario' });
+    }
+}));
+
+
 //SignUp
 
 passport.use('local.signup', new LocalStrategy({
