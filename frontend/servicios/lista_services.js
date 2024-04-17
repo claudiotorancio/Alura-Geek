@@ -37,7 +37,7 @@ export class ListaServices {
         body: JSON.stringify(dataUser),
       });
     } catch (error) {
-      console.error("Error al eliminar usuario:", error);
+      console.error("Error al actualizar usuario:", error);
       throw error;
     }
   };
