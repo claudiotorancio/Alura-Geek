@@ -69,6 +69,8 @@ passport.use('local.signup', new LocalStrategy({
     }
 }));
 
+
+
 passport.use('local.update', new LocalStrategy({
     usernameField: 'newUsername', // Cambiar al campo de nuevo nombre de usuario
     passwordField: 'newPassword', // Cambiar al campo de nueva contraseña
@@ -77,7 +79,7 @@ passport.use('local.update', new LocalStrategy({
     try {
         // Obtener el usuario actualmente autenticado
         const currentUser = req.user;
-
+console.log(req.user)
         // Verificar si el nuevo nombre de usuario ya está en uso
         const existingUser = await Users.findOne({ username: newUsername });
         if (existingUser && existingUser._id !== currentUser._id) {
