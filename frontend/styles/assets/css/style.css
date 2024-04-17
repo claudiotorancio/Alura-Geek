@@ -95,7 +95,6 @@ header {
 
 .texto h1 {
   font-weight: 700;
-  font-size: 60px;
   color: var(--fuente-banner);
   margin-top: 80px;
   margin-left: 120px;
@@ -225,7 +224,7 @@ header {
 
 #menu-mobile {
   z-index: 1;
-  font-size: 1.8rem;
+  font-size:2vw;
 }
 
 #menu-mobile.active {
@@ -250,6 +249,7 @@ header {
 #menu-mobile div.open:nth-child(1) {
   z-index: 1000;
   height: 70vh;
+  font-size: 1.5vw;
 
 }
 
