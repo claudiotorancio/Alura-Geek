@@ -14,7 +14,12 @@ const updateUser = async (req, res) => {
 
     // Obtener los datos del usuario a actualizar desde el req.body
     const {  newUsername, newPassword } = req.body;
-console.log(req.body, id)
+
+    const currentUser = {
+        newUsername,
+        newPassword
+    }
+console.log(currentUser, id)
     // Buscar el usuario en la base de datos por su ID
     await mongoose.connect(MONGODB_URI, {
         useNewUrlParser: true,
@@ -29,8 +34,8 @@ console.log(userToUpdate)
     }
 
     // Actualizar los datos del usuario
-    userToUpdate.username = newUsername;
-    userToUpdate.password = await helpers.encryptPassword(newPassword);; // No es necesario encriptar si se proporciona desde el admin
+    userToUpdate.username = currentUser.newUsername;
+    userToUpdate.password = await helpers.encryptPassword(currentUser.newPassword);; // No es necesario encriptar si se proporciona desde el admin
     await userToUpdate.save();
 
     // Devolver el usuario actualizado
