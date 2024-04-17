@@ -26,6 +26,19 @@ export class ListaServices {
     }
   };
 
+  updateUser = async (user, id) => {
+    
+    try {
+      await fetch(`${this.baseURL}/api/updateUser/${id}`, {
+        method: "PUT",
+        body: user
+      });
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
+      throw error;
+    }
+  };
+
   totalProductos = async (id) => {
     try {
       const respuesta = await fetch(`${this.baseURL}/api/contadorProductos/${id}`);

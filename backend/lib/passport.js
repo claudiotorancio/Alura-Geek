@@ -69,6 +69,34 @@ passport.use('local.signup', new LocalStrategy({
     }
 }));
 
+passport.use('local.update', new LocalStrategy({
+    usernameField: 'newUsername', // Cambiar al campo de nuevo nombre de usuario
+    passwordField: 'newPassword', // Cambiar al campo de nueva contraseña
+    passReqToCallback: true
+}, async (req, newUsername, newPassword, done) => {
+    try {
+        // Obtener el usuario actualmente autenticado
+        const currentUser = req.user;
+
+        // Verificar si el nuevo nombre de usuario ya está en uso
+        const existingUser = await Users.findOne({ username: newUsername });
+        if (existingUser && existingUser._id !== currentUser._id) {
+            return done(null, false, { message: 'Username already taken' });
+        }
+
+        // Actualizar el nombre de usuario y la contraseña
+        currentUser.username = newUsername;
+        currentUser.password = await helpers.encryptPassword(newPassword);
+        await currentUser.save();
+
+        // Devolver el usuario actualizado
+        return done(null, currentUser);
+    } catch (err) {
+        return done(err, false, { message: 'Error updating user' });
+    }
+}));
+
+
 //serialUser
 
 passport.serializeUser((user, done) => {

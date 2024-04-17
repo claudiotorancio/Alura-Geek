@@ -1,5 +1,6 @@
 import { productoServices } from "./servicios/product_services.js";
 import { ListaServices } from "./servicios/lista_services.js";
+import { modalControllers } from "./modal.js";
 
 export class ListaControllers {
   constructor(tabla, titulo) {
@@ -10,7 +11,8 @@ export class ListaControllers {
 
   async renderLista() {
     try {
-      const { listado, usersCantidad } = await this.listaServicesInstance.listaUsers();
+      const { listado, usersCantidad } =
+        await this.listaServicesInstance.listaUsers();
       const { total } = await productoServices.listaProductos();
 
       const tituloTabla = `
@@ -43,7 +45,7 @@ export class ListaControllers {
           created_at: usuario.created_at,
           role: usuario.role,
           totalProductos: totalProductos,
-          id: usuario._id
+          id: usuario._id,
         };
         this.tabla.appendChild(this.nuevaLista(usuarioData));
       }
@@ -54,7 +56,12 @@ export class ListaControllers {
 
   nuevaLista({ username, created_at, role, totalProductos, id }) {
     const fechaCreacion = new Date(created_at);
-    const fechaFormateada = `${fechaCreacion.getFullYear().toString().slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${("0" + fechaCreacion.getDate()).slice(-2)}`;
+    const fechaFormateada = `${fechaCreacion
+      .getFullYear()
+      .toString()
+      .slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${(
+      "0" + fechaCreacion.getDate()
+    ).slice(-2)}`;
 
     const card = document.createElement("div");
 
@@ -68,7 +75,9 @@ export class ListaControllers {
                 <td style="width: 25%;">${fechaFormateada}</td>
                 <td style="width: 25%;">${totalProductos}</td>
                 <td style="width: 25%;">${role}</td>
-                <td style="width: 25%;"><button type="button" class="btn btn-danger" data-userid="${id}" >cut</button></td>
+                <td style="width: 25%;"><button type="button" class="btn btn-danger" data-userid="${id}" >delete</button></td>
+                <td style="width: 25%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >update</button></td>
+
               </tr>
             </tbody>
           </table>
@@ -79,15 +88,17 @@ export class ListaControllers {
       event.preventDefault();
       const userId = event.target.dataset.userid;
 
-      const confirmacion = confirm("¿Estás seguro de que quieres eliminar esta tarjeta?");
+      const confirmacion = confirm(
+        "¿Estás seguro de que quieres eliminar esta tarjeta?"
+      );
 
       if (confirmacion) {
         try {
-          if (role !== 'admin') {
+          if (role !== "admin") {
             await this.listaServicesInstance.eliminarUser(userId);
             card.remove();
           } else {
-            alert('No se puede eliminar un usuario administrador');
+            alert("No se puede eliminar un usuario administrador");
           }
         } catch (error) {
           console.error(error);
@@ -95,11 +106,77 @@ export class ListaControllers {
       }
     });
 
+    card.querySelector("[data-userUp]").addEventListener("click", async (event) => {
+      event.preventDefault();
+      try{
+            this.editarLista(username,role, id );
+      
+        } catch (error) {
+          console.error(error);
+        }
+        });
+
     return card;
   }
 
   async obtenerTotalProductos(userId) {
-    const { cantidad } = await this.listaServicesInstance.totalProductos(userId);
+    const { cantidad } = await this.listaServicesInstance.totalProductos(
+      userId
+    );
     return cantidad;
+  }
+
+
+  editarLista (username,  password, id) { 
+    modalControllers.baseModal();
+    const modal = document.getElementById("modal");
+    const productoEdicion = modal.querySelector("[data-table]");
+    productoEdicion.innerHTML = `
+      <div class="text-center">
+      <div class="card-header">
+          <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
+              <p class="parrafo">usuario a editar</p>
+                      <div class="form-group">
+                      <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${username}" required data-username >
+                      </div>
+                      <div class="form-group"> 
+                      <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${password}" required data-role>
+                      </div>
+                      <div>
+                      <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
+                      </div>
+          </form>
+      </div>
+      </div>
+  
+      `;
+  
+    productoEdicion.classList.add("modalVisor");
+  
+    modal.querySelector("[data-forma]").addEventListener("submit", async (e) => {
+      e.preventDefault();
+  
+      const username = document.querySelector("[data-username]").value;
+      const password = document.querySelector("[data-role]").value;
+  
+  
+      const dataEdit = new FormData();
+      dataEdit.append("username", username);
+      dataEdit.append("password", password);
+
+
+      await this.listaServicesInstance.updateUser(dataEdit, id)
+  
+        .then(() => {
+          modalControllers.modalProductoEditado();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  
+  
+
+
   }
 }
