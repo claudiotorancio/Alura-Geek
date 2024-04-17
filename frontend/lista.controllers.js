@@ -157,7 +157,7 @@ export class ListaControllers {
       e.preventDefault();
   
       const newUsername = document.querySelector("[data-username]").value;
-    const newPassword = document.querySelector("data-password").value;
+    const newPassword = document.querySelector("[data-password]").value;
   
    
       const dataUser = new FormData();
