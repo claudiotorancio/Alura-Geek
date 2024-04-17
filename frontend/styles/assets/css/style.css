@@ -338,7 +338,7 @@ margin-bottom: 0.5rem;
 
 }
 
-@media (min-width: 768px) and (max-width: 1200px) {
+@media (min-width: 768px) and (max-width: 1500px) {
   .busqueda {
     margin-right: 10%;
   }
