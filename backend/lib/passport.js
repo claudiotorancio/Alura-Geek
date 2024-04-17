@@ -57,10 +57,24 @@ passport.use('local.update', new LocalStrategy({
 
         // Obtener el usuario desde el req.body
         const { id } = req.params; // Asegúrate de enviar el userId desde el cliente
-console.log(id)
+        
+console.log(`id de usuario: ${id}`)
+
+const {newUsername, newPassword} = req.body
+
+console.log(`req.body: ${req.body}`);
+
+        // const newData {
+        //     newUsername,
+        //     newPassword
+        // }
+
+        // console.log(newData)
+
         // Buscar el usuario en la base de datos por su ID
         const currentUser = await Users.findById(id);
 console.log(currentUser)
+
         // Verificar si se encontró el usuario
         if (!currentUser) {
             return done(null, false, { message: 'Usuario no encontrado' });
