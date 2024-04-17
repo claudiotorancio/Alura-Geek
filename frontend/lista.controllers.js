@@ -158,14 +158,19 @@ export class ListaControllers {
     modal.querySelector("[data-forma]").addEventListener("submit", async (e) => {
       e.preventDefault();
   
-      const form = e.currentTarget;
-      const formData = new FormData(form);
+      const newUsername = document.getElementsByName("newUsername").value;
+      const newPassword = document.getElementsByName("newPassword").value;
   
-      // Agregar el ID del usuario al FormData
-      formData.append("id", id);
   
+      const dataEdit = {
+        newUsername,
+        newPassword
+      };
+
+
+ 
       try {
-        await this.listaServicesInstance.updateUser(formData);
+        await this.listaServicesInstance.updateUser(dataEdit, id);
         modalControllers.modalProductoEditado();
       } catch (error) {
         console.error(error);
