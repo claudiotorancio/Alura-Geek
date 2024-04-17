@@ -10,14 +10,14 @@ const updateUser = async (req, res) => {
       }
 
       // Verificar si el usuario está autenticado
-//       if (!req.isAuthenticated()) {
-//         return res.status(401).json({ message: 'Usuario no autenticado' });
-//       }
+      if (!req.isAuthenticated()) {
+        return res.status(401).json({ message: 'Usuario no autenticado' });
+      }
 console.log(user)
-//       // Manejar la respuesta de la estrategia 'local.update'
-//       if (!user) {
-//         return res.status(400).json({ message: 'Error al actualizar usuario' });
-//       }
+      // Manejar la respuesta de la estrategia 'local.update'
+      if (!user) {
+        return res.status(400).json({ message: 'Error al actualizar usuario' });
+      }
 
       // Si la actualización fue exitosa, enviar una respuesta con el usuario actualizado
       console.log('Usuario actualizado:', user);
