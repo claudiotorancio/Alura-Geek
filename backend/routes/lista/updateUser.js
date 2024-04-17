@@ -8,17 +8,19 @@ const updateUser = async (req, res) => {
     //Verificar si el usuario autenticado es un administrador
     // if (!req.isAuthenticated()) {
     //   return res.status(401).json({ message: 'No autorizado' });
+
     // }
+    
 
     const id = req.params.id;
 
     // Obtener los datos del usuario a actualizar desde el req.body
-    // const {  newUsername, newPassword } = req.body;
+    const {  newUsername, newPassword } = req.body;
 
     const currentUser = {
         newUsername,
         newPassword,
-        id
+    
     }
 
 
