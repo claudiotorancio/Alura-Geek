@@ -29,7 +29,7 @@ header {
 .cabecera_container {
     z-index: 3;
   width: 85%;
-  height: 8vh;
+  height: 17vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -379,10 +379,11 @@ margin-bottom: 0.5rem;
     border: none;
     margin-left: 0.62rem;
   }
-
   .cabecera_container {
-    width: 90%;
-  }
+  
+  height: 8vh;
+
+}
   .cabecera_logo {
     width: 9.5rem;
   }
