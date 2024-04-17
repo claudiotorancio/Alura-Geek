@@ -106,15 +106,16 @@ export class ListaControllers {
       }
     });
 
-    card.querySelector("[data-userUp]").addEventListener("click", async (event) => {
-      event.preventDefault();
-      try{
-            this.editarLista(username,role, id );
-      
+    card
+      .querySelector("[data-userUp]")
+      .addEventListener("click", async (event) => {
+        event.preventDefault();
+        try {
+          this.editarLista(username, role, id);
         } catch (error) {
           console.error(error);
         }
-        });
+      });
 
     return card;
   }
@@ -126,8 +127,7 @@ export class ListaControllers {
     return cantidad;
   }
 
-
-  editarLista (newUsername, id) { 
+  editarLista(id) {
     modalControllers.baseModal();
     const modal = document.getElementById("modal");
     const productoEdicion = modal.querySelector("[data-table]");
@@ -136,12 +136,12 @@ export class ListaControllers {
       <div class="card-header">
           <form action="/api/updateUser/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
               <p class="parrafo">usuario a editar</p>
-                      <div class="form-group">
-                      <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required data-newUsername >
-                      </div>
-                      <div class="form-group"> 
-                      <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" required data-newPassword>
-                      </div>
+              <div class="form-group mt-3">
+              <input type="text" name="newUsername" placeholder="newUsername" class="form-control" required>
+          </div>
+          <div class="form-group mt-3">
+              <input type="password"  name="newPassword" placeholder="newPassword" class="form-control" required>
+          </div>
                       <div>
                       <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
                       </div>
@@ -150,34 +150,31 @@ export class ListaControllers {
       </div>
   
       `;
-  
+
     productoEdicion.classList.add("modalVisor");
-  
-    modal.querySelector("[data-forma]").addEventListener("submit", async (e) => {
-      e.preventDefault();
-  
-      const newUsername = document.querySelector("[data-newUsername]").value;
-      const newPassword = document.querySelector("[data-newPassword]")[0].value;
-  
-  
-      const dataEdit = {
-        newUsername,
-        newPassword
-      };
 
+    modal
+      .querySelector("[data-forma]")
+      .addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      await this.listaServicesInstance.updateUser(dataEdit, id)
-  
-        .then(() => {
-          modalControllers.modalProductoEditado();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
-  
-  
+        const newUsername = document.getElementsByName("newUsername")[0].value;
+        const newPassword = document.getElementsByName("newPassword")[0].value;
 
+        const dataEdit = {
+          newUsername,
+          newPassword,
+        };
 
+        await this.listaServicesInstance
+          .updateUser(dataEdit, id)
+
+          .then(() => {
+            modalControllers.modalProductoEditado();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
   }
 }
