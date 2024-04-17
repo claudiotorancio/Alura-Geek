@@ -29,7 +29,7 @@ header {
 .cabecera_container {
     z-index: 3;
   width: 85%;
-  height: 17vh;
+  height: 12vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
