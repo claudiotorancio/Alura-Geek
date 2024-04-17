@@ -140,7 +140,7 @@ export class ListaControllers {
                       <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${username}" required data-username >
                       </div>
                       <div class="form-group"> 
-                      <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${password}" required data-role>
+                      <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${password}" required data-password>
                       </div>
                       <div>
                       <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
@@ -157,7 +157,7 @@ export class ListaControllers {
       e.preventDefault();
   
       const username = document.querySelector("[data-username]").value;
-      const password = document.querySelector("[data-role]").value;
+      const password = document.querySelector("[data-psasword]").value;
   
   
       const dataEdit = {

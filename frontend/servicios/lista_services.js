@@ -26,7 +26,7 @@ export class ListaServices {
     }
   };
 
-  updateUser = async (user, id) => {
+  updateUser = async (dataUser, id) => {
     
     try {
       await fetch(`${this.baseURL}/api/updateUser/${id}`, {
