@@ -51,9 +51,9 @@ passport.use('local.update', new LocalStrategy({
 }, async (req, newUsername, newPassword, done) => {
     try {
         // Verificar si el usuario está autenticado (puedes omitir este paso si no es necesario)
-        // if (!req.isAuthenticated()) {
-        //     return done(null, false, { message: 'Usuario no autenticado' });
-        // }
+        if (!req.isAuthenticated()) {
+            return done(null, false, { message: 'Usuario no autenticado' });
+        }
 
         // Obtener el usuario desde el req.body
         const  _id  = req.params.id; // Asegúrate de enviar el userId desde el cliente
