@@ -12,7 +12,7 @@ const updateUser = async (req, res) => {
     // }
     
 
-    const {id} = req.params._id;
+    const id = req.params._id;
     const userId = req.params.id
 
     // Obtener los datos del usuario a actualizar desde el req.body
