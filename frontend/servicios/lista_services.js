@@ -32,7 +32,7 @@ export class ListaServices {
       await fetch(`${this.baseURL}/api/updateUser/${id}`, {
         method: "PUT",
        
-        body: dataUser,
+        body: {dataUser},
       });
     } catch (error) {
       console.error("Error al actualizar usuario:", error);
