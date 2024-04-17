@@ -10,7 +10,7 @@ const updateUser = async (req, res) => {
     //   return res.status(401).json({ message: 'No autorizado' });
     // }
 
-    const user_id = req.user._id;
+    const id = req.params._id;
 
     // Obtener los datos del usuario a actualizar desde el req.body
     const {  newUsername, newPassword } = req.body;
@@ -18,12 +18,12 @@ const updateUser = async (req, res) => {
     const currentUser = {
         newUsername,
         newPassword,
-        user_id
+        id
     }
 
 
 
-console.log(`ID del usuario: ${user_id}`);
+console.log(`ID del usuario: ${id}`);
     console.log(`Nuevo nombre de usuario: ${currentUser.newUsername}`);
     console.log(`Nueva contraseña: ${currentUser.newPassword}`);
     console.log(`Nuevo User: ${currentUser}`);
@@ -33,14 +33,14 @@ console.log(`ID del usuario: ${user_id}`);
 //         newPassword
 //     }
 // console.log(currentUser, id)
-//     // Buscar el usuario en la base de datos por su ID
-//     await mongoose.connect(MONGODB_URI, {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true,
-//       });
+    // Buscar el usuario en la base de datos por su ID
+    await mongoose.connect(MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
 
-//     const userToUpdate = await Users.findById(id);
-// console.log(userToUpdate)
+    const userToUpdate = await Users.findById(id);
+console.log(userToUpdate)
 //     // Verificar si se encontró el usuario
 //     if (!userToUpdate) {
 //       return res.status(404).json({ message: 'Usuario no encontrado' });
