@@ -27,11 +27,11 @@ const updateUser = async (req, res) => {
 
    
 
-console.log(`req,body: ${JSON.stringify(req.body)}`)
+console.log(`req,body: ${req.body}`)
 console.log(`ID del usuario: ${id}`);
-    console.log(`Nuevo nombre de usuario: ${newUsername}`);
-    console.log(`Nueva contraseña: ${newPassword}`);
-    console.log(`Nuevo User: ${JSON.stringify(currentUser)}`);
+    console.log(`Nuevo nombre de usuario: ${currentUser.newUsername}`);
+    console.log(`Nueva contraseña: ${currentUser.newPassword}`);
+    console.log(`Nuevo User: ${currentUser}`);
 
 //     const currentUser = {
 //         newUsername,
