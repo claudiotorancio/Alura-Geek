@@ -163,10 +163,10 @@ export class ListaControllers {
       const formData = new FormData(form);
   
       // Agregar el ID del usuario al FormData
-      formData.append("id", id);
+   
   
       try {
-        await this.listaServicesInstance.updateUser(formData);
+        await this.listaServicesInstance.updateUser(formData, id);
         modalControllers.modalProductoEditado();
       } catch (error) {
         console.error(error);
