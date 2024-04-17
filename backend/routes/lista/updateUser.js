@@ -11,17 +11,17 @@ const updateUser = async (req, res) => {
 
     // }
     
-    const {  username, password } = req.body;
+    const {  newUsername, newPassword } = req.body;
     const {id }= req.params;
     
-    
+
     // Obtener los datos del usuario a actualizar desde el req.body
 
 
 
     const currentUser = {
-    username,
-        password,
+    newUsername,
+        newPassword,
     
     }
 
@@ -29,8 +29,8 @@ const updateUser = async (req, res) => {
 
 console.log(`req,body: ${JSON.stringify(req.body)}`)
 console.log(`ID del usuario: ${id}`);
-    console.log(`Nuevo nombre de usuario: ${username}`);
-    console.log(`Nueva contraseña: ${password}`);
+    console.log(`Nuevo nombre de usuario: ${newUsername}`);
+    console.log(`Nueva contraseña: ${newPassword}`);
     console.log(`Nuevo User: ${JSON.stringify(currentUser)}`);
 
 //     const currentUser = {
