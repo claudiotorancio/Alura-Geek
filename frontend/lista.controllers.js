@@ -127,7 +127,7 @@ export class ListaControllers {
   }
 
 
-  editarLista (newUsername,id) { 
+  editarLista (newUsername, id) { 
     modalControllers.baseModal();
     const modal = document.getElementById("modal");
     const productoEdicion = modal.querySelector("[data-table]");
@@ -140,7 +140,7 @@ export class ListaControllers {
                       <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required data-newUsername >
                       </div>
                       <div class="form-group"> 
-                      <input class="form-control mt-3 mb-3 p-2"  placeholder="new Password" type="password" value="" required data-newPassword>
+                      <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" required data-newPassword>
                       </div>
                       <div>
                       <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
@@ -157,7 +157,7 @@ export class ListaControllers {
       e.preventDefault();
   
       const newUsername = document.querySelector("[data-newUsername]").value;
-      const newPassword = document.querySelector("[data-newPassword]").value;
+      const newPassword = document.querySelector("[data-newPassword]")[0].value;
   
   
       const dataEdit = {
