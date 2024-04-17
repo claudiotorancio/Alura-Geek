@@ -1,5 +1,6 @@
-import passport from '../../lib/passport.js';
-import Users from '../../models/User.js';
+import mongoose from "mongoose";
+import MONGODB_URI from "../../config.js";
+import Users from "../../models/User.js";;
 
 const updateUser = async (req, res) => {
   try {
@@ -8,13 +9,18 @@ const updateUser = async (req, res) => {
       return res.status(401).json({ message: 'No autorizado' });
     }
 
-    const {id} = req.params.id
+    const userId = req.params.id;
 console.log(id)
     // Obtener los datos del usuario a actualizar desde el req.body
     const {  newUsername, newPassword } = req.body;
 console.log(req.body)
     // Buscar el usuario en la base de datos por su ID
-    const userToUpdate = await Users.findById(id);
+    await mongoose.connect(MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+
+    const userToUpdate = await Users.findById(userId);
 console.log(userToUpdate)
     // Verificar si se encontró el usuario
     if (!userToUpdate) {
