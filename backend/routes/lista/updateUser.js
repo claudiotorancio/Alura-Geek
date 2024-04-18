@@ -8,7 +8,19 @@ const updateUser = async (req, res) => {
         console.error('Error al autenticar la sesión del usuario:', error);
         return res.status(500).json({ error: 'Error al autenticar la sesión del usuario' });
       }
+
+      // Verificar si el usuario está autenticado
+      // if (!req.isAuthenticated()) {
+      //   return res.status(401).json({ message: 'Usuario no autenticado' });
+      // }
 console.log(user)
+      // Manejar la respuesta de la estrategia 'local.update'
+      if (!user) {
+        return res.status(400).json({ message: 'Error al actualizar usuario' });
+      }
+
+      // Si la actualización fue exitosa, enviar una respuesta con el usuario actualizado
+      console.log('Usuario actualizado:', user);
       return res.json({ user });
     })(req, res); // Pasar req y res al middleware de Passport
   } catch (error) {

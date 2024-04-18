@@ -71,21 +71,21 @@ console.log(`id de usuario: ${_id}`)
         // console.log(newData)
 
         // Buscar el usuario en la base de datos por su ID
-        const currentUser = await Users.findById(_id);
-console.log(currentUser)
+        const user = await Users.findById({_id: _id});
+console.log(user)
 
         // Verificar si se encontró el usuario
-        if (!currentUser) {
+        if (!user) {
             return done(null, false, { message: 'Usuario no encontrado' });
         }
 
         // Actualizar el nombre de usuario y la contraseña
-        currentUser.username = newUsername;
-        currentUser.password = await helpers.encryptPassword(newPassword);
-        await currentUser.save();
+        user.username = newUsername;
+        user.password = await helpers.encryptPassword(newPassword);
+        await user.save();
 
         // Devolver el usuario actualizado
-        return done(null, currentUser);
+        return done(null, user);
     } catch (err) {
         return done(err, false, { message: 'Error al actualizar usuario' });
     }
