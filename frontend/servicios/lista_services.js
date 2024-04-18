@@ -27,15 +27,13 @@ export class ListaServices {
   };
 
   updateUser = async (dataUser, id) => {
-    console.log(dataUser, id)
+    console.log(dataUser)
     try {
       await fetch(`${this.baseURL}/api/updateUser/${id}`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-      
         body: JSON.stringify (dataUser),
       });
     } catch (error) {

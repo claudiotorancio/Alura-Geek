@@ -249,7 +249,7 @@ header {
 #menu-mobile div.open:nth-child(1) {
   z-index: 1000;
   height: 70vh;
-  font-size: 1.5vw;
+  
 
 }
 
@@ -328,6 +328,11 @@ ul li a {
   margin: var(--cardMargin);
 }
 
+
+.form-check {
+  width: 0%;
+
+}
 
 
 

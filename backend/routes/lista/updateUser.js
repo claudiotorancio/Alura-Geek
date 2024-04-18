@@ -11,7 +11,7 @@ const updateUser = async (req, res) => {
     }
 
     //cuerpo del body
-    const {newUsername, newPassword} = req.body
+    const {newUsername, newPassword, newRole} = req.body
   
 
     // Obtener el usuario desde el _id
@@ -34,7 +34,8 @@ console.log(`id de usuario: ${_id}`)
     // Actualizar el nombre de usuario y la contraseña
     user.username = newUsername;
     user.password = await helpers.encryptPassword(newPassword);
-    
+    user.role = newRole;
+
     //salvamos los nuevos datos
     await user.save();
 

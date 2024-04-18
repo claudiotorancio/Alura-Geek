@@ -19,7 +19,7 @@ export class ListaControllers {
         <div>
           <div class="row">
             <div class="col-md-12">
-              <h2 class="card-header">Usuarios registrados</h2>
+              <h2 class="card-header">Users</h2>
               <table class="table">
                 <thead>
                   <tr>
@@ -132,24 +132,36 @@ export class ListaControllers {
     const modal = document.getElementById("modal");
     const productoEdicion = modal.querySelector("[data-table]");
   
-    productoEdicion.innerHTML = `
-      <div class="text-center">
-        <div class="card-header">
-          <form action="/api/updateUser/" enctype="multipart/form-data" id="form"  method="PUT" data-forma>                
-            <p class="parrafo">usuario a editar</p>
-            <div class="form-group">
-              <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${username}"  required name="newUsername" >
-            </div>
-            <div class="form-group"> 
-              <input class="form-control mt-3 mb-3 p-2"  placeholder="nueva contraseña" type="password"  required name="newPassword">
-            </div>
-            <div>
-              <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
-            </div>
-          </form>
-        </div>
+    productoEdicion.innerHTML =  `
+    <div class="text-center">
+      <div class="card-header">
+        <form action="/api/updateUser/" enctype="multipart/form-data" id="form"  method="PUT" data-forma>                
+          <p class="parrafo">Usuario a editar</p>
+          <div class="form-group">
+            <input class="form-control mt-3 p-2"  placeholder="Nombre de usuario" type="text" value="${username}" required name="newUsername">
+          </div>
+          <div class="form-group"> 
+            <input class="form-control mt-3 mb-3 p-2"  placeholder="newPassword" type="password"  required name="newPassword">
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="user" name="newRole" id="roleUser" checked>
+            <label class="form-check-label" for="roleUser">
+              user
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="admin" name="newRole" id="roleAdmin">
+            <label class="form-check-label" for="roleAdmin">
+              admin
+            </label>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
+          </div>
+        </form>
       </div>
-    `;
+    </div>
+  `;
   
     productoEdicion.classList.add("modalVisor");
 
