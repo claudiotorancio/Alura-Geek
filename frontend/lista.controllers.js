@@ -75,8 +75,8 @@ export class ListaControllers {
                 <td style="width: 25%;">${fechaFormateada}</td>
                 <td style="width: 25%;">${totalProductos}</td>
                 <td style="width: 25%;">${role}</td>
-                <td style="width: 25%;"><button type="button" class="btn btn-danger" data-userid="${id}" >delete</button></td>
-                <td style="width: 25%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >update</button></td>
+                <td style="width: 15%;"><button type="button" class="btn btn-danger" data-userid="${id}" >del</button></td>
+                <td style="width: 15%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >up</button></td>
 
               </tr>
             </tbody>

@@ -27,7 +27,6 @@ export class ListaServices {
   };
 
   updateUser = async (dataUser, id) => {
-    console.log(dataUser)
     try {
       await fetch(`${this.baseURL}/api/updateUser/${id}`, {
         method: "PUT",
