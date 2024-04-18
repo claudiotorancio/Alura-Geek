@@ -16,15 +16,7 @@ const getUser = async (req, res) => {
 
     console.log(`params: ${req.params.id}`)
 
-    let _id
-
-    if(req.params.id === null){
-       _id  = req.user._id// Asegúrate de enviar el userId desde el cliente
-    } else {
-      _id = req.params.id
-    }
-
-   
+    const _id  = req.user._id// Asegúrate de enviar el userId desde el cliente
 
     console.log(`id usuario: ${_id}`)
    
