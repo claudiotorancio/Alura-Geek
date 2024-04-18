@@ -56,9 +56,9 @@ passport.use('local.update', new LocalStrategy({
         // }
 
         // Obtener el usuario desde el req.body
-        const  [id]  = req.params // Asegúrate de enviar el userId desde el cliente
+        const  {id}  = req.params // Asegúrate de enviar el userId desde el cliente
         
-console.log(`id de usuario: ${newUsername}`)
+// console.log(`id de usuario: ${newUsername}`)
         
 console.log(`id de usuario: ${id}`)
 
