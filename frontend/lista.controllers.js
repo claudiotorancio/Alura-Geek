@@ -13,6 +13,7 @@ export class ListaControllers {
     try {
 
       const role = await this.getRole(userId);
+      console.log(`renderlista(role): ${role} `)
       if(role === 'admin') 
         await this.renderUsersList();
       
@@ -197,6 +198,7 @@ export class ListaControllers {
 
     async getRole(userId) {
     const user = await this.listaServicesInstance.getUser(userId);
+    console.log(`getRole: ${user}`)
     return user.role;
   }
 }

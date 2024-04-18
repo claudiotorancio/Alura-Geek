@@ -6,6 +6,7 @@ export class ListaServices {
   }
 
   getUser = async (id) => {
+    console.log(`getUser id: ${id}`)
     try {
      await fetch(`${this.baseURL}/api/getUser/${id}`, {
       method: "GET",
