@@ -9,10 +9,14 @@ export class ListaControllers {
     this.listaServicesInstance = new ListaServices();
   }
 
-    async renderLista(role) {
+    async renderLista() {
     try {
-      if(role === 'admin')
-      await this.renderUsersList();
+
+      const role = await this.getRole(userId);
+      if(role === 'admin') 
+        await this.renderUsersList();
+      
+     
     } catch (error) {
       console.log(error);
     }
@@ -189,7 +193,11 @@ export class ListaControllers {
         console.error(error);
       }
     });
+  }
 
+    async getRole(userId) {
+    const user = await this.listaServicesInstance.listaUsers(userId);
+    return user.role;
   }
 }
 
