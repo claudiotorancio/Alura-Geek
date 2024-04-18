@@ -109,7 +109,7 @@ export class ListaControllers {
     card.querySelector("[data-userUp]").addEventListener("click", async (event) => {
       event.preventDefault();
       try{
-            this.editarLista(username,role, id );
+            this.editarLista(username, id );
       
         } catch (error) {
           console.error(error);
@@ -127,49 +127,54 @@ export class ListaControllers {
   }
 
 
-   editarLista(newUsername, newPassword, id) {
-    
+  editarLista(username, id) {
     modalControllers.baseModal();
     const modal = document.getElementById("modal");
     const productoEdicion = modal.querySelector("[data-table]");
+  
     productoEdicion.innerHTML = `
-    <div class="text-center">
-    <div class="card-header">
-        <form action="/api/updateUser/" id="form"  method="PUT" data-forma>                
+      <div class="text-center">
+        <div class="card-header">
+          <form action="/api/updateUser/" enctype="multipart/form-data" id="form"  method="PUT" data-forma>                
             <p class="parrafo">usuario a editar</p>
-                    <div class="form-group">
-                    <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${newUsername}" required name="newUsername" >
-                    </div>
-                    <div class="form-group"> 
-                    <input class="form-control mt-3 mb-3 p-2"  placeholder="Password" type="password" value="${newPassword}" required name="newPassword">
-                    </div>
-                    <div>
-                    <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
-                    </div>
-        </form>
-    </div>
-    </div>
-
+            <div class="form-group">
+              <input class="form-control mt-3 p-2"  placeholder="nombre" type="text" value="${username}"  required name="newUsername" >
+            </div>
+            <div class="form-group"> 
+              <input class="form-control mt-3 mb-3 p-2"  placeholder="nueva contraseña" type="password"  required name="newPassword">
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary btn-lg">Editar usuario</button>
+            </div>
+          </form>
+        </div>
+      </div>
     `;
   
     productoEdicion.classList.add("modalVisor");
-  
+
     modal.querySelector("[data-forma]").addEventListener("submit", async (e) => {
       e.preventDefault();
-  
-      const form = e.currentTarget;
-      const formData = new FormData(form);
-  
-      // Agregar el ID del usuario al FormData
+
+        // Obtener los datos del formulario
+     const form = document.getElementById("form");
+     const formData = new FormData(form);
    
+     // Convertir los datos de FormData a JSON
+     const jsonData = {};
+     for (const [key, value] of formData.entries()) {
+       jsonData[key] = value;
+     }
   
       try {
-        await this.listaServicesInstance.updateUser(formData, id);
+        await this.listaServicesInstance.updateUser(jsonData, id);
         modalControllers.modalProductoEditado();
       } catch (error) {
         console.error(error);
       }
     });
+  
+  
   
   
   

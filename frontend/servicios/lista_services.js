@@ -31,8 +31,12 @@ export class ListaServices {
     try {
       await fetch(`${this.baseURL}/api/updateUser/${id}`, {
         method: "PUT",
-       
-        body: dataUser,
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      
+        body: JSON.stringify (dataUser),
       });
     } catch (error) {
       console.error("Error al actualizar usuario:", error);

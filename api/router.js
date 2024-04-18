@@ -1,4 +1,4 @@
-import { Router, json, urlencoded } from "express";
+import express, { Router, urlencoded } from "express";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import AWS from "aws-sdk";
@@ -24,9 +24,7 @@ import path from "path";
 
 const router = Router();
 
-router.use(cookieParser());
-router.use(urlencoded({ extended: false }));
-router.use(json());
+
 
 // Configuración de sesión
 
@@ -75,6 +73,11 @@ const upload = () =>
 
 export const uploadSingle = upload(process.env.BUCKET_AWS).single("image");
 const uploadSingleUpdate = upload(process.env.BUCKET_AWS).single("imagePath");
+
+router.use(express.json())
+router.use(cookieParser());
+router.use(express.urlencoded({extended:false}));
+;
 
 // Rutas
 router.post("/api/signup", signup);

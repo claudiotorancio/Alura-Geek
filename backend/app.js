@@ -1,4 +1,4 @@
-import express from "express";
+import express, {urlencoded} from "express";
 import { fileURLToPath } from "url";
 import path from "path";
 import morgan from "morgan";
@@ -14,7 +14,10 @@ const __dirname = path.dirname(__filename);
 const outputPath = path.join(__dirname, "public");
 
 //middlewares
+app.use(urlencoded({extended:false}));
+app.use(express.json())
 app.use(morgan("dev"));
+
 app.use(cors());
 //passport
 

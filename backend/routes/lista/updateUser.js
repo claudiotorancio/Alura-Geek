@@ -1,52 +1,41 @@
-import passport from '../../lib/passport.js';
+
 import Users from '../../models/User.js';
 import helpers from '../../lib/helpers.js';
 
 const updateUser = async (req, res) => {
+
   try {
-    // Verificar si el usuario está autenticado (puedes omitir este paso si no es necesario)
+      // Verificar si el usuario está autenticado
     if (!req.isAuthenticated()) {
       return res.status(401).json({ error: 'Usuario no autenticado' });
     }
 
-    // Obtener el usuario desde el req.body
+    //cuerpo del body
+    const {newUsername, newPassword} = req.body
+  
+
+    // Obtener el usuario desde el _id
     const  _id  = req.params.id // Asegúrate de enviar el userId desde el cliente
 
-    const {newUsername, newPassword} = req.body
-    
-// console.log(`id de usuario: ${newUsername}`)
-    
 console.log(`id de usuario: ${_id}`)
-
-// // const {newUsername, newPassword} = req.body
-
-// // console.log(`req.body: ${req.body}`);
-
-    // const {newData} = req.body
-
-    // console.log(newData)
 
     // Buscar el usuario en la base de datos por su ID
     const user = await Users.findById(_id);
-console.log(user)
+    console.log(user)
 
     // Verificar si se encontró el usuario
     if (!user) {
         return (null, false, { message: 'Usuario no encontrado' });
     }
 
+    console.log(`nuevo username; ${newUsername}`)
+    console.log(`nuevo password; ${newPassword}`)
+
     // Actualizar el nombre de usuario y la contraseña
     user.username = newUsername;
     user.password = await helpers.encryptPassword(newPassword);
-
-console.log(`antiguo username: ${user.username}`)
-console.log(`antiguo password: ${user.password}`)
-
-
-console.log(`nuevo username: ${newUsername}`)
-console.log(`nuevo password: ${newPassword}`)
-
-
+    
+    //salvamos los nuevos datos
     await user.save();
 
       return res.json({ user });
