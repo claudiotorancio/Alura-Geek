@@ -9,7 +9,7 @@ export class ListaControllers {
     this.listaServicesInstance = new ListaServices();
   }
 
-    async renderLista() {
+    async renderLista(userId) {
     try {
 
       const role = await this.getRole(userId);
