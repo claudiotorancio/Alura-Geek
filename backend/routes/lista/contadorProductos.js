@@ -7,7 +7,7 @@ import Vista from '../../models/Vista.js'
 const contadorProductos = async (req, res) => {
     try {
 
-        if (!req.isAuthenticated()) {
+        if (!req.isAuthenticated() && req.user.role === 'admin') {
            return res.status(401).json({ error: 'Usuario no autenticado' });
           }
           

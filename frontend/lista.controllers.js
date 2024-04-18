@@ -9,48 +9,52 @@ export class ListaControllers {
     this.listaServicesInstance = new ListaServices();
   }
 
-  async renderLista() {
+    async renderLista(role) {
     try {
-      const { listado, usersCantidad } =
-        await this.listaServicesInstance.listaUsers();
-      const { total } = await productoServices.listaProductos();
-
-      const tituloTabla = `
-        <div>
-          <div class="row">
-            <div class="col-md-12">
-              <h2 class="card-header">Users</h2>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 25%;">Users (${usersCantidad})</th>
-                    <th style="width: 25%;">Create</th>
-                    <th style="width: 25%;">prod (${total})</th>
-                    <th style="width: 25%;">Rol</th>
-                    <th style="width: 25%;">Accion</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-          </div>
-        </div>`;
-      this.titulo.innerHTML = tituloTabla;
-
-      listado.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-      for (const usuario of listado) {
-        const totalProductos = await this.obtenerTotalProductos(usuario._id);
-        const usuarioData = {
-          username: usuario.username,
-          created_at: usuario.created_at,
-          role: usuario.role,
-          totalProductos: totalProductos,
-          id: usuario._id,
-        };
-        this.tabla.appendChild(this.nuevaLista(usuarioData));
-      }
+      if(role === 'admin')
+      await this.renderUsersList();
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async renderUsersList() {
+    const { listado, usersCantidad } = await this.listaServicesInstance.listaUsers();
+    const { total } = await productoServices.listaProductos();
+
+    const tituloTabla = `
+      <div>
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="card-header">Users</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Users (${usersCantidad})</th>
+                  <th style="width: 25%;">Create</th>
+                  <th style="width: 25%;">prod (${total})</th>
+                  <th style="width: 25%;">Rol</th>
+                  <th style="width: 25%;">Accion</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>`;
+    this.titulo.innerHTML = tituloTabla;
+
+    listado.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+    for (const usuario of listado) {
+      const totalProductos = await this.obtenerTotalProductos(usuario._id);
+      const usuarioData = {
+        username: usuario.username,
+        created_at: usuario.created_at,
+        role: usuario.role,
+        totalProductos: totalProductos,
+        id: usuario._id,
+      };
+      this.tabla.appendChild(this.nuevaLista(usuarioData));
     }
   }
 

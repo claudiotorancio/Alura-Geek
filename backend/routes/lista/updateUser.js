@@ -6,7 +6,7 @@ const updateUser = async (req, res) => {
 
   try {
       // Verificar si el usuario está autenticado
-    if (!req.isAuthenticated()) {
+    if (!req.isAuthenticated() && req.user.role === 'admin') {
       return res.status(401).json({ error: 'Usuario no autenticado' });
     }
 
