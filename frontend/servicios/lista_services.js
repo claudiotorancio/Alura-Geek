@@ -5,6 +5,17 @@ export class ListaServices {
     this.baseURL = baseURL;
   }
 
+  getUser = async (id) => {
+    try {
+      const respuesta = await fetch(`${this.baseURL}/api/getUser/${id}`);
+      return respuesta.json();
+    } catch (error) {
+      console.error("Error al obtener el usuario:", error);
+      throw error;
+    }
+  };
+
+
   listaUsers = async () => {
     try {
       const respuesta = await fetch(`${this.baseURL}/api/renderLista`);

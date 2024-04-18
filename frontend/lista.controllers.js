@@ -196,7 +196,7 @@ export class ListaControllers {
   }
 
     async getRole(userId) {
-    const user = await this.listaServicesInstance.listaUsers(userId);
+    const user = await this.listaServicesInstance.getUser(userId);
     return user.role;
   }
 }

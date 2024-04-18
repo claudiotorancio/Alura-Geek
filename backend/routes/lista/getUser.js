@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Users from "../../models/User.js";
 
-const listaAdmin = async (req, res) => {
+const getUser = async (req, res) => {
   try {
   //  Verificar si el usuario está autenticado
     if (!req.isAuthenticated() && req.user.role === 'admin') {
@@ -14,6 +14,10 @@ const listaAdmin = async (req, res) => {
       return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
     }
 
+    const  _id  = req.params.id // Asegúrate de enviar el userId desde el cliente
+
+    console.log(`id usuario: ${_id}`)
+
     // Conectar a la base de datos mediante serverless function
     await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
@@ -21,11 +25,10 @@ const listaAdmin = async (req, res) => {
     });
 
     // Obtener el listado de usuarios
-    const listado = await Users.find();
-    const usersCantidad = await Users.countDocuments()
+   const user = await Users.findById(_id);
 
-    // Retornar el listado de usuarios
-    res.json({ listado, usersCantidad });
+    // Retornar el user
+    res.json({ user });
 
   } catch (error) {
     console.error(error);
@@ -33,4 +36,4 @@ const listaAdmin = async (req, res) => {
   }
 };
 
-export default listaAdmin;
+export default getUser;

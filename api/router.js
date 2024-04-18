@@ -20,6 +20,7 @@ import listaAdmin from "../backend/routes/lista/lista.Admin.js";
 import deleteUser from "../backend/routes/lista/deleteUser.js";
 import contadorProductos from "../backend/routes/lista/contadorProductos.js";
 import updateUser from "../backend/routes/lista/updateUser.js";
+import getUser from "../backend/routes/lista/getUser.js";
 import path from "path";
 
 const router = Router();
@@ -83,6 +84,7 @@ router.use(express.urlencoded({extended:false}));
 router.post("/api/signup", signup);
 router.post("/api/signin", signin);
 router.delete("/api/logout", logout);
+router.get('/api/getUser/:id', getUser)
 router.get('/api/renderLista', listaAdmin)
 router.delete('/api/deleteUser/:id', deleteUser)
 router.put('/api/updateUser/:id', updateUser)
