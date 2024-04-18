@@ -1,28 +1,47 @@
 import passport from '../../lib/passport.js';
+import Users from '../../models/User.js';
+import helpers from '../../lib/helpers.js';
 
 const updateUser = async (req, res) => {
   try {
-    // Autenticar la sesión del usuario y ejecutar la estrategia 'local.update'
-    passport.authenticate('local.update',  async (error, user) => {
-      if (error) {
-        console.error('Error al autenticar la sesión del usuario:', error);
-        return res.status(500).json({ error: 'Error al autenticar la sesión del usuario' });
-      }
+    // Verificar si el usuario está autenticado (puedes omitir este paso si no es necesario)
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: 'Usuario no autenticado' });
+    }
 
-      // Verificar si el usuario está autenticado
-      // if (!req.isAuthenticated()) {
-      //   return res.status(401).json({ message: 'Usuario no autenticado' });
-      // }
+    // Obtener el usuario desde el req.body
+    const  _id  = req.params.id // Asegúrate de enviar el userId desde el cliente
+
+    const {newUsername, newPassword} = req.body
+    
+// console.log(`id de usuario: ${newUsername}`)
+    
+console.log(`id de usuario: ${_id}`)
+
+// // const {newUsername, newPassword} = req.body
+
+// // console.log(`req.body: ${req.body}`);
+
+    // const {newData} = req.body
+
+    // console.log(newData)
+
+    // Buscar el usuario en la base de datos por su ID
+    const user = await Users.findById(_id);
 console.log(user)
-      // Manejar la respuesta de la estrategia 'local.update'
-      if (!user) {
-        return res.status(400).json({ message: 'Error al actualizar usuario' });
-      }
 
-      // Si la actualización fue exitosa, enviar una respuesta con el usuario actualizado
-      console.log('Usuario actualizado:', user);
+    // Verificar si se encontró el usuario
+    if (!user) {
+        return (null, false, { message: 'Usuario no encontrado' });
+    }
+
+    // Actualizar el nombre de usuario y la contraseña
+    user.username = newUsername;
+    user.password = await helpers.encryptPassword(newPassword);
+    await user.save();
+
       return res.json({ user });
-    })(req, res); // Pasar req y res al middleware de Passport
+    
   } catch (error) {
     console.error('Error al actualizar usuario:', error);
     res.status(500).json({ message: 'Error interno del servidor' });

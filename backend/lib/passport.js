@@ -44,52 +44,52 @@ passport.use('local.signin', new LocalStrategy({
 }));
 
 
-passport.use('local.update', new LocalStrategy({
-    usernameField: 'newUsername', // Cambiar al campo de nuevo nombre de usuario
-    passwordField: 'newPassword', // Cambiar al campo de nueva contraseña
-    passReqToCallback: true
-}, async (req, newUsername, newPassword, done) => {
-    try {
-        // Verificar si el usuario está autenticado (puedes omitir este paso si no es necesario)
-        // if (!req.isAuthenticated()) {
-        //     return done(null, false, { message: 'Usuario no autenticado' });
-        // }
+// passport.use('local.update', new LocalStrategy({
+//     usernameField: 'newUsername', // Cambiar al campo de nuevo nombre de usuario
+//     passwordField: 'newPassword', // Cambiar al campo de nueva contraseña
+//     passReqToCallback: true
+// }, async (req, newUsername, newPassword, done) => {
+//     try {
+//         // Verificar si el usuario está autenticado (puedes omitir este paso si no es necesario)
+//         // if (!req.isAuthenticated()) {
+//         //     return done(null, false, { message: 'Usuario no autenticado' });
+//         // }
 
-        // Obtener el usuario desde el req.body
-        const  {id}  = req.params // Asegúrate de enviar el userId desde el cliente
+//         // Obtener el usuario desde el req.body
+//         const  {id}  = req.params // Asegúrate de enviar el userId desde el cliente
         
-// console.log(`id de usuario: ${newUsername}`)
+// // console.log(`id de usuario: ${newUsername}`)
         
-console.log(`id de usuario: ${id}`)
+// console.log(`id de usuario: ${id}`)
 
-// // const {newUsername, newPassword} = req.body
+// // // const {newUsername, newPassword} = req.body
 
-// // console.log(`req.body: ${req.body}`);
+// // // console.log(`req.body: ${req.body}`);
 
-        // const {newData} = req.body
+//         // const {newData} = req.body
 
-        // console.log(newData)
+//         // console.log(newData)
 
-        // Buscar el usuario en la base de datos por su ID
-        const user = await Users.findById(id);
-console.log(user)
+//         // Buscar el usuario en la base de datos por su ID
+//         const user = await Users.findById(id);
+// console.log(user)
 
-        // Verificar si se encontró el usuario
-        if (!user) {
-            return done(null, false, { message: 'Usuario no encontrado' });
-        }
+//         // Verificar si se encontró el usuario
+//         if (!user) {
+//             return done(null, false, { message: 'Usuario no encontrado' });
+//         }
 
-        // Actualizar el nombre de usuario y la contraseña
-        user.username = newUsername;
-        user.password = await helpers.encryptPassword(newPassword);
-        await user.save();
+//         // Actualizar el nombre de usuario y la contraseña
+//         user.username = newUsername;
+//         user.password = await helpers.encryptPassword(newPassword);
+//         await user.save();
 
-        // Devolver el usuario actualizado
-        return done(null, user);
-    } catch (err) {
-        return done(err, false, { message: 'Error al actualizar usuario' });
-    }
-}));
+//         // Devolver el usuario actualizado
+//         return done(null, user);
+//     } catch (err) {
+//         return done(err, false, { message: 'Error al actualizar usuario' });
+//     }
+// }));
 
 
 //SignUp
