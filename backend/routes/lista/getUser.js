@@ -14,9 +14,17 @@ const getUser = async (req, res) => {
       return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
     }
 
-    console.log(`params: ${req.params}`)
+    console.log(`params: ${req.params.id}`)
 
-    const _id  = req.user._id// Asegúrate de enviar el userId desde el cliente
+    let _id
+
+    if(req.params.id === null){
+       _id  = req.user._id// Asegúrate de enviar el userId desde el cliente
+    } else {
+      _id = req.params.id
+    }
+
+   
 
     console.log(`id usuario: ${_id}`)
    

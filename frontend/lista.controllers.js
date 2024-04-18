@@ -11,13 +11,10 @@ export class ListaControllers {
 
     async renderLista() {
     try {
-
       const role = await this.getRole();
-      console.log(`renderlista(role): ${role} `)
       if(role === 'admin') 
         await this.renderUsersList();
       
-     
     } catch (error) {
       console.log(error);
     }
@@ -63,14 +60,20 @@ export class ListaControllers {
     }
   }
 
-  nuevaLista({ username, created_at, role, totalProductos, id }) {
+  async getRole(id) {
+    const user = await this.listaServicesInstance.getUser(id);
+    console.log(`getRole: ${user}`)
+    return user.role;
+  }
+
+  async getUsername(userId) {
+        const user = await this.listaServicesInstance.getUser(userId);
+        return user.username;
+      }
+
+    nuevaLista({ username, created_at, role, totalProductos, id }) {
     const fechaCreacion = new Date(created_at);
-    const fechaFormateada = `${fechaCreacion
-      .getFullYear()
-      .toString()
-      .slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${(
-      "0" + fechaCreacion.getDate()
-    ).slice(-2)}`;
+    const fechaFormateada = `${fechaCreacion.getFullYear().toString().slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${("0" + fechaCreacion.getDate()).slice(-2)}`;
 
     const card = document.createElement("div");
 
@@ -86,53 +89,48 @@ export class ListaControllers {
                 <td style="width: 25%;">${role}</td>
                 <td style="width: 15%;"><button type="button" class="btn btn-danger" data-userid="${id}" >del</button></td>
                 <td style="width: 15%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >up</button></td>
-
               </tr>
             </tbody>
           </table>
         </div>
       </div>`;
 
-    card.querySelector("button").addEventListener("click", async (event) => {
-      event.preventDefault();
-      const userId = event.target.dataset.userid;
-
-      const confirmacion = confirm(
-        "¿Estás seguro de que quieres eliminar esta tarjeta?"
-      );
-
-      if (confirmacion) {
-        try {
-          if (role !== "admin") {
-            await this.listaServicesInstance.eliminarUser(userId);
-            card.remove();
-          } else {
-            alert("No se puede eliminar un usuario administrador");
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    });
-
-    card.querySelector("[data-userUp]").addEventListener("click", async (event) => {
-      event.preventDefault();
-      try{
-            this.editarLista(username, id );
-      
-        } catch (error) {
-          console.error(error);
-        }
-        });
+    card.querySelector("button").addEventListener("click", this.deleteButtonHandler.bind(this));
+    card.querySelector("[data-userUp]").addEventListener("click", this.updateButtonHandler.bind(this));
 
     return card;
   }
 
-  async obtenerTotalProductos(userId) {
-    const { cantidad } = await this.listaServicesInstance.totalProductos(
-      userId
-    );
-    return cantidad;
+    async deleteButtonHandler(event) {
+    event.preventDefault();
+    const userId = event.target.dataset.userid;
+
+    const confirmacion = confirm("¿Estás seguro de que quieres eliminar esta tarjeta?");
+
+    if (confirmacion) {
+      try {
+        const role = await this.getRole(userId);
+        if (role !== "admin") {
+          await this.listaServicesInstance.eliminarUser(userId);
+          event.target.closest(".row").remove();
+        } else {
+          alert("No se puede eliminar un usuario administrador");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
+  async updateButtonHandler(event) {
+    event.preventDefault();
+    const userId = event.target.dataset.userid;
+    try {
+      const username = await this.getUsername(userId);
+      this.editarLista(username, userId);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 
@@ -196,11 +194,7 @@ export class ListaControllers {
     });
   }
 
-    async getRole(id) {
-    const user = await this.listaServicesInstance.getUser(id);
-    console.log(`getRole: ${user}`)
-    return user.role;
-  }
+   
 }
 
 
