@@ -5,23 +5,22 @@ export class ListaServices {
     this.baseURL = baseURL;
   }
 
-  getUser = async (id) => {
-    console.log(`getUser id: ${id}`);
+  getUser = async () => {
+    // console.log(`getUser id: ${id}`);
     try {
-      const respuesta = await fetch(`${this.baseURL}/api/getUser/${id}`);
-  
+      const respuesta = await fetch(`${this.baseURL}/api/getUser`);
+    
       const data = await respuesta.json();
-      // Acceder a user desde el objeto de respuesta
       const user = data.user;
       
-      console.log(`getUser user: ${user}`);
-      // Retornar user si es necesario
-      return {user};
+      console.log(`getUser user:`, user);
+      return user; // Simplificado para devolver solo el usuario
     } catch (error) {
       console.error("Error al obtener usuario:", error);
-      throw error; // Propagar el error para manejarlo en otro lugar si es necesario
+      throw error;
     }
   };
+  
   
 
 
