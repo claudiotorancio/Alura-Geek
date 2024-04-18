@@ -14,9 +14,12 @@ const getUser = async (req, res) => {
       return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
     }
 
+    console.log(`params: ${req.params}`)
+
     const _id  = req.user._id// Asegúrate de enviar el userId desde el cliente
 
     console.log(`id usuario: ${_id}`)
+   
 
     // Conectar a la base de datos mediante serverless function
     await mongoose.connect(MONGODB_URI, {

@@ -196,8 +196,8 @@ export class ListaControllers {
     });
   }
 
-    async getRole() {
-    const user = await this.listaServicesInstance.getUser();
+    async getRole(id) {
+    const user = await this.listaServicesInstance.getUser(id);
     console.log(`getRole: ${user}`)
     return user.role;
   }
