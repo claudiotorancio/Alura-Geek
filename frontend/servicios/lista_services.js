@@ -7,12 +7,13 @@ export class ListaServices {
 
   getUser = async (id) => {
     try {
-      const respuesta = await fetch(`${this.baseURL}/api/getUser/${id}`);
-      return respuesta.json();
-    } catch (error) {
-      console.error("Error al obtener el usuario:", error);
-      throw error;
-    }
+     await fetch(`${this.baseURL}/api/getUser/${id}`, {
+      method: "GET",
+    });
+  } catch (error) {
+    console.error("Error al eliminar usuario:", error);
+    throw error;
+  }
   };
 
 

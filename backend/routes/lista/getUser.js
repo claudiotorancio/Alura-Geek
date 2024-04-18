@@ -14,7 +14,7 @@ const getUser = async (req, res) => {
       return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
     }
 
-    const  _id  = req.params.id // Asegúrate de enviar el userId desde el cliente
+    const _id  = req.user._id// Asegúrate de enviar el userId desde el cliente
 
     console.log(`id usuario: ${_id}`)
 
@@ -24,9 +24,9 @@ const getUser = async (req, res) => {
       useUnifiedTopology: true,
     });
 
-    // Obtener el listado de usuarios
+    // Obtener el user
    const user = await Users.findById(_id);
-
+console.log(user)
     // Retornar el user
     res.json({ user });
 
