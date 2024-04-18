@@ -489,6 +489,11 @@ width: 4rem;
     margin-top: 1.5rem;
   }
 
+  .table-container {
+    max-height: 10rem; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Hace que la barra de desplazamiento vertical aparezca cuando el contenido excede la altura máxima */
+  }
+
   .consolas {
     margin-left: 1rem;
     width: 7rem;
