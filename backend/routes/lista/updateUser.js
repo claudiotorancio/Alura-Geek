@@ -38,6 +38,15 @@ console.log(user)
     // Actualizar el nombre de usuario y la contraseña
     user.username = newUsername;
     user.password = await helpers.encryptPassword(newPassword);
+
+console.log(`antiguo username: ${user.username}`)
+console.log(`antiguo password: ${user.password}`)
+
+
+console.log(`nuevo username: ${newUsername}`)
+console.log(`nuevo password: ${newPassword}`)
+
+
     await user.save();
 
       return res.json({ user });
