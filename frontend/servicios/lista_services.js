@@ -8,17 +8,15 @@ export class ListaServices {
   getUser = async (id) => {
     console.log(`getUser id: ${id}`);
     try {
-      const response = await fetch(`${this.baseURL}/api/getUser/${id}`, {
-        method: "GET",
-      });
+      const respuesta = await fetch(`${this.baseURL}/api/getUser/${id}`);
+  
+      const data = await respuesta.json();
+      // Acceder a user desde el objeto de respuesta
+      const user = data.user;
       
-      // Verificar el estado de la respuesta HTTP
-      if (!response.ok) {
-        throw new Error(`Error al obtener usuario: ${response.statusText}`);
-      }
-      
-      // Devolver los datos del usuario obtenidos de la respuesta
-      return await response.json();
+      console.log(`getUser user: ${user}`);
+      // Retornar user si es necesario
+      return {user};
     } catch (error) {
       console.error("Error al obtener usuario:", error);
       throw error; // Propagar el error para manejarlo en otro lugar si es necesario

@@ -5,7 +5,7 @@ import Users from "../../models/User.js";
 const getUser = async (req, res) => {
   try {
   //  Verificar si el usuario está autenticado
-    if (!req.isAuthenticated() && req.user.role === 'admin') {
+    if (!req.isAuthenticated()) {
       return res.status(401).json({ error: 'Usuario no autenticado' });
     }
 
