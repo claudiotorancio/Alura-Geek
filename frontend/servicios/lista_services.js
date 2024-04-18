@@ -6,16 +6,25 @@ export class ListaServices {
   }
 
   getUser = async (id) => {
-    console.log(`getUser id: ${id}`)
+    console.log(`getUser id: ${id}`);
     try {
-     await fetch(`${this.baseURL}/api/getUser/${id}`, {
-      method: "GET",
-    });
-  } catch (error) {
-    console.error("Error al eliminar usuario:", error);
-    throw error;
-  }
+      const response = await fetch(`${this.baseURL}/api/getUser/${id}`, {
+        method: "GET",
+      });
+      
+      // Verificar el estado de la respuesta HTTP
+      if (!response.ok) {
+        throw new Error(`Error al obtener usuario: ${response.statusText}`);
+      }
+      
+      // Devolver los datos del usuario obtenidos de la respuesta
+      return await response.json();
+    } catch (error) {
+      console.error("Error al obtener usuario:", error);
+      throw error; // Propagar el error para manejarlo en otro lugar si es necesario
+    }
   };
+  
 
 
   listaUsers = async () => {
