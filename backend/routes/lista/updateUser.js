@@ -8,7 +8,7 @@ const updateUser = async (req, res) => {
         console.error('Error al autenticar la sesión del usuario:', error);
         return res.status(500).json({ error: 'Error al autenticar la sesión del usuario' });
       }
-
+console.log(user)
       return res.json({ user });
     })(req, res); // Pasar req y res al middleware de Passport
   } catch (error) {
