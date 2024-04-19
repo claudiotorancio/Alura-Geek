@@ -5,9 +5,9 @@ export class ListaServices {
     this.baseURL = baseURL;
   }
 
-  getAdmin = async () => {
+  getAdmin = async (id) => {
     try {
-      const respuesta = await fetch(`${this.baseURL}/api/getAdmin`);
+      const respuesta = await fetch(`${this.baseURL}/api/getAdmin/${id}`);
       
       const data = await respuesta.json();
       const user = data.user;

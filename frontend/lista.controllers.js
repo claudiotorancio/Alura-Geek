@@ -122,9 +122,9 @@ export class ListaControllers {
     }
   }
 
-  async getAdmin() {
+  async getAdmin(id) {
     try {
-        user = await this.listaServicesInstance.getAdmin();
+        user = await this.listaServicesInstance.getAdmin(id);
       console.log(`getAdmin: ${user}`);
       return user.role;
     } catch (error) {
