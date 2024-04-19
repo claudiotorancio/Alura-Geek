@@ -5,14 +5,18 @@ import Users from "../../models/User.js";
 const getUser = async (req, res) => {
   try {
   //  Verificar si el usuario está autenticado
-    // if (!req.isAuthenticated()) {
-    //   return res.status(401).json({ error: 'Usuario no autenticado' });
-    // }
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: 'Usuario no autenticado' });
+    }
 
-    // // //Verificar si el usuario tiene el rol de administrador
-    // if (req.user.role !== 'admin') {
-    //   return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
-    // }
+    // //Verificar si el usuario tiene el rol de administrador
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
+    }
+
+    const role = req.user.role
+
+    console.log(`usuario: ${role}`)
 
     const userId = req.params.id;
 
@@ -30,7 +34,7 @@ console.log(user)
 
 
     // Retornar el user
-    res.json({ user });
+    res.json({ user, role });
 
   } catch (error) {
     console.error(error);
