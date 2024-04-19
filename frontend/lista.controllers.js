@@ -84,7 +84,7 @@ export class ListaControllers {
         </div>
       </div>`;
 
-    card.querySelector("button").addEventListener("click", this.deleteButtonHandler.bind(this));
+    card.querySelector("[data-userid]").addEventListener("click", this.deleteButtonHandler.bind(this));
     card.querySelector("[data-userUp]").addEventListener("click", this.updateButtonHandler.bind(this));
 
     return card;

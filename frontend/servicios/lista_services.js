@@ -21,6 +21,7 @@ export class ListaServices {
   };
 
   getUser = async (userId) => {
+    console.log(`getUser id:`, userId);
     try {
       const respuesta = await fetch(`${this.baseURL}/api/getUser/${userId}`);
       
