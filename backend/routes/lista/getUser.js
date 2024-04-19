@@ -4,19 +4,14 @@ import Users from "../../models/User.js";
 
 const getUser = async (req, res) => {
   try {
-  //  Verificar si el usuario está autenticado
-    // if (!req.isAuthenticated()) {
-    //   return res.status(401).json({ error: 'Usuario no autenticado' });
-    // }
-
-    // // //Verificar si el usuario tiene el rol de administrador
-    // if (req.user.role !== 'admin') {
-    //   return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
-    // }
+    //  Verificar si el usuario está autenticado
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Usuario no autenticado" });
+    }
 
     const userId = req.params.id;
 
-    console.log(`id usuario: ${userId}`)
+    console.log(`id usuario: ${userId}`);
 
     // Conectar a la base de datos mediante serverless function
     await mongoose.connect(MONGODB_URI, {
@@ -25,13 +20,11 @@ const getUser = async (req, res) => {
     });
 
     // Obtener el user
-   const user = await Users.findById(userId);
-console.log(user)
-
+    const user = await Users.findById(userId);
+    //console.log(user);
 
     // Retornar el user
     res.json({ user });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

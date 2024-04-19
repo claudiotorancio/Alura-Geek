@@ -6,7 +6,7 @@ const deleteUser = async (req, res) => {
   try {
     // Verificar si el usuario está autenticado
     if (!req.isAuthenticated()) {
-      return res.status(401).json({ error: 'Usuario no autenticado' });
+      return res.status(401).json({ error: "Usuario no autenticado" });
     }
 
     // Conectar a la base de datos
@@ -18,26 +18,15 @@ const deleteUser = async (req, res) => {
     // Obtener el ID del usuario a eliminar
     const userId = req.params.id;
 
-    // Verificar si el usuario autenticado tiene el rol de administrador
-    if (req.user.role === 'admin') {
-      // Buscar y eliminar el usuario por su ID
-      const deletedUser = await Users.findByIdAndDelete(userId);
-      
-      // Verificar si el usuario se encontró y se eliminó correctamente
-      if (!deletedUser) {
-        return res.status(404).json({ message: 'User not found' });
-      }
+    // Buscar y eliminar el usuario por su ID
+    const deletedUser = await Users.findByIdAndDelete(userId);
 
-      // Usuario eliminado con éxito
-      return res.json({ message: 'User deleted', deletedUser });
-    } else {
-      // Si el usuario no es administrador, devolver un error de autorización
-      return res.status(403).json({ error: 'Usuario no autorizado para eliminar usuarios' });
-    }
+    // Usuario eliminado con éxito
+    return res.json({ message: "User deleted", deletedUser });
   } catch (error) {
     // Manejar errores durante la eliminación del usuario
     console.error(error);
-    return res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 

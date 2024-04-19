@@ -1,4 +1,4 @@
-import express, { Router, urlencoded } from "express";
+import express, { Router } from "express";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import AWS from "aws-sdk";
@@ -26,9 +26,11 @@ import path from "path";
 
 const router = Router();
 
+// Configuración de midllewares
 
-
-// Configuración de sesión
+router.use(express.json());
+router.use(cookieParser());
+router.use(express.urlencoded({ extended: false }));
 
 router.use(
   session({
@@ -76,21 +78,19 @@ const upload = () =>
 export const uploadSingle = upload(process.env.BUCKET_AWS).single("image");
 const uploadSingleUpdate = upload(process.env.BUCKET_AWS).single("imagePath");
 
-router.use(express.json())
-router.use(cookieParser());
-router.use(express.urlencoded({extended:false}));
-;
 
-// Rutas
+// Rutas signin
 router.post("/api/signup", signup);
 router.post("/api/signin", signin);
 router.delete("/api/logout", logout);
-router.get('/api/getAdmin', getAdmin)
-router.get('/api/getUser/:id', getUser)
-router.get('/api/renderLista', listaAdmin)
-router.delete('/api/deleteUser/:id', deleteUser)
-router.put('/api/updateUser/:id', updateUser)
-router.get('/api/contadorProductos/:id', contadorProductos)
+// Rutas listado
+router.get("/api/getAdmin", getAdmin);
+router.get("/api/getUser/:id", getUser);
+router.get("/api/renderLista", listaAdmin);
+router.delete("/api/deleteUser/:id", deleteUser);
+router.put("/api/updateUser/:id", updateUser);
+router.get("/api/contadorProductos/:id", contadorProductos);
+// Rutas productos
 router.get("/api/renderInicio", renderInicio);
 router.get("/api/renderProducts", renderProducts);
 router.post("/api/createProduct", createProduct);
