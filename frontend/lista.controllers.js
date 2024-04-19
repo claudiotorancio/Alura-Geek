@@ -122,11 +122,11 @@ export class ListaControllers {
     }
   }
 
-  async getAdmin(id) {
+  async getAdmin() {
     try {
-        user = await this.listaServicesInstance.getAdmin(id);
-      console.log(`getAdmin: ${user}`);
-      return user.role;
+        role = await this.listaServicesInstance.getAdmin();
+      console.log(`getAdmin: ${role}`);
+      return role;
     } catch (error) {
       console.error("Error al obtener el rol del usuario:", error);
       throw error;

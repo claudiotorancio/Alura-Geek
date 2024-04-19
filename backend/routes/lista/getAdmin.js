@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-import MONGODB_URI from "../../config.js";
-import Users from "../../models/User.js";
+
 
 const getAdmin = async (req, res) => {
   try {
@@ -14,23 +12,13 @@ const getAdmin = async (req, res) => {
       return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
     }
 
-    const userId = req.user._id
+    const role = req.user.role
 
-    console.log(`id usuario: ${userId}`)
-
-    // Conectar a la base de datos mediante serverless function
-    await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-
-    // Obtener el user
-   const user = await Users.findById(userId);
-console.log(user)
+    console.log(`usuario: ${role}`)
 
 
     // Retornar el user
-    res.json({ user });
+    res.json({ role });
 
   } catch (error) {
     console.error(error);

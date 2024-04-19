@@ -85,7 +85,7 @@ router.use(express.urlencoded({extended:false}));
 router.post("/api/signup", signup);
 router.post("/api/signin", signin);
 router.delete("/api/logout", logout);
-router.get('/api/getAdmin/:id', getAdmin)
+router.get('/api/getAdmin', getAdmin)
 router.get('/api/getUser/:id', getUser)
 router.get('/api/renderLista', listaAdmin)
 router.delete('/api/deleteUser/:id', deleteUser)
