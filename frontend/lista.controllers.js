@@ -125,6 +125,69 @@ export class ListaControllers {
     return card;
   }
 
+  //   nuevaLista({ username, created_at, role, totalProductos, id }) {
+  //   const fechaCreacion = new Date(created_at);
+  //   const fechaFormateada = `${fechaCreacion.getFullYear().toString().slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${("0" + fechaCreacion.getDate()).slice(-2)}`;
+
+  //   const card = document.createElement("div");
+
+  //   card.innerHTML = `
+  //     <div class="row">
+  //       <div class="col-md-12">
+  //         <table class="table">
+  //           <tbody>
+  //             <tr style="text-align: left;">
+  //               <td style="width: 25%;" >${username}</td>
+  //               <td style="width: 25%;">${fechaFormateada}</td>
+  //               <td style="width: 25%;">${totalProductos}</td>
+  //               <td style="width: 25%;">${role}</td>
+  //               <td style="width: 15%;"><button type="button" class="btn btn-danger" data-userid="${id}" >del</button></td>
+  //               <td style="width: 15%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >up</button></td>
+  //             </tr>
+  //           </tbody>
+  //         </table>
+  //       </div>
+  //     </div>`;
+
+  //   card.querySelector("button").addEventListener("click", this.deleteButtonHandler.bind(this));
+  //   card.querySelector("[data-userUp]").addEventListener("click", this.updateButtonHandler.bind(this));
+
+  //   return card;
+  // }
+
+  // async deleteButtonHandler(event) {
+  //   event.preventDefault();
+  //   const userId = event.target.dataset.userid;
+
+  //   const confirmacion = confirm("¿Estás seguro de que quieres eliminar esta tarjeta?");
+
+  //   if (confirmacion) {
+  //     try {
+  //       const role = await this.getRole(userId);
+  //       if (role !== "admin") {
+  //         await this.listaServicesInstance.eliminarUser(userId);
+  //         event.target.closest(".row").remove();
+  //       } else {
+  //         alert("No se puede eliminar un usuario administrador");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // }
+
+  // async updateButtonHandler(event) {
+  //   event.preventDefault();
+  //   const userId = event.target.dataset.userid;
+  //   try {
+  //     const username = await this.getUsername(userId);
+  //     this.editarLista(username, userId);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+
   async obtenerTotalProductos(userId) {
     const { cantidad } = await this.listaServicesInstance.totalProductos(
       userId
@@ -256,67 +319,67 @@ export class ListaControllers {
 //     }
 //   }
 
-//   nuevaLista({ username, created_at, role, totalProductos, id }) {
-//     const fechaCreacion = new Date(created_at);
-//     const fechaFormateada = `${fechaCreacion.getFullYear().toString().slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${("0" + fechaCreacion.getDate()).slice(-2)}`;
+  // nuevaLista({ username, created_at, role, totalProductos, id }) {
+  //   const fechaCreacion = new Date(created_at);
+  //   const fechaFormateada = `${fechaCreacion.getFullYear().toString().slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${("0" + fechaCreacion.getDate()).slice(-2)}`;
 
-//     const card = document.createElement("div");
+  //   const card = document.createElement("div");
 
-//     card.innerHTML = `
-//       <div class="row">
-//         <div class="col-md-12">
-//           <table class="table">
-//             <tbody>
-//               <tr style="text-align: left;">
-//                 <td style="width: 25%;" >${username}</td>
-//                 <td style="width: 25%;">${fechaFormateada}</td>
-//                 <td style="width: 25%;">${totalProductos}</td>
-//                 <td style="width: 25%;">${role}</td>
-//                 <td style="width: 15%;"><button type="button" class="btn btn-danger" data-userid="${id}" >del</button></td>
-//                 <td style="width: 15%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >up</button></td>
-//               </tr>
-//             </tbody>
-//           </table>
-//         </div>
-//       </div>`;
+  //   card.innerHTML = `
+  //     <div class="row">
+  //       <div class="col-md-12">
+  //         <table class="table">
+  //           <tbody>
+  //             <tr style="text-align: left;">
+  //               <td style="width: 25%;" >${username}</td>
+  //               <td style="width: 25%;">${fechaFormateada}</td>
+  //               <td style="width: 25%;">${totalProductos}</td>
+  //               <td style="width: 25%;">${role}</td>
+  //               <td style="width: 15%;"><button type="button" class="btn btn-danger" data-userid="${id}" >del</button></td>
+  //               <td style="width: 15%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >up</button></td>
+  //             </tr>
+  //           </tbody>
+  //         </table>
+  //       </div>
+  //     </div>`;
 
-//     card.querySelector("button").addEventListener("click", this.deleteButtonHandler.bind(this));
-//     card.querySelector("[data-userUp]").addEventListener("click", this.updateButtonHandler.bind(this));
+  //   card.querySelector("button").addEventListener("click", this.deleteButtonHandler.bind(this));
+  //   card.querySelector("[data-userUp]").addEventListener("click", this.updateButtonHandler.bind(this));
 
-//     return card;
-//   }
+  //   return card;
+  // }
 
-//   async deleteButtonHandler(event) {
-//     event.preventDefault();
-//     const userId = event.target.dataset.userid;
+  // async deleteButtonHandler(event) {
+  //   event.preventDefault();
+  //   const userId = event.target.dataset.userid;
 
-//     const confirmacion = confirm("¿Estás seguro de que quieres eliminar esta tarjeta?");
+  //   const confirmacion = confirm("¿Estás seguro de que quieres eliminar esta tarjeta?");
 
-//     if (confirmacion) {
-//       try {
-//         const role = await this.getRole(userId);
-//         if (role !== "admin") {
-//           await this.listaServicesInstance.eliminarUser(userId);
-//           event.target.closest(".row").remove();
-//         } else {
-//           alert("No se puede eliminar un usuario administrador");
-//         }
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     }
-//   }
+  //   if (confirmacion) {
+  //     try {
+  //       const role = await this.getRole(userId);
+  //       if (role !== "admin") {
+  //         await this.listaServicesInstance.eliminarUser(userId);
+  //         event.target.closest(".row").remove();
+  //       } else {
+  //         alert("No se puede eliminar un usuario administrador");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // }
 
-//   async updateButtonHandler(event) {
-//     event.preventDefault();
-//     const userId = event.target.dataset.userid;
-//     try {
-//       const username = await this.getUsername(userId);
-//       this.editarLista(username, userId);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
+  // async updateButtonHandler(event) {
+  //   event.preventDefault();
+  //   const userId = event.target.dataset.userid;
+  //   try {
+  //     const username = await this.getUsername(userId);
+  //     this.editarLista(username, userId);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
 //   async obtenerTotalProductos(userId) {
 //     const { cantidad } = await this.listaServicesInstance.totalProductos(userId);

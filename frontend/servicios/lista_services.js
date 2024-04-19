@@ -5,9 +5,9 @@ export class ListaServices {
     this.baseURL = baseURL;
   }
 
-  getUser = async (id) => {
+  getUser = async (userId) => {
     try {
-      const respuesta = await fetch(`${this.baseURL}/api/getUser/${id}`);
+      const respuesta = await fetch(`${this.baseURL}/api/getUser/${userId}`);
       
       const data = await respuesta.json();
       const user = data.user;
