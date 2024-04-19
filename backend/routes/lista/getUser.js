@@ -14,7 +14,12 @@ const getUser = async (req, res) => {
       return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
     }
 
-    const userId = req.user._id ? req.user._id : req.params.id;
+    let userId = req.params.id; // Intenta obtener userId de la URL
+    
+    // Si no hay userId en la URL, utiliza req.user._id
+    if (!userId) {
+      userId = req.user._id;
+    }
 
     console.log(`id usuario: ${userId}`)
 
