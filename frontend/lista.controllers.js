@@ -122,6 +122,12 @@ export class ListaControllers {
     }
   }
 
+  
+  async getUsername(userId) {
+    const user = await this.listaServicesInstance.getUser(userId);
+    return user.username;
+  }
+
   async getAdmin() {
     try {
         const role = await this.listaServicesInstance.getAdmin();
