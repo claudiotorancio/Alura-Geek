@@ -115,8 +115,8 @@ export class ListaControllers {
     event.preventDefault();
     const id = event.target.dataset.userid;
     try {
-      const username = await this.getUsername(Id);
-      this.editarLista(username, Id);
+      const username = await this.getUsername(id);
+      this.editarLista(username, id);
     } catch (error) {
       console.error(error);
     }
