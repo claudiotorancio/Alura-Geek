@@ -11,8 +11,8 @@ export class ListaControllers {
 
     async renderLista() {
     try {
-      const role = await this.getAdmin();
-      if(role === 'admin') 
+      // const role = await this.getAdmin();
+      // if(role === 'admin') 
         await this.renderUsersList();
       
     } catch (error) {
@@ -77,7 +77,7 @@ export class ListaControllers {
                 <td style="width: 25%;">${totalProductos}</td>
                 <td style="width: 25%;">${role}</td>
                 <td style="width: 15%;"><button type="button" class="btn btn-danger" data-userid="${id}" >del</button></td>
-                <td style="width: 15%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >up</button></td>
+                <td style="width: 15%;"><button type="button" class="btn btn-primary" id="button" data-userUp="${id}" >up</button></td>
               </tr>
             </tbody>
           </table>
@@ -113,18 +113,20 @@ export class ListaControllers {
 
   async updateButtonHandler(event) {
     event.preventDefault();
-    const id = event.target.dataset.userid;
+    const userId = event.target.dataset.userup;
+    console.log(`updateButton id: ${userId}`);
     try {
-      const username = await this.getUsername(id);
-      this.editarLista(username, id);
+      const username = await this.getUsername(userId);
+      this.editarLista(username, userId);
     } catch (error) {
       console.error(error);
     }
   }
 
   
-  async getUsername(id) {
-    const user = await this.listaServicesInstance.getUser(id);
+  async getUsername(userId) {
+    console.log(`getUsername id: ${userId}`);
+    const user = await this.listaServicesInstance.getUser(userId);
     console.log(`getUsername: ${user}`);
     return user.username;
   }
