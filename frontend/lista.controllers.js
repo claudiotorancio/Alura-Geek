@@ -124,8 +124,7 @@ export class ListaControllers {
 
   async getAdmin() {
     try {
-        const data = await this.listaServicesInstance.getUser();
-        const role = data.role
+        const role = await this.listaServicesInstance.getUser();
       console.log(`getAdmin: ${role}`);
       return role;
     } catch (error) {
@@ -136,8 +135,7 @@ export class ListaControllers {
 
 async getRole(id) {
   try {
-      const data = await this.listaServicesInstance.getUser(id);
-      const user = data.user
+      const user = await this.listaServicesInstance.getUser(id);
     console.log(`getRole: ${user}`);
     return user.role;
   } catch (error) {

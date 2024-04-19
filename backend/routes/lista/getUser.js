@@ -14,10 +14,6 @@ const getUser = async (req, res) => {
       return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
     }
 
-    const role = req.user.role
-
-    console.log(`usuario: ${role}`)
-
     const userId = req.params.id;
 
     console.log(`id usuario: ${userId}`)
@@ -34,7 +30,7 @@ console.log(user)
 
 
     // Retornar el user
-    res.json({ user, role });
+    res.json({ user });
 
   } catch (error) {
     console.error(error);
