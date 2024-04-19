@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import MONGODB_URI from "../../config.js";
 import Users from "../../models/User.js";
 
-const getUser = async (req, res) => {
+const getAdmin = async (req, res) => {
   try {
   //  Verificar si el usuario está autenticado
     if (!req.isAuthenticated()) {
@@ -14,7 +14,7 @@ const getUser = async (req, res) => {
       return res.status(403).json({ error: 'Usuario no autorizado para acceder a esta función' });
     }
 
-    const userId = req.params.id;
+    const userId = req.user._id
 
     console.log(`id usuario: ${userId}`)
 
@@ -38,4 +38,4 @@ console.log(user)
   }
 };
 
-export default getUser;
+export default getAdmin;

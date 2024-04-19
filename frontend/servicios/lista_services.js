@@ -5,6 +5,21 @@ export class ListaServices {
     this.baseURL = baseURL;
   }
 
+  getAdmin = async () => {
+    try {
+      const respuesta = await fetch(`${this.baseURL}/api/getAdmin`);
+      
+      const data = await respuesta.json();
+      const user = data.user;
+      
+      console.log(`getAdmin user:`, user);
+      return user; // Simplificado para devolver solo el usuario
+    } catch (error) {
+      console.error("Error al obtener usuario:", error);
+      throw error;
+    }
+  };
+
   getUser = async (userId) => {
     try {
       const respuesta = await fetch(`${this.baseURL}/api/getUser/${userId}`);
@@ -21,8 +36,6 @@ export class ListaServices {
   };
   
   
-
-
   listaUsers = async () => {
     try {
       const respuesta = await fetch(`${this.baseURL}/api/renderLista`);

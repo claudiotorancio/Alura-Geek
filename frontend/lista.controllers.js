@@ -11,7 +11,7 @@ export class ListaControllers {
 
     async renderLista() {
     try {
-      const role = await this.getRole();
+      const role = await this.getAdmin();
       if(role === 'admin') 
         await this.renderUsersList();
       
@@ -59,71 +59,6 @@ export class ListaControllers {
       this.tabla.appendChild(this.nuevaLista(usuarioData));
     }
   }
-
-  // nuevaLista({ username, created_at, role, totalProductos, id }) {
-  //   const fechaCreacion = new Date(created_at);
-  //   const fechaFormateada = `${fechaCreacion
-  //     .getFullYear()
-  //     .toString()
-  //     .slice(-2)}-${("0" + (fechaCreacion.getMonth() + 1)).slice(-2)}-${(
-  //     "0" + fechaCreacion.getDate()
-  //   ).slice(-2)}`;
-
-  //   const card = document.createElement("div");
-
-  //   card.innerHTML = `
-  //     <div class="row">
-  //       <div class="col-md-12">
-  //         <table class="table">
-  //           <tbody>
-  //             <tr style="text-align: left;">
-  //               <td style="width: 25%;" >${username}</td>
-  //               <td style="width: 25%;">${fechaFormateada}</td>
-  //               <td style="width: 25%;">${totalProductos}</td>
-  //               <td style="width: 25%;">${role}</td>
-  //               <td style="width: 15%;"><button type="button" class="btn btn-danger" data-userid="${id}" >del</button></td>
-  //               <td style="width: 15%;"><button type="button" class="btn btn-primary" data-userUp="${id}" >up</button></td>
-
-  //             </tr>
-  //           </tbody>
-  //         </table>
-  //       </div>
-  //     </div>`;
-
-  //   card.querySelector("button").addEventListener("click", async (event) => {
-  //     event.preventDefault();
-  //     const userId = event.target.dataset.userid;
-
-  //     const confirmacion = confirm(
-  //       "¿Estás seguro de que quieres eliminar esta tarjeta?"
-  //     );
-
-  //     if (confirmacion) {
-  //       try {
-  //         if (role !== "admin") {
-  //           await this.listaServicesInstance.eliminarUser(userId);
-  //           card.remove();
-  //         } else {
-  //           alert("No se puede eliminar un usuario administrador");
-  //         }
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     }
-  //   });
-
-  //   card.querySelector("[data-userUp]").addEventListener("click", async (event) => {
-  //     event.preventDefault();
-  //     try{
-  //           this.editarLista(username, id );
-      
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //       });
-
-  //   return card;
-  // }
 
     nuevaLista({ username, created_at, role, totalProductos, id }) {
     const fechaCreacion = new Date(created_at);
@@ -187,20 +122,26 @@ export class ListaControllers {
     }
   }
 
-  async getRole(id = null) {
+  async getAdmin() {
     try {
-      let user;
-      if (id) { // Si se proporciona un id, llama a getUser con ese id
-        user = await this.listaServicesInstance.getUser(id);
-      } else { // Si no se proporciona un id, llama a getUser sin ningún id
-        user = await this.listaServicesInstance.getUser(); // Ajusta getUser para manejar casos sin id según sea necesario
-      }
-      console.log(`getRole: ${user}`);
+        user = await this.listaServicesInstance.getAdmin();
+      console.log(`getAdmin: ${user}`);
       return user.role;
     } catch (error) {
       console.error("Error al obtener el rol del usuario:", error);
       throw error;
     }
+}
+
+async getRole(id) {
+  try {
+      user = await this.listaServicesInstance.getUser(id);
+    console.log(`getRole: ${user}`);
+    return user.role;
+  } catch (error) {
+    console.error("Error al obtener el rol del usuario:", error);
+    throw error;
+  }
 }
 
   async obtenerTotalProductos(userId) {
