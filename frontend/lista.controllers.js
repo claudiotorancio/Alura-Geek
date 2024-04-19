@@ -187,6 +187,21 @@ export class ListaControllers {
     }
   }
 
+  async getRole(id = null) {
+    try {
+      let user;
+      if (id) { // Si se proporciona un id, llama a getUser con ese id
+        user = await this.listaServicesInstance.getUser(id);
+      } else { // Si no se proporciona un id, llama a getUser sin ningún id
+        user = await this.listaServicesInstance.getUser(); // Ajusta getUser para manejar casos sin id según sea necesario
+      }
+      console.log(`getRole: ${user}`);
+      return user.role;
+    } catch (error) {
+      console.error("Error al obtener el rol del usuario:", error);
+      throw error;
+    }
+}
 
   async obtenerTotalProductos(userId) {
     const { cantidad } = await this.listaServicesInstance.totalProductos(
