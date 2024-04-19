@@ -128,7 +128,7 @@ export class ListaControllers {
   async updateButtonHandler(event) {
     event.preventDefault();
     const userId = event.target.dataset.userup;
-    console.log(`updateButton id: ${userId}`);
+    //console.log(`updateButton id: ${userId}`);
     try {
       const username = await this.getUsername(userId);
       this.editarLista(username, userId);
@@ -138,9 +138,9 @@ export class ListaControllers {
   }
   //extraer datos de Users
   async getUsername(userId) {
-    console.log(`getUsername id: ${userId}`);
+   // console.log(`getUsername id: ${userId}`);
     const user = await this.listaServicesInstance.getUser(userId);
-    console.log(`getUsername: ${user}`);
+   // console.log(`getUsername: ${user}`);
     return user.username;
   }
   //extraer datos de Users
@@ -148,7 +148,7 @@ export class ListaControllers {
   async getAdmin() {
     try {
       const role = await this.listaServicesInstance.getAdmin();
-      console.log(`getAdmin: ${role}`);
+      //console.log(`getAdmin: ${role}`);
       return role;
     } catch (error) {
       console.error("Error al obtener el rol del usuario:", error);
@@ -160,7 +160,7 @@ export class ListaControllers {
   async getRole(id) {
     try {
       const user = await this.listaServicesInstance.getUser(id);
-      console.log(`getRole: ${user}`);
+      //console.log(`getRole: ${user}`);
       return user.role;
     } catch (error) {
       console.error("Error al obtener el rol del usuario:", error);
