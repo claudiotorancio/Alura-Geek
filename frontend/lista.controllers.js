@@ -113,18 +113,19 @@ export class ListaControllers {
 
   async updateButtonHandler(event) {
     event.preventDefault();
-    const userId = event.target.dataset.userid;
+    const id = event.target.dataset.userid;
     try {
-      const username = await this.getUsername(userId);
-      this.editarLista(username, userId);
+      const username = await this.getUsername(Id);
+      this.editarLista(username, Id);
     } catch (error) {
       console.error(error);
     }
   }
 
   
-  async getUsername(userId) {
-    const user = await this.listaServicesInstance.getUser(userId);
+  async getUsername(id) {
+    const user = await this.listaServicesInstance.getUser(id);
+    console.log(`getUsername: ${user}`);
     return user.username;
   }
 
