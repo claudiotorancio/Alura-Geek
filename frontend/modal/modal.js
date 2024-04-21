@@ -1,5 +1,5 @@
-import { loginControllers } from "./login_controllers.js";
-import { productoServices } from "./servicios/product_services.js";
+import { LoginControllers } from "../controllers/login_controllers.js";
+import productoServices from "../services/product_services.js";
 
 const baseModal = () => {
   const modal = document.getElementById("modal");
@@ -156,10 +156,12 @@ const modalErrorSignIn = () => {
 
   const botonEliminar = incorrect.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
-    loginControllers.signin();
+    const loginControllersInstance = new LoginControllers()
+    loginControllersInstance.renderSignin();
   });
   setTimeout(() => {
-    loginControllers.signin();
+    const loginControllersInstance = new LoginControllers()
+    loginControllersInstance.renderSignin();
   }, 2000);
 };
 
@@ -185,10 +187,12 @@ const modalSuccessSignup = () => {
 
   const botonEliminar = successSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
-    loginControllers.signin();
+    const loginControllersInstance = new LoginControllers()
+    loginControllersInstance.renderSignin();
   });
   setTimeout(() => {
-    loginControllers.signin();
+    const loginControllersInstance = new LoginControllers()
+    loginControllersInstance.renderSignin();
   }, 3000);
 };
 
@@ -214,11 +218,13 @@ const modalErrorSignup = () => {
 
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
-    loginControllers.signup();
+    const loginControllersInstance = new LoginControllers()
+    loginControllersInstance.signup();
   });
 
   setTimeout(() => {
-    loginControllers.signup();
+    const loginControllersInstance = new LoginControllers()
+  loginControllersInstance.signup();
   }, 2000);
 };
 
@@ -244,11 +250,14 @@ const modalErrorRegistro = () => {
 
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
-    loginControllers.signin();
+    const loginControllersInstance = new LoginControllers()
+    loginControllersInstance.renderSignin();
+
   });
 
   setTimeout(() => {
-    loginControllers.signin();
+    const loginControllersInstance = new LoginControllers()
+  loginControllersInstance.renderSignin();
   }, 2000);
 };
 

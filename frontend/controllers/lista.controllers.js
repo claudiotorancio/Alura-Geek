@@ -1,6 +1,6 @@
-import { productoServices } from "./servicios/product_services.js";
-import { ListaServices } from "./servicios/lista_services.js";
-import { modalControllers } from "./modal.js";
+import productoServices from "../services/product_services.js";
+import { ListaServices } from "../services/lista_services.js";
+import { modalControllers } from "../modal/modal.js";
 
 export class ListaControllers {
   constructor(tabla, titulo) {
