@@ -75,7 +75,7 @@ export class LoginControllers {
         const password = document.getElementsByName('password')[0].value;
         const signupData = { username, password };
         try {
-            await this.loginInstance.renderSignup(signupData);
+            await this.loginInstance.signup(signupData);
         } catch (err) {
             console.error(err.message);
         }
