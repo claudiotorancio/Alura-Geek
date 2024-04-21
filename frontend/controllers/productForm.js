@@ -36,20 +36,20 @@ export class ProductForm {
                             data-imageUrl  required autofocus>
                     </div>
                     <div class="form-group">
-                        <input class="form-control mt-3 p-2" type="text" placeholder="Nombre del producto" required
+                        <input class="form-control mt-3 p-2" type="text" placeholder="Nombre del producto" name="name" required
                             data-name>
                     </div>
                     <div class="form-group">
-                        <input class="form-control mt-3 mb-3 p-2" type="text" placeholder="Precio del producto"
+                        <input class="form-control mt-3 mb-3 p-2" type="text" placeholder="Precio del producto" name="price"
                             required data-price>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control mt-3 mb-3 p-2" type="text" placeholder="Descripcion"
+                        <textarea class="form-control mt-3 mb-3 p-2" type="text" placeholder="Descripcion" name="description"
                             required data-description></textarea>
                     </div>
                     <p for="miMenuDesplegable">Seccion</p>
                     <div class="form-group">
-                        <select class="form-control  mb-3 p-2" id="miMenuDesplegable" name="opcion">
+                        <select class="form-control  mb-3 p-2" id="miMenuDesplegable" name="section">
                             <option value="opcion1">Posters</option>
                             <option value="opcion2">Consolas</option>
                             <option value="opcion3">Diversos</option>
@@ -81,6 +81,7 @@ export class ProductForm {
       name: formData.get("name"),
       price: formData.get("price"),
       description: formData.get("description"),
+      section: formData.get("section"),
       image: formData.get("image"),
     };
 
