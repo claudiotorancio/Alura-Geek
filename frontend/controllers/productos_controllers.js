@@ -113,9 +113,9 @@ class ProductEditor {
       <div class="text-center">
         <div class="card-header">
         
-          <img class="img-card-top mx-auto"  src="${imagePath}" alt="">
+          <img class="img-card-top mx-auto" style="width: 10rem;" src="${imagePath}" alt="">
          
-          <form action="/api/updateProduct/" id="form" style="width: 10rem;" enctype="multipart/form-data" method="PUT" data-forma>                
+          <form action="/api/updateProduct/" id="form"  enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">Producto a editar</p>
             <div class="form-group"> 
               <input class="form-control p-2" placeholder="imageUrl" type="file" name="imagePath" value="${imagePath}" data-image autofocus >
