@@ -157,6 +157,11 @@
     width: 60%;
 }
 
+.card-top {
+    width: 14rem;
+    overflow: hidden;
+}
+
 @media (min-width:320px) and (max-width:768px) {
 
     .card {

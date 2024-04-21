@@ -258,6 +258,7 @@ header {
   flex-direction: column;
   background-color: var(--fuente-quienesSomos);
   padding: 2rem;
+  overflow: hidden;
 }
 
 ul {
