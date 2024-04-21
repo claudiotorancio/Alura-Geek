@@ -85,12 +85,6 @@
     font-weight: 600;
 }
 
-.img-card-top.mx-auto {
-    width: 20vw;
-}
-
-
-
 .productos {
   
     display: ruby;
@@ -153,14 +147,7 @@
     object-fit: cover;
 }
 
-.col-md-6 {
-    width: 60%;
-}
 
-.card-top {
-    width: 14rem;
-    overflow: hidden;
-}
 
 @media (min-width:320px) and (max-width:768px) {
 
@@ -171,10 +158,6 @@
     .card-title {
         font-size: 5vw;
 
-    }
-    
-    .img-card-top.mx-auto {
-        width: 45vw;
     }
     
     
