@@ -299,8 +299,9 @@ ul li a {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  max-width: 60%;
+  max-width: 50%;
   text-align: center;
+  max-height: 90%;
 }
 
 /* Estilos para el botón "Cerrar" del modal */

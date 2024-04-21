@@ -112,7 +112,7 @@ class ProductEditor {
     this.productoEdicion.innerHTML = `
       <div class="text-center">
         <div class="card-header">
-          <img class="img-card-top mx-auto" style="width:45vw;" src="${imagePath}" alt="">
+          <img class="img-card-top mx-auto"  src="${imagePath}" alt="">
           <form action="/api/updateProduct/" id="form" enctype="multipart/form-data" method="PUT" data-forma>                
             <p class="parrafo">Producto a editar</p>
             <div class="form-group"> 
