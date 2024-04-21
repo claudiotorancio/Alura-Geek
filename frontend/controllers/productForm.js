@@ -69,28 +69,38 @@ export class ProductForm {
     const form = this.initForm.querySelector("[data-form]");
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.handleSubmit(form);
+      this.handleSubmit();
     });
   }
 
 
   //recopilar y enviar los datos
-  async handleSubmit(form) {
-    const formData = new FormData(form);
-    const data = {
-      name: formData.get("name"),
-      price: formData.get("price"),
-      description: formData.get("description"),
-      section: formData.get("section"),
-      image: formData.get("image"),
-    };
+  async handleSubmit() {
+    const name = document.querySelector("[data-name]").value;
+    const price = document.querySelector("[data-price]").value;
+    const description = document.querySelector("[data-description]").value;
+    const section = document.getElementById("miMenuDesplegable").value;
+    const image = document.querySelector("[data-imageUrl]").files[0];
 
+    const productData = new FormData();
+    productData.append("name", name);
+    productData.append("price", price);
+    productData.append("description", description);
+    productData.append("section", section);
+    productData.append("image", image);
+
+    const user = JSON.parse(sessionStorage.getItem("user")) || null;
+
+    if (user) {
     try {
-      await productoServices.crearProducto(data);
+      await productoServices.crearProducto(productData);
       modalControllers.modalProductoCreado();
     } catch (error) {
       console.error(error);
     }
+  }else {
+    modalControllers.modalErrorRegistro()
+  }
   }
 }
 
