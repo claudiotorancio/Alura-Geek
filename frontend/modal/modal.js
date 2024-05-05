@@ -219,12 +219,12 @@ const modalErrorSignup = () => {
   const botonEliminar = errorSignup.querySelector(".boton-eliminar");
   botonEliminar.addEventListener("click", () => {
     const loginControllersInstance = new LoginControllers()
-    loginControllersInstance.signup();
+    loginControllersInstance.renderSignup();
   });
 
   setTimeout(() => {
     const loginControllersInstance = new LoginControllers()
-  loginControllersInstance.signup();
+    loginControllersInstance.renderSignup();
   }, 2000);
 };
 

@@ -79,12 +79,15 @@ export class LoginControllers {
         } catch (err) {
             console.error(err.message);
         }
+        
     }
 
     //render modal signup
     renderSignup() {
-        
         this.renderForm("SignUp", "/api/signup", "username", "password", "Sign Up", "", this.signupSubmitHandler);
+            const signupBtn = document.querySelector('[data-btn]');
+            signupBtn.style.display = 'none';
+        
     }
 }
 
